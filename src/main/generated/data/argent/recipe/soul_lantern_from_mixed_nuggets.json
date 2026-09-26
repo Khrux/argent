@@ -1,0 +1,21 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "argent:config",
+      "option": "soul_lantern"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "minecraft:soul_torch",
+    "X": "#argent:soul_lantern_nuggets"
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "id": "minecraft:soul_lantern"
+  }
+}

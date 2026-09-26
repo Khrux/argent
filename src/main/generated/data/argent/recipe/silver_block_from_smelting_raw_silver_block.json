@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 1800,
+  "experience": 9.0,
+  "group": "silver_block",
+  "ingredient": "argent:raw_silver_block",
+  "result": {
+    "id": "argent:silver_block"
+  }
+}

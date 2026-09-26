@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "argent:item/wither_zombie_spawn_egg"
+  }
+}

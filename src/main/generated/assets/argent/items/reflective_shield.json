@@ -1,0 +1,88 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:special",
+            "base": "argent:item/reflective_shield",
+            "model": {
+              "type": "argent:reflective_shield",
+              "reflective": true
+            }
+          },
+          "when": [
+            "thirdperson_lefthand",
+            "thirdperson_righthand",
+            "ground",
+            "fixed"
+          ]
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:special",
+        "base": "argent:item/reflective_shield",
+        "model": {
+          "type": "argent:reflective_shield"
+        }
+      },
+      "property": "minecraft:display_context"
+    },
+    "on_true": {
+      "type": "minecraft:select",
+      "cases": [
+        {
+          "model": {
+            "type": "minecraft:special",
+            "base": "argent:item/reflective_shield_blocking",
+            "model": {
+              "type": "argent:reflective_shield",
+              "reflective": true
+            }
+          },
+          "when": [
+            "thirdperson_lefthand",
+            "thirdperson_righthand",
+            "ground",
+            "fixed"
+          ]
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:special",
+        "base": "argent:item/reflective_shield_blocking",
+        "model": {
+          "type": "argent:reflective_shield"
+        }
+      },
+      "property": "minecraft:display_context"
+    },
+    "property": "minecraft:using_item",
+    "transformation": {
+      "left_rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "right_rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "scale": [
+        1.0,
+        -1.0,
+        -1.0
+      ],
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

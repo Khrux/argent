@@ -1,0 +1,38 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "argent:config",
+      "option": "mirrors"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mirror": {
+      "conditions": {
+        "items": [
+          {
+            "items": "argent:mirror"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "argent:reflective_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mirror"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "argent:reflective_shield"
+    ]
+  }
+}

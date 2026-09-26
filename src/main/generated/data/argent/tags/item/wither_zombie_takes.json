@@ -1,0 +1,14 @@
+{
+  "values": [
+    "#c:foods",
+    "#c:crops",
+    "#c:seeds",
+    "#minecraft:flowers",
+    "#minecraft:saplings",
+    "#minecraft:leaves",
+    "#c:leathers",
+    "#c:feathers",
+    "#minecraft:wool",
+    "#minecraft:eggs"
+  ]
+}

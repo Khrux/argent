@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "argent",
+	"version": "${version}",
+	"name": "Argent",
+	"description": "Silver and what it reveals: reflecting mirrors with an in-game skin painter, a silver bell, reflective shields, silver parrot armour, soul lanterns that show where monsters can spawn, and the wither zombie that can't bear its own reflection.",
+	"authors": [
+		"khrux"
+	],
+	"license": "CC-BY-NC-SA-4.0",
+	"icon": "assets/argent/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.argent.Argent"
+		],
+		"client": [
+			"com.khrux.argent.client.ArgentClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.argent.datagen.ArgentDataGenerator"
+		],
+		"modmenu": [
+			"com.khrux.argent.client.ArgentModMenu"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"mixins": [
+		"argent.mixins.json",
+		{
+			"config": "argent.client.mixins.json",
+			"environment": "client"
+		}
+	]
+}

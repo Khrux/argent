@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "silver_ingot",
+  "ingredient": "argent:deepslate_silver_ore",
+  "result": {
+    "id": "argent:silver_ingot"
+  }
+}

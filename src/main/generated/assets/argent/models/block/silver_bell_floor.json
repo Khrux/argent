@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/bell_floor",
+  "textures": {
+    "particle": "argent:block/silver_bell"
+  }
+}

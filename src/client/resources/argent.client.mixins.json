@@ -1,0 +1,19 @@
+{
+	"required": true,
+	"package": "com.khrux.argent.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AbstractClientPlayerMixin",
+		"EntityMixin",
+		"GameRendererMixin",
+		"ItemFrameRendererMixin",
+		"KeyboardInputMixin",
+		"PlayerInfoMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

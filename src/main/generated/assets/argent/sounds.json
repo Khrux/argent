@@ -1,0 +1,92 @@
+{
+  "entity.wither_zombie.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/say1",
+        "pitch": 0.65
+      },
+      {
+        "name": "minecraft:mob/zombie/say2",
+        "pitch": 0.65
+      },
+      {
+        "name": "minecraft:mob/zombie/say3",
+        "pitch": 0.65
+      }
+    ],
+    "subtitle": "subtitles.entity.wither_zombie.ambient"
+  },
+  "entity.wither_zombie.death": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/death",
+        "pitch": 0.65
+      }
+    ],
+    "subtitle": "subtitles.entity.wither_zombie.death"
+  },
+  "entity.wither_zombie.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/hurt1",
+        "pitch": 0.65
+      },
+      {
+        "name": "minecraft:mob/zombie/hurt2",
+        "pitch": 0.65
+      }
+    ],
+    "subtitle": "subtitles.entity.wither_zombie.hurt"
+  },
+  "entity.wither_zombie.notice": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/say1",
+        "pitch": 0.5
+      },
+      {
+        "name": "minecraft:mob/zombie/say2",
+        "pitch": 0.5
+      },
+      {
+        "name": "minecraft:mob/zombie/say3",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "subtitles.entity.wither_zombie.notice"
+  },
+  "entity.wither_zombie.shatter": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/death",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "subtitles.entity.wither_zombie.shatter"
+  },
+  "entity.wither_zombie.step": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/zombie/step1",
+        "pitch": 0.75
+      },
+      {
+        "name": "minecraft:mob/zombie/step2",
+        "pitch": 0.75
+      },
+      {
+        "name": "minecraft:mob/zombie/step3",
+        "pitch": 0.75
+      },
+      {
+        "name": "minecraft:mob/zombie/step4",
+        "pitch": 0.75
+      },
+      {
+        "name": "minecraft:mob/zombie/step5",
+        "pitch": 0.75
+      }
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "argent:silver_ingot",
+    "X": "minecraft:wind_charge"
+  },
+  "pattern": [
+    " ##",
+    " X ",
+    "## "
+  ],
+  "result": {
+    "id": "argent:silver_parrot_armor"
+  }
+}

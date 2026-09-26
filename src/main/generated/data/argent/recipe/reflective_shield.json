@@ -1,0 +1,15 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "argent:config",
+      "option": "mirrors"
+    }
+  ],
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "minecraft:shield",
+  "material": "argent:mirror",
+  "result": {
+    "id": "argent:reflective_shield"
+  }
+}
