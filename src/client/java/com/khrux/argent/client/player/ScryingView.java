@@ -26,6 +26,7 @@ public class ScryingView {
 	private CameraType previousCameraType = CameraType.FIRST_PERSON;
 	private Input keys = Input.EMPTY;
 	private Vec2 move = Vec2.ZERO;
+	private Vec3 petDeltaMovement = Vec3.ZERO;
 
 	public boolean isActive() {
 		return this.petId != 0;
@@ -53,6 +54,7 @@ public class ScryingView {
 		this.petId = 0;
 		this.keys = Input.EMPTY;
 		this.move = Vec2.ZERO;
+		this.petDeltaMovement = Vec3.ZERO;
 		minecraft.options.setCameraType(this.previousCameraType);
 		minecraft.setCameraEntity(minecraft.player);
 	}
@@ -101,6 +103,7 @@ public class ScryingView {
 		LivingEntity pet = this.pet(minecraft);
 		if (pet != null) {
 			pet.getInterpolation().cancel();
+			pet.setDeltaMovement(this.petDeltaMovement);
 			pet.lerpHeadTo(pet.getYRot(), 0);
 			pet.setYHeadRot(pet.getYRot());
 		}
@@ -135,7 +138,8 @@ public class ScryingView {
 			y = JUMP_POWER;
 		}
 
-		pet.setDeltaMovement(new Vec3(x, y, z));
+		this.petDeltaMovement = new Vec3(x, y, z);
+		pet.setDeltaMovement(this.petDeltaMovement);
 		ClientPlayNetworking.send(new ScryingMovePayload(pet.position(), pet.getYRot(), pet.getXRot(), pet.onGround()));
 	}
 
