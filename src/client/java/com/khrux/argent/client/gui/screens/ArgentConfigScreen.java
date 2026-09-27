@@ -11,6 +11,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Checkbox;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.input.KeyEvent;
@@ -32,8 +34,14 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		return OptionInstance.cachedConstantTooltip(Component.translatable(captionId + ".tooltip"));
 	}
 
-	private static OptionInstance<Boolean> toggle(final String captionId, final boolean initialValue, final OptionInstance.ValueUpdateListener<Boolean> onValueUpdate) {
-		return OptionInstance.createBoolean(captionId, tooltip(captionId), initialValue, onValueUpdate);
+	private Checkbox checkbox(final String captionId, final boolean initialValue, final Checkbox.OnValueChange onValueChange) {
+		Checkbox checkbox = Checkbox.builder(Component.translatable(captionId), this.font)
+			.maxWidth(Button.DEFAULT_WIDTH)
+			.selected(initialValue)
+			.onValueChange(onValueChange)
+			.build();
+		checkbox.setTooltip(Tooltip.create(Component.translatable(captionId + ".tooltip")));
+		return checkbox;
 	}
 
 	private static <T> OptionInstance<T> choice(
@@ -59,7 +67,6 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		this.list.addSmall(Button.builder(OPEN_SKIN_EDITOR, button -> ArgentClient.openSkinEditor(this.minecraft)).build(), this.skinEditorKeyButton);
 		this.list
 			.addSmall(
-				toggle("options.argent.silver", config.silver, value -> config.silver = value),
 				choice(
 					"options.argent.mirror_recipe",
 					ArgentConfig.MirrorRecipe.values(),
@@ -68,7 +75,6 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 					config.mirrorRecipe,
 					value -> config.mirrorRecipe = value
 				),
-				toggle("options.argent.mirror_screen", config.mirrorScreen, value -> config.mirrorScreen = value),
 				choice(
 					"options.argent.soul_lantern",
 					ArgentConfig.SoulLantern.values(),
@@ -84,9 +90,17 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 					ArgentConfig.Reflections::getDisplayName,
 					config.reflections,
 					value -> config.reflections = value
-				),
-				toggle("options.argent.wither_zombies", config.witherZombies, value -> config.witherZombies = value),
-				toggle("options.argent.scrying", config.scrying, value -> config.scrying = value)
+				)
+			);
+		this.list
+			.addSmall(
+				List.of(
+					this.checkbox("options.argent.silver", config.silver, (checkbox, value) -> config.silver = value),
+					this.checkbox("options.argent.mirror_screen", config.mirrorScreen, (checkbox, value) -> config.mirrorScreen = value),
+					this.checkbox("options.argent.wither_zombies", config.witherZombies, (checkbox, value) -> config.witherZombies = value),
+					this.checkbox("options.argent.scrying", config.scrying, (checkbox, value) -> config.scrying = value),
+					this.checkbox("options.argent.scrying_library_loot", config.scryingLibraryLoot, (checkbox, value) -> config.scryingLibraryLoot = value)
+				)
 			);
 	}
 

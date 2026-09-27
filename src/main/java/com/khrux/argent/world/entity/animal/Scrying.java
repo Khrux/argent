@@ -13,11 +13,15 @@ import java.util.UUID;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.loot.v3.LootTableSource;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,9 +36,17 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
@@ -44,6 +56,7 @@ public class Scrying {
 	private static final double MAX_STEP = 1.5;
 	private static final double BITE_RANGE = 3.0;
 	private static final int BITE_COOLDOWN = 10;
+	private static final float LIBRARY_BOOK_CHANCE = 0.1F;
 	private static final Map<UUID, Scrying.Link> LINKS = new HashMap<>();
 
 	public static void bootstrap() {
@@ -58,6 +71,7 @@ public class Scrying {
 		ServerTickEvents.END_SERVER_TICK.register(Scrying::tick);
 		ServerLivingEntityEvents.AFTER_DAMAGE.register(Scrying::afterDamage);
 		ServerPlayConnectionEvents.DISCONNECT.register((listener, server) -> LINKS.remove(listener.player.getUUID()));
+		LootTableEvents.MODIFY.register(Scrying::modifyLootTable);
 	}
 
 	public static boolean isLinkedPet(final Entity entity) {
@@ -107,6 +121,22 @@ public class Scrying {
 		}
 
 		return InteractionResult.SUCCESS;
+	}
+
+	private static void modifyLootTable(
+		final ResourceKey<LootTable> key, final LootTable.Builder tableBuilder, final LootTableSource source, final HolderLookup.Provider registries
+	) {
+		if (!source.isBuiltin() || key != BuiltInLootTables.STRONGHOLD_LIBRARY || !ArgentConfig.get().scryingLibraryLoot) {
+			return;
+		}
+
+		Holder<Enchantment> scrying = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ArgentEnchantments.SCRYING);
+		tableBuilder.withPool(
+			LootPool.lootPool()
+				.setRolls(ContextIntProviders.exactly(1))
+				.when(LootItemRandomChanceCondition.randomChance(LIBRARY_BOOK_CHANCE))
+				.add(LootItem.lootTableItem(Items.BOOK).apply(new SetEnchantmentsFunction.Builder().withEnchantment(scrying, ContextIntProviders.exactly(1))))
+		);
 	}
 
 	private static void tick(final MinecraftServer server) {

@@ -23,11 +23,12 @@ public class ArgentConfig {
 				SoulLantern.CODEC.optionalFieldOf("soul_lantern_mode", SoulLantern.HAND).forGetter(config -> config.soulLantern),
 				Reflections.CODEC.optionalFieldOf("reflection_mode", Reflections.ALL).forGetter(config -> config.reflections),
 				Codec.BOOL.optionalFieldOf("wither_zombies", true).forGetter(config -> config.witherZombies),
-				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.scrying)
+				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.scrying),
+				Codec.BOOL.optionalFieldOf("scrying_library_loot", false).forGetter(config -> config.scryingLibraryLoot)
 			)
 			.apply(i, ArgentConfig::new)
 	);
-	private static ArgentConfig instance = new ArgentConfig(true, MirrorRecipe.SILVER, true, SoulLantern.HAND, Reflections.ALL, true, true);
+	private static ArgentConfig instance = new ArgentConfig(true, MirrorRecipe.SILVER, true, SoulLantern.HAND, Reflections.ALL, true, true, false);
 	public boolean silver;
 	public MirrorRecipe mirrorRecipe;
 	public boolean mirrorScreen;
@@ -35,6 +36,7 @@ public class ArgentConfig {
 	public Reflections reflections;
 	public boolean witherZombies;
 	public boolean scrying;
+	public boolean scryingLibraryLoot;
 
 	private ArgentConfig(
 		final boolean silver,
@@ -43,7 +45,8 @@ public class ArgentConfig {
 		final SoulLantern soulLantern,
 		final Reflections reflections,
 		final boolean witherZombies,
-		final boolean scrying
+		final boolean scrying,
+		final boolean scryingLibraryLoot
 	) {
 		this.silver = silver;
 		this.mirrorRecipe = mirrorRecipe;
@@ -52,6 +55,7 @@ public class ArgentConfig {
 		this.reflections = reflections;
 		this.witherZombies = witherZombies;
 		this.scrying = scrying;
+		this.scryingLibraryLoot = scryingLibraryLoot;
 	}
 
 	public static ArgentConfig get() {

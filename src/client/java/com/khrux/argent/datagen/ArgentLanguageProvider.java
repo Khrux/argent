@@ -60,8 +60,13 @@ public class ArgentLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.argent.skin_editor_key", "Editor Key: %s");
 		translationBuilder.add("options.argent.scrying", "Scrying");
 		translationBuilder.add("options.argent.scrying.tooltip", "Whether sneaking and using an empty hand on your pet wearing Scrying armour lets you see and move through it.");
+		translationBuilder.add("options.argent.scrying_library_loot", "Scrying in Libraries");
+		translationBuilder.add(
+			"options.argent.scrying_library_loot.tooltip",
+			"A Scrying book can rarely turn up in stronghold library chests, so Scrying is found even without wither zombies. Applies to chests opened after /reload or rejoining."
+		);
 		translationBuilder.add("options.argent.wither_zombies", "Wither Zombies");
-		translationBuilder.add("options.argent.wither_zombies.tooltip", "Whether wither zombies spawn in the Nether. Existing ones stay.");
+		translationBuilder.add("options.argent.wither_zombies.tooltip", "Whether wither zombies spawn in the Nether. Applies after rejoining; existing ones stay.");
 		translationBuilder.add("options.argent.mirror_screen", "Mirror Screen");
 		translationBuilder.add("options.argent.mirror_screen.tooltip", "Off makes mirrors props: right-clicking does nothing.");
 		translationBuilder.add("gui.argent.preset", "Preset %s");

@@ -3,7 +3,7 @@
 	"id": "argent",
 	"version": "${version}",
 	"name": "Argent",
-	"description": "Silver and what it reveals: reflecting mirrors with an in-game skin painter, a silver bell, reflective shields, silver parrot armour, soul lanterns that show where monsters can spawn, and the wither zombie that can't bear its own reflection.",
+	"description": "Silver, and the things it lets you see. Mirrors with a built-in skin editor, soul lanterns that show where monsters can spawn, and Scrying, which lets you see and move as your wolf or parrot.",
 	"authors": [
 		"khrux"
 	],
