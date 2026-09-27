@@ -14,10 +14,10 @@ Replacing a file under the same name updates the page within about five minutes.
 
 Full-width headings. The description column is about 900 px wide on a computer, so banners are exported at double that to stay sharp on high-resolution screens.
 
-- `argent.png`, the title: 1800 x 600 (3:1)
+- `argent.png`, the title: 1800 x 450, one and a half times a section banner
 - Every section banner: exactly 1800 x 300 (6:1), so the headings line up the whole way down
 - Keep the important part and any text inside the middle 1500 px or so; on phones banners shrink to about 360 px wide
-- Animated banners: GIF at 900 x 150 (900 x 300 for the title), under about 5 MB each, and change `.png` to `.gif` in that banner's line of the description
+- Animated banners: GIF at 900 x 150 (900 x 225 for the title), under about 5 MB each, and change `.png` to `.gif` in that banner's line of the description
 
 | File | Section |
 | --- | --- |
