@@ -28,7 +28,7 @@ Full-width headings. The description column is about 900 px wide on a computer, 
 | `banners/mirror.png` | Mirrors |
 | `banners/skin-editor.png` | Skin Editor |
 | `banners/wall-mirrors.png` | Wall Mirrors |
-| `banners/reflective-shield.png` | The Reflective Shield |
+| `banners/reflective-shield.png` | Reflective Shields |
 | `banners/wither-zombie.png` | The Wither Zombie |
 | `banners/silver-parrot-armour.png` | Silver Parrot Armour |
 | `banners/scrying.png` | Scrying |
@@ -53,7 +53,7 @@ Cut-outs that sit to the right of the text. Transparent background, with rotatio
 | `stickers/mirror-screen.png` | Skin Editor, top |
 | `stickers/painted-skin.png` | Skin Editor, beside "Wearing it" |
 | `stickers/mirror-wall.png` | Wall Mirrors |
-| `stickers/reflective-shield.png` | The Reflective Shield |
+| `stickers/reflective-shield.png` | Reflective Shields |
 | `stickers/wither-zombie.png` | The Wither Zombie, top |
 | `stickers/crumbling.png` | The Wither Zombie, beside "How to get rid of one" |
 | `stickers/armoured-parrot.png` | Silver Parrot Armour |
