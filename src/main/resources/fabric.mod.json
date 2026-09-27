@@ -8,6 +8,7 @@
 		"khrux"
 	],
 	"contact": {
+		"homepage": "https://modrinth.com/mod/argent",
 		"sources": "https://github.com/Khrux/argent",
 		"issues": "https://github.com/Khrux/argent/issues"
 	},
