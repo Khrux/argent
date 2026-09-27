@@ -11,6 +11,7 @@ import com.khrux.argent.client.renderer.MirrorReflections;
 import com.khrux.argent.client.renderer.blockentity.MirrorRenderer;
 import com.khrux.argent.client.renderer.blockentity.SilverBellRenderer;
 import com.khrux.argent.client.renderer.entity.ArmoredParrotRenderer;
+import com.khrux.argent.client.renderer.entity.PlainArmorWolfRenderer;
 import com.khrux.argent.client.renderer.entity.WitherZombieRenderer;
 import com.khrux.argent.client.renderer.entity.layers.SilverParrotArmorLayer;
 import com.khrux.argent.client.renderer.special.ReflectiveShieldSpecialRenderer;
@@ -74,6 +75,7 @@ public class ArgentClient implements ClientModInitializer {
 		EntityRenderers.register(ArgentEntityTypes.WITHER_ZOMBIE, WitherZombieRenderer::new);
 		ModelLayerRegistry.registerModelLayer(ArgentModelLayers.SILVER_PARROT_ARMOR, SilverParrotArmorLayer::createArmorLayer);
 		EntityRenderers.register(EntityTypes.PARROT, ArmoredParrotRenderer::new);
+		EntityRenderers.register(EntityTypes.WOLF, PlainArmorWolfRenderer::new);
 		LevelExtractionEvents.END_EXTRACTION.register(context -> reflections.extract(context));
 		LevelExtractionEvents.END_EXTRACTION.register(WITHER_ZOMBIE_GAZE::extract);
 		LevelExtractionEvents.END_EXTRACTION.register(SCRYING_VIEW::extract);
