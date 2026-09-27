@@ -23,7 +23,7 @@ Full-width headings. The description column is about 900 px wide on a computer, 
 | --- | --- |
 | `banners/argent.png` | Title |
 | `banners/silver.png` | Silver |
-| `banners/soul-lantern.png` | The Soul Lantern |
+| `banners/soul-lantern.png` | Soul Lanterns |
 | `banners/silver-bell.png` | The Silver Bell |
 | `banners/mirror.png` | The Mirror |
 | `banners/skin-editor.png` | The Skin Editor |
@@ -47,7 +47,7 @@ Cut-outs that sit to the right of the text. Transparent background, with rotatio
 | File | Section |
 | --- | --- |
 | `stickers/silver-ingot.png` | Silver |
-| `stickers/soul-lantern.png` | The Soul Lantern |
+| `stickers/soul-lantern.png` | Soul Lanterns |
 | `stickers/silver-bell.png` | The Silver Bell |
 | `stickers/mirror.png` | The Mirror |
 | `stickers/mirror-screen.png` | The Skin Editor, top |
