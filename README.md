@@ -12,7 +12,12 @@ Replacing a file under the same name updates the page within about five minutes.
 
 ## Banners
 
-Full-width section headings. About 1800 px wide, so they stay sharp on high-resolution screens. Keep every banner the same height so the page has a steady rhythm. PNG, or GIF for an animated one (then change `.png` to `.gif` in that banner's line of the description).
+Full-width headings. The description column is about 900 px wide on a computer, so banners are exported at double that to stay sharp on high-resolution screens.
+
+- `argent.png`, the title: 1800 x 600 (3:1)
+- Every section banner: exactly 1800 x 300 (6:1), so the headings line up the whole way down
+- Keep the important part and any text inside the middle 1500 px or so; on phones banners shrink to about 360 px wide
+- Animated banners: GIF at 900 x 150 (900 x 300 for the title), under about 5 MB each, and change `.png` to `.gif` in that banner's line of the description
 
 | File | Section |
 | --- | --- |
@@ -33,7 +38,11 @@ Full-width section headings. About 1800 px wide, so they stay sharp on high-reso
 
 ## Stickers
 
-Cut-outs that sit to the right of the text. Transparent background, rotation and outline already applied. They're shown 220 px wide, so export them at about 440 px wide.
+Cut-outs that sit to the right of the text. Transparent background, with rotation and outline already applied. They're shown 220 px wide, so export them 440 px wide, measured after rotating and outlining.
+
+- Square: 440 x 440
+- Up to 440 x 660 (2:3) for tall ones
+- Landscape ones (up to 640 x 440) need `width="320"` in their line of the description
 
 | File | Section |
 | --- | --- |
@@ -53,4 +62,4 @@ Cut-outs that sit to the right of the text. Transparent background, rotation and
 
 ## Signature
 
-`signature.png`, centred at the end, shown 300 px wide.
+`signature.png`, centred at the end: 600 x 200, shown at 300 x 100.
