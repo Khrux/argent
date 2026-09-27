@@ -23,22 +23,21 @@ Full-width headings. The description column is about 900 px wide on a computer, 
 | --- | --- |
 | `banners/argent.png` | Title |
 | `banners/silver.png` | Silver |
-| `banners/soul-lantern.png` | Soul Lanterns |
+| `banners/soul-lanterns.png` | Soul Lanterns |
 | `banners/silver-bell.png` | Silver Bell |
-| `banners/mirror.png` | Mirrors |
+| `banners/mirrors.png` | Mirrors |
 | `banners/skin-editor.png` | Skin Editor |
 | `banners/wall-mirrors.png` | Wall Mirrors |
-| `banners/reflective-shield.png` | Reflective Shields |
-| `banners/wither-zombie.png` | The Wither Zombie |
-| `banners/silver-parrot-armour.png` | Silver Parrot Armour |
+| `banners/reflective-shields.png` | Reflective Shields |
+| `banners/wither-zombie.png` | Wither Zombie |
+| `banners/parrot-armor.png` | Parrot Armor |
 | `banners/scrying.png` | Scrying |
-| `banners/settings.png` | Settings |
-| `banners/servers.png` | On servers without Argent |
-| `banners/requirements.png` | Requirements |
+
+Settings, On servers without Argent and Requirements are plain text headings, not banners.
 
 ## Stickers
 
-Cut-outs that sit to the right of the text. Transparent background, with rotation and outline already applied. They're shown 220 px wide, so export them 440 px wide, measured after rotating and outlining.
+Not in use yet. Cut-outs that sit to the right of the text. Transparent background, with rotation and outline already applied. They're shown 220 px wide, so export them 440 px wide, measured after rotating and outlining.
 
 - Square: 440 x 440
 - Up to 440 x 660 (2:3) for tall ones
@@ -54,9 +53,9 @@ Cut-outs that sit to the right of the text. Transparent background, with rotatio
 | `stickers/painted-skin.png` | Skin Editor, beside "Wearing it" |
 | `stickers/mirror-wall.png` | Wall Mirrors |
 | `stickers/reflective-shield.png` | Reflective Shields |
-| `stickers/wither-zombie.png` | The Wither Zombie, top |
-| `stickers/crumbling.png` | The Wither Zombie, beside "How to get rid of one" |
-| `stickers/armoured-parrot.png` | Silver Parrot Armour |
+| `stickers/wither-zombie.png` | Wither Zombie, top |
+| `stickers/crumbling.png` | Wither Zombie, beside "How to get rid of one" |
+| `stickers/armoured-parrot.png` | Parrot Armor |
 | `stickers/scrying.png` | Scrying |
 | `stickers/settings.png` | Settings |
 
