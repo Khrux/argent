@@ -24,9 +24,9 @@ Full-width headings. The description column is about 900 px wide on a computer, 
 | `banners/argent.png` | Title |
 | `banners/silver.png` | Silver |
 | `banners/soul-lantern.png` | Soul Lanterns |
-| `banners/silver-bell.png` | The Silver Bell |
-| `banners/mirror.png` | The Mirror |
-| `banners/skin-editor.png` | The Skin Editor |
+| `banners/silver-bell.png` | Silver Bell |
+| `banners/mirror.png` | Mirrors |
+| `banners/skin-editor.png` | Skin Editor |
 | `banners/wall-mirrors.png` | Wall Mirrors |
 | `banners/reflective-shield.png` | The Reflective Shield |
 | `banners/wither-zombie.png` | The Wither Zombie |
@@ -48,10 +48,10 @@ Cut-outs that sit to the right of the text. Transparent background, with rotatio
 | --- | --- |
 | `stickers/silver-ingot.png` | Silver |
 | `stickers/soul-lantern.png` | Soul Lanterns |
-| `stickers/silver-bell.png` | The Silver Bell |
-| `stickers/mirror.png` | The Mirror |
-| `stickers/mirror-screen.png` | The Skin Editor, top |
-| `stickers/painted-skin.png` | The Skin Editor, beside "Wearing it" |
+| `stickers/silver-bell.png` | Silver Bell |
+| `stickers/mirror.png` | Mirrors |
+| `stickers/mirror-screen.png` | Skin Editor, top |
+| `stickers/painted-skin.png` | Skin Editor, beside "Wearing it" |
 | `stickers/mirror-wall.png` | Wall Mirrors |
 | `stickers/reflective-shield.png` | The Reflective Shield |
 | `stickers/wither-zombie.png` | The Wither Zombie, top |
