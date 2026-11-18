@@ -31,6 +31,7 @@ public class ParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel
 	private static final Identifier TEXTURE = JustScrying.id("textures/entity/parrot/parrot_armor.png");
 	private static final float PLUME_X = 0.0F;
 	private static final float PLUME_Y = -2.6F / 16.0F;
+	private static final float ANIMATED_HEAD_PLUME_Y = -3.1F / 16.0F;
 	private static final float PLUME_Z = 0.25F / 16.0F;
 	private static final float PLUME_SCALE = 0.3F;
 	private static final float PLUME_TILT = -18.0F;
@@ -98,8 +99,16 @@ public class ParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel
 		poseStack.pushPose();
 		ModelPart root = this.getParentModel().root();
 		root.translateAndRotate(poseStack);
-		root.getChild("head").translateAndRotate(poseStack);
-		poseStack.translate(PLUME_X, PLUME_Y, PLUME_Z);
+		ModelPart body = root.getChild("body");
+		if (body.hasChild("head2")) {
+			body.translateAndRotate(poseStack);
+			body.getChild("head2").translateAndRotate(poseStack);
+			poseStack.translate(PLUME_X, ANIMATED_HEAD_PLUME_Y, PLUME_Z);
+		} else {
+			root.getChild("head").translateAndRotate(poseStack);
+			poseStack.translate(PLUME_X, PLUME_Y, PLUME_Z);
+		}
+
 		poseStack.scale(PLUME_SCALE, -PLUME_SCALE, -PLUME_SCALE);
 		poseStack.rotateDegrees(Axis.XP, PLUME_TILT);
 		poseStack.rotateDegrees(Axis.YP, 90.0F);

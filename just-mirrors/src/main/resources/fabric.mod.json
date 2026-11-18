@@ -11,6 +11,7 @@
 		"sources": "https://github.com/Khrux/argent",
 		"issues": "https://github.com/Khrux/argent/issues"
 	},
+	"icon": "assets/justmirrors/icon.png",
 	"license": "CC-BY-NC-SA-4.0",
 	"environment": "*",
 	"entrypoints": {
