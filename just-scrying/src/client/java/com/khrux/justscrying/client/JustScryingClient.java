@@ -2,8 +2,10 @@ package com.khrux.justscrying.client;
 
 import com.khrux.justscrying.client.model.geom.JustScryingModelLayers;
 import com.khrux.justscrying.client.player.ScryingView;
+import com.khrux.justscrying.client.renderer.entity.ArmoredCatRenderer;
 import com.khrux.justscrying.client.renderer.entity.ArmoredParrotRenderer;
 import com.khrux.justscrying.client.renderer.entity.PlainArmorWolfRenderer;
+import com.khrux.justscrying.client.renderer.entity.layers.CatArmorLayer;
 import com.khrux.justscrying.client.renderer.entity.layers.ParrotArmorLayer;
 import com.khrux.justscrying.network.protocol.ScryingLinkPayload;
 import net.fabricmc.api.ClientModInitializer;
@@ -20,7 +22,9 @@ public class JustScryingClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ModelLayerRegistry.registerModelLayer(JustScryingModelLayers.PARROT_ARMOR, ParrotArmorLayer::createArmorLayer);
+		ModelLayerRegistry.registerModelLayer(JustScryingModelLayers.CAT_ARMOR, CatArmorLayer::createArmorLayer);
 		EntityRenderers.register(EntityTypes.PARROT, ArmoredParrotRenderer::new);
+		EntityRenderers.register(EntityTypes.CAT, ArmoredCatRenderer::new);
 		EntityRenderers.register(EntityTypes.WOLF, PlainArmorWolfRenderer::new);
 		LevelExtractionEvents.END_EXTRACTION.register(SCRYING_VIEW::extract);
 		ClientTickEvents.START_CLIENT_TICK.register(SCRYING_VIEW::startTick);

@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class JustScryingItemIds {
 	public static final ResourceKey<Item> PARROT_ARMOR = create("parrot_armor");
+	public static final ResourceKey<Item> CAT_ARMOR = create("cat_armor");
 
 	private static ResourceKey<Item> create(final String name) {
 		return ResourceKey.create(Registries.ITEM, JustScrying.id(name));

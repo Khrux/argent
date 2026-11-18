@@ -16,8 +16,9 @@ public class JustScryingItemTagsProvider extends FabricTagsProvider.ItemTagsProv
 
 	@Override
 	protected void addTags(final HolderLookup.Provider registries) {
-		this.builder(JustScryingItemTags.SCRYING_ENCHANTABLE).add(ItemIds.WOLF_ARMOR, JustScryingItemIds.PARROT_ARMOR);
+		this.builder(JustScryingItemTags.SCRYING_ENCHANTABLE).add(ItemIds.WOLF_ARMOR, JustScryingItemIds.PARROT_ARMOR, JustScryingItemIds.CAT_ARMOR);
 		this.builder(JustScryingItemTags.REPAIRS_PARROT_ARMOR).add(ItemIds.LEATHER);
-		this.builder(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(JustScryingItemIds.PARROT_ARMOR);
+		this.builder(JustScryingItemTags.REPAIRS_CAT_ARMOR).add(ItemIds.ARMADILLO_SCUTE);
+		this.builder(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(JustScryingItemIds.PARROT_ARMOR, JustScryingItemIds.CAT_ARMOR);
 	}
 }

@@ -1,6 +1,6 @@
 package com.khrux.justscrying.client.gui.screens;
 
-import com.khrux.justscrying.client.gui.components.RecipeGrid;
+import com.khrux.justscrying.client.gui.components.PetArmorRecipeGrid;
 import com.khrux.justscrying.config.JustScryingConfig;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 public class JustScryingConfigScreen extends OptionsSubScreen {
 	private static final Component TITLE = Component.translatable("options.justscrying.title");
 	private static final Component RECIPE_TOOLTIP = Component.translatable("options.justscrying.recipe.tooltip");
-	private final Map<OptionInstance<?>, Supplier<RecipeGrid>> recipeGrids = new LinkedHashMap<>();
+	private final Map<OptionInstance<?>, Supplier<PetArmorRecipeGrid>> recipeGrids = new LinkedHashMap<>();
 
 	public JustScryingConfigScreen(final Screen lastScreen) {
 		super(lastScreen, Minecraft.getInstance().options, TITLE);
@@ -30,11 +30,12 @@ public class JustScryingConfigScreen extends OptionsSubScreen {
 			.addSmall(
 				JustScryingOptions.effect(),
 				JustScryingOptions.libraryBooks(),
-				this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), RecipeGrid::parrotArmor)
+				this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::parrotArmor),
+				this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::catArmor)
 			);
 	}
 
-	private OptionInstance<?> recipe(final OptionInstance<?> option, final Supplier<RecipeGrid> grid) {
+	private OptionInstance<?> recipe(final OptionInstance<?> option, final Supplier<PetArmorRecipeGrid> grid) {
 		this.recipeGrids.put(option, grid);
 		return option;
 	}
@@ -46,7 +47,7 @@ public class JustScryingConfigScreen extends OptionsSubScreen {
 			return;
 		}
 
-		for (Map.Entry<OptionInstance<?>, Supplier<RecipeGrid>> entry : this.recipeGrids.entrySet()) {
+		for (Map.Entry<OptionInstance<?>, Supplier<PetArmorRecipeGrid>> entry : this.recipeGrids.entrySet()) {
 			AbstractWidget widget = this.list.findOption(entry.getKey());
 			if (widget != null && widget.isHovered()) {
 				graphics.tooltip(this.font, entry.getValue().get().tooltip(this.font, RECIPE_TOOLTIP), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);

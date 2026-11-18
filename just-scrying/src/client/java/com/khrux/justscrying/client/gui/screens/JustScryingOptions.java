@@ -19,4 +19,9 @@ public class JustScryingOptions {
 		JustScryingConfig config = JustScryingConfig.get();
 		return OptionInstance.createBoolean("options.justscrying.parrot_armor_recipe", tooltip, config.parrotArmorRecipe, value -> config.parrotArmorRecipe = value);
 	}
+
+	public static OptionInstance<Boolean> catArmorRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {
+		JustScryingConfig config = JustScryingConfig.get();
+		return OptionInstance.createBoolean("options.justscrying.cat_armor_recipe", tooltip, config.catArmorRecipe, value -> config.catArmorRecipe = value);
+	}
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_dye",
+  "dye": "#minecraft:dyes",
+  "group": "dyed_armor",
+  "result": {
+    "id": "justscrying:cat_armor"
+  },
+  "target": "justscrying:cat_armor"
+}

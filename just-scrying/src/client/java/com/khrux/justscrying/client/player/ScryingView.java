@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.feline.Cat;
 import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.phys.EntityHitResult;
@@ -22,6 +23,7 @@ public class ScryingView {
 	private static final float SPRINT_MULTIPLIER = 1.5F;
 	private static final float FLY_SPEED = 0.25F;
 	private static final float JUMP_POWER = 0.42F;
+	private static final float CAT_JUMP_POWER = 0.5F;
 	private int petId;
 	private CameraType previousCameraType = CameraType.FIRST_PERSON;
 	private Input keys = Input.EMPTY;
@@ -135,7 +137,7 @@ public class ScryingView {
 			pet.setNoGravity(true);
 			y = ((this.keys.jump() ? 1.0 : 0.0) - (this.keys.shift() ? 1.0 : 0.0)) * speed;
 		} else if (this.keys.jump() && pet.onGround()) {
-			y = JUMP_POWER;
+			y = pet instanceof Cat ? CAT_JUMP_POWER : JUMP_POWER;
 		}
 
 		this.petDeltaMovement = new Vec3(x, y, z);

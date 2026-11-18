@@ -1,3 +1,6 @@
 // 26.3	-999999999-01-01T00:00:00	Just Scrying/Model Definitions
+2dc8ceb96d51e9d6cb18b8f6e909725080a23938 assets/justscrying/items/cat_armor.json
 49661f2f6127c41dd91039499904dec3e987eb1c assets/justscrying/items/parrot_armor.json
+563070f2bc105696310ff8824241b9650f649a16 assets/justscrying/models/item/cat_armor.json
+a40a31118b697e9daad63b5d6b606bbe81dc7ff7 assets/justscrying/models/item/cat_armor_dyed.json
 e14fc6933a8d0b24a32b99aff1a726838cb3b731 assets/justscrying/models/item/parrot_armor.json

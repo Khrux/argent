@@ -1,0 +1,20 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "justscrying:config",
+      "option": "cat_armor"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:armadillo_scute"
+  },
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "result": {
+    "id": "justscrying:cat_armor"
+  }
+}

@@ -1,5 +1,9 @@
 // 26.3	-999999999-01-01T00:00:00	Just Scrying/Recipes
+d563dfe470dce7b713ae8863095ca3aca587d831 data/justscrying/advancement/recipes/combat/cat_armor.json
 ab3eecaa7fff013373bcddefa9e0e5ee51343a3a data/justscrying/advancement/recipes/combat/parrot_armor.json
+11505e227c5dcef4f466217bc83edcc0790936a6 data/justscrying/advancement/recipes/misc/cat_armor_dyed.json
 d0e3f7bd86f94eeab76274e281f3e287eb1eb5e7 data/justscrying/advancement/recipes/misc/parrot_armor_dyed.json
+585be159ed1bc947fef212d650bce2aa4825a3f1 data/justscrying/recipe/cat_armor.json
+300ab918b39727ce822ed62d22d5a2590806e725 data/justscrying/recipe/cat_armor_dyed.json
 a15923c69f57244a0cb70fe01951613fdc7cd1b9 data/justscrying/recipe/parrot_armor.json
 fec54480edd14ecb58dc801ff7ff6155603135ee data/justscrying/recipe/parrot_armor_dyed.json

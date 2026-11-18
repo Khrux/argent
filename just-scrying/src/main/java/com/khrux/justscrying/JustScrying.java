@@ -2,7 +2,7 @@ package com.khrux.justscrying;
 
 import com.khrux.justscrying.config.JustScryingCondition;
 import com.khrux.justscrying.config.JustScryingConfig;
-import com.khrux.justscrying.world.entity.animal.ParrotArmor;
+import com.khrux.justscrying.world.entity.animal.PetArmor;
 import com.khrux.justscrying.world.entity.animal.Scrying;
 import com.khrux.justscrying.world.item.JustScryingItems;
 import net.fabricmc.api.ModInitializer;
@@ -24,9 +24,9 @@ public class JustScrying implements ModInitializer {
 		ResourceConditions.register(JustScryingCondition.TYPE);
 		JustScryingItems.bootstrap();
 		BuiltInRegistries.ITEM.addAlias(Identifier.fromNamespaceAndPath("argent", "silver_parrot_armor"), BuiltInRegistries.ITEM.getKey(JustScryingItems.PARROT_ARMOR));
-		UseEntityCallback.EVENT.register(ParrotArmor::interact);
+		UseEntityCallback.EVENT.register(PetArmor::interact);
 		Scrying.bootstrap();
-		ServerLivingEntityEvents.ALLOW_DAMAGE.register(ParrotArmor::allowDamage);
+		ServerLivingEntityEvents.ALLOW_DAMAGE.register(PetArmor::allowDamage);
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT)
 			.register(combat -> {
 				if (JustScryingConfig.get().isEnabled()) {

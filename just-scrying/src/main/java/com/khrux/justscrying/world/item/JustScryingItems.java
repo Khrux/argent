@@ -9,6 +9,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
@@ -20,24 +22,29 @@ import net.minecraft.world.item.equipment.Equippable;
 public class JustScryingItems {
 
 	public static final Item PARROT_ARMOR = registerItem(
-		JustScryingItemIds.PARROT_ARMOR,
-		Item::new,
-		new Item.Properties()
+		JustScryingItemIds.PARROT_ARMOR, Item::new, petArmorProperties(EntityTypes.PARROT, JustScryingItemTags.REPAIRS_PARROT_ARMOR)
+	);
+	public static final Item CAT_ARMOR = registerItem(
+		JustScryingItemIds.CAT_ARMOR, Item::new, petArmorProperties(EntityTypes.CAT, JustScryingItemTags.REPAIRS_CAT_ARMOR)
+	);
+
+	private static Item.Properties petArmorProperties(final EntityType<?> entityType, final TagKey<Item> repairItems) {
+		return new Item.Properties()
 			.durability(ArmorType.BODY.getDurability(ArmorMaterials.ARMADILLO_SCUTE.durability()))
 			.attributes(ArmorMaterials.ARMADILLO_SCUTE.createAttributes(ArmorType.BODY))
-			.repairable(JustScryingItemTags.REPAIRS_PARROT_ARMOR)
+			.repairable(repairItems)
 			.component(
 				DataComponents.EQUIPPABLE,
 				Equippable.builder(EquipmentSlot.BODY)
 					.setEquipSound(ArmorMaterials.ARMADILLO_SCUTE.equipSound())
-					.setAllowedEntities(HolderSet.direct(EntityTypes.PARROT.builtInRegistryHolder()))
+					.setAllowedEntities(HolderSet.direct(entityType.builtInRegistryHolder()))
 					.setCanBeSheared(true)
 					.setShearingSound(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.ARMOR_UNEQUIP_WOLF))
 					.build()
 			)
 			.component(DataComponents.BREAK_SOUND, SoundEvents.WOLF_ARMOR_BREAK)
-			.stacksTo(1)
-	);
+			.stacksTo(1);
+	}
 
 	private static Item registerItem(final ResourceKey<Item> id) {
 		return registerItem(id, Item::new, new Item.Properties());

@@ -12,24 +12,30 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public record RecipeGrid(List<ItemStack> ingredients, ItemStack result) implements ClientTooltipComponent {
+public record PetArmorRecipeGrid(List<ItemStack> ingredients, ItemStack result) implements ClientTooltipComponent {
 	private static final int SLOT_SIZE = 18;
 	private static final int ARROW_WIDTH = 24;
 	private static final int SLOT_COLOR = 0x40FFFFFF;
 	private static final int ARROW_COLOR = 0xFFAAAAAA;
 	private static final int TOOLTIP_WIDTH = 200;
 
-	public static RecipeGrid of(final Item result, final Item... ingredients) {
-		return new RecipeGrid(
+	public static PetArmorRecipeGrid of(final Item result, final Item... ingredients) {
+		return new PetArmorRecipeGrid(
 			Arrays.stream(ingredients).map(item -> item == Items.AIR ? ItemStack.EMPTY : new ItemStack(item)).toList(), new ItemStack(result)
 		);
 	}
 
-	public static RecipeGrid parrotArmor() {
+	public static PetArmorRecipeGrid parrotArmor() {
 		Item f = Items.FEATHER;
 		Item l = Items.LEATHER;
 		Item air = Items.AIR;
 		return of(JustScryingItems.PARROT_ARMOR, air, f, air, air, l, air, l, l, air);
+	}
+
+	public static PetArmorRecipeGrid catArmor() {
+		Item s = Items.ARMADILLO_SCUTE;
+		Item air = Items.AIR;
+		return of(JustScryingItems.CAT_ARMOR, air, air, air, s, s, s, s, air, s);
 	}
 
 	public List<ClientTooltipComponent> tooltip(final Font font, final Component text) {

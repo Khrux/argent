@@ -17,6 +17,7 @@ public class JustScryingLanguageProvider extends FabricLanguageProvider {
 	public void generateTranslations(final HolderLookup.Provider registries, final FabricLanguageProvider.TranslationBuilder translationBuilder) {
 		translationBuilder.add(Util.makeDescriptionId("enchantment", JustScryingEnchantments.SCRYING.identifier()), "Scrying");
 		translationBuilder.add(JustScryingItems.PARROT_ARMOR, "Parrot Armor");
+		translationBuilder.add(JustScryingItems.CAT_ARMOR, "Cat Armor");
 		translationBuilder.add("options.justscrying.title", "Just Scrying Settings");
 		translationBuilder.add("options.justscrying.scrying", "Scrying");
 		translationBuilder.add("options.justscrying.scrying.tooltip", "Whether sneaking and using an empty hand on your pet wearing Scrying armour lets you see and move through it.");

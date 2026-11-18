@@ -5,6 +5,7 @@ import com.khrux.argent.config.ArgentConfig;
 import com.khrux.justmirrors.client.gui.components.SkinEditorKeyBinding;
 import com.khrux.justmirrors.client.gui.screens.JustMirrorsOptions;
 import com.khrux.justmirrors.world.item.JustMirrorsItems;
+import com.khrux.justscrying.client.gui.components.PetArmorRecipeGrid;
 import com.khrux.justscrying.client.gui.screens.JustScryingOptions;
 import com.khrux.justsilver.client.gui.components.RecipeGrid;
 import com.khrux.justscrying.config.JustScryingConfig;
@@ -152,7 +153,8 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 			case SCRYING -> {
 				widgets.add(this.button(JustScryingOptions.effect()));
 				widgets.add(this.button(bookSource()));
-				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> com.khrux.justscrying.client.gui.components.RecipeGrid.parrotArmor().tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.parrotArmor().tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.catArmor().tooltip(this.font, RECIPE_TOOLTIP)));
 			}
 		}
 

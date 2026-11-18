@@ -33,6 +33,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Leashable;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.animal.feline.Cat;
 import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
@@ -56,6 +57,7 @@ public class Scrying {
 	private static final double MAX_STEP = 1.5;
 	private static final double BITE_RANGE = 3.0;
 	private static final int BITE_COOLDOWN = 10;
+	private static final float SCRATCH_DAMAGE = 3.0F;
 	private static final float LIBRARY_BOOK_CHANCE = 0.1F;
 	private static final Map<UUID, Scrying.Link> LINKS = new HashMap<>();
 
@@ -90,7 +92,7 @@ public class Scrying {
 			&& hand == InteractionHand.MAIN_HAND
 			&& player.getMainHandItem().isEmpty()
 			&& !player.isSpectator()
-			&& (entity instanceof Wolf || entity instanceof Parrot)
+			&& (entity instanceof Wolf || entity instanceof Parrot || entity instanceof Cat)
 			&& entity instanceof TamableAnimal pet
 			&& pet.isTame()
 			&& pet.isOwnedBy(player)
@@ -183,18 +185,23 @@ public class Scrying {
 
 	private static void bite(final ServerPlayer player, final ScryingBitePayload payload) {
 		Scrying.Link link = LINKS.get(player.getUUID());
-		if (link == null || !(link.pet instanceof Wolf wolf) || !(wolf.level() instanceof ServerLevel level)) {
+		if (link == null || !(link.pet instanceof Wolf || link.pet instanceof Cat) || !(link.pet.level() instanceof ServerLevel level)) {
 			return;
 		}
 
+		TamableAnimal pet = link.pet;
 		Entity target = level.getEntity(payload.targetId());
 		long time = level.getGameTime();
-		if (target == null || target == player || target == wolf || wolf.distanceTo(target) > BITE_RANGE || time - link.lastBite < BITE_COOLDOWN) {
+		if (target == null || target == player || target == pet || pet.distanceTo(target) > BITE_RANGE || time - link.lastBite < BITE_COOLDOWN) {
 			return;
 		}
 
 		link.lastBite = time;
-		wolf.doHurtTarget(level, target);
+		if (pet instanceof Cat) {
+			target.hurtServer(level, pet.damageSources().mobAttack(pet), SCRATCH_DAMAGE);
+		} else {
+			pet.doHurtTarget(level, target);
+		}
 	}
 
 	private static void stop(final ServerPlayer player) {

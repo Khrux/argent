@@ -19,5 +19,6 @@ public class JustScryingModelProvider extends FabricModelProvider {
 	@Override
 	public void generateItemModels(final ItemModelGenerators itemModelGenerators) {
 		itemModelGenerators.generateDyedItem(JustScryingItems.PARROT_ARMOR, DyedItemColor.LEATHER_COLOR);
+		itemModelGenerators.generateTwoLayerDyedItem(JustScryingItems.CAT_ARMOR);
 	}
 }

@@ -34,6 +34,13 @@ public class JustScryingRecipeProvider extends FabricRecipeProvider {
 					.unlockedBy("has_leather", this.has(Items.LEATHER))
 					.save(JustScryingRecipeProvider.this.withConditions(this.output, new JustScryingCondition(JustScryingCondition.Option.PARROT_ARMOR)));
 				this.dyedItem(JustScryingItems.PARROT_ARMOR, "dyed_armor");
+				this.shaped(RecipeCategory.COMBAT, JustScryingItems.CAT_ARMOR)
+					.define('S', Items.ARMADILLO_SCUTE)
+					.pattern("SSS")
+					.pattern("S S")
+					.unlockedBy("has_armadillo_scute", this.has(Items.ARMADILLO_SCUTE))
+					.save(JustScryingRecipeProvider.this.withConditions(this.output, new JustScryingCondition(JustScryingCondition.Option.CAT_ARMOR)));
+				this.dyedItem(JustScryingItems.CAT_ARMOR, "dyed_armor");
 			}
 		};
 	}
