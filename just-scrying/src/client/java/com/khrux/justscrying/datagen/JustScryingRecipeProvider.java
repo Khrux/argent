@@ -1,5 +1,6 @@
 package com.khrux.justscrying.datagen;
 
+import com.khrux.justscrying.config.JustScryingCondition;
 import com.khrux.justscrying.world.item.JustScryingItems;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -31,7 +32,7 @@ public class JustScryingRecipeProvider extends FabricRecipeProvider {
 					.pattern(" L ")
 					.pattern("LL ")
 					.unlockedBy("has_leather", this.has(Items.LEATHER))
-					.save(this.output);
+					.save(JustScryingRecipeProvider.this.withConditions(this.output, new JustScryingCondition(JustScryingCondition.Option.PARROT_ARMOR)));
 			}
 		};
 	}

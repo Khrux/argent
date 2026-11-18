@@ -22,7 +22,7 @@ public class SoulLanternParticles {
 
 	public static void tick(final ClientLevel level) {
 		LocalPlayer player = Minecraft.getInstance().player;
-		if (player == null || JustSpawnLanternsConfig.get().markers == JustSpawnLanternsConfig.Markers.OFF || !isCarryingLantern(player)) {
+		if (player == null || !JustSpawnLanternsConfig.get().showsMarkers() || !isCarryingLantern(player)) {
 			return;
 		}
 

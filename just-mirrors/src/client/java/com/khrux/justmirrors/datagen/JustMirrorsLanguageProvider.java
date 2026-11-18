@@ -24,7 +24,9 @@ public class JustMirrorsLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justmirrors.reflections.off", "Off");
 		translationBuilder.add("options.justmirrors.reflections.entities", "Entities Only");
 		translationBuilder.add("options.justmirrors.reflections.all", "Everything");
-		translationBuilder.add("options.justmirrors.reflection_distance", "Reflection Distance: %s blocks");
+		translationBuilder.add("options.justmirrors.reflection_distance", "Reflection Distance");
+		translationBuilder.add("options.justmirrors.reflection_distance.tooltip", "How far away blocks and entities show in mirrors. Shorter is faster.");
+		translationBuilder.add("options.justmirrors.reflection_distance.blocks", "%s blocks");
 		translationBuilder.add("options.justmirrors.mirror_screen", "Mirror Screen");
 		translationBuilder.add("options.justmirrors.mirror_screen.tooltip", "Off makes mirrors props: right-clicking does nothing.");
 		translationBuilder.add("gui.justmirrors.preset", "Preset %s");

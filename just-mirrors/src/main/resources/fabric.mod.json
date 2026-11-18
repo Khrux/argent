@@ -22,6 +22,9 @@
 		],
 		"fabric-datagen": [
 			"com.khrux.justmirrors.datagen.JustMirrorsDataGenerator"
+		],
+		"modmenu": [
+			"com.khrux.justmirrors.client.JustMirrorsModMenu"
 		]
 	},
 	"depends": {

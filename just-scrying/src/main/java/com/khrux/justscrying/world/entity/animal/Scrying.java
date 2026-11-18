@@ -85,7 +85,7 @@ public class Scrying {
 	}
 
 	public static boolean canLink(final Player player, final InteractionHand hand, final Entity entity) {
-		return JustScryingConfig.get().isEnabled()
+		return JustScryingConfig.get().scryingWorks()
 			&& player.isSecondaryUseActive()
 			&& hand == InteractionHand.MAIN_HAND
 			&& player.getMainHandItem().isEmpty()

@@ -22,6 +22,9 @@
 		],
 		"fabric-datagen": [
 			"com.khrux.justspawnlanterns.datagen.JustSpawnLanternsDataGenerator"
+		],
+		"modmenu": [
+			"com.khrux.justspawnlanterns.client.JustSpawnLanternsModMenu"
 		]
 	},
 	"depends": {

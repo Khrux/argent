@@ -22,6 +22,9 @@
 		],
 		"fabric-datagen": [
 			"com.khrux.justscrying.datagen.JustScryingDataGenerator"
+		],
+		"modmenu": [
+			"com.khrux.justscrying.client.JustScryingModMenu"
 		]
 	},
 	"depends": {

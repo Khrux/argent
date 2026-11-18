@@ -2,7 +2,10 @@ package com.khrux.argent.config;
 
 import com.google.gson.JsonParser;
 import com.khrux.justmirrors.config.JustMirrorsConfig;
+import com.khrux.justscrying.config.JustScryingConfig;
 import com.khrux.justsilver.config.JustSilverConfig;
+import com.khrux.justspawnlanterns.config.JustSpawnLanternsConfig;
+import com.khrux.justwitherzombies.config.JustWitherZombiesConfig;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
@@ -64,6 +67,73 @@ public class ArgentConfig {
 		return JustSilverConfig.get().generatesOre() ? MirrorRecipe.SILVER : MirrorRecipe.DIAMOND;
 	}
 
+	public Mode mode(final Section section) {
+		return switch (section) {
+			case SILVER -> this.silver;
+			case MIRRORS -> this.mirrors;
+			case SPAWN_LANTERNS -> this.spawnLanterns;
+			case WITHER_ZOMBIE -> this.witherZombie;
+			case SCRYING -> this.scrying;
+		};
+	}
+
+	public void setMode(final Section section, final Mode mode) {
+		switch (section) {
+			case SILVER -> {
+				this.silver = mode;
+				JustSilverConfig config = JustSilverConfig.get();
+				config.enabled = mode != Mode.DISABLED;
+				if (mode == Mode.ENABLED) {
+					config.setDefaults();
+				}
+			}
+			case MIRRORS -> {
+				this.mirrors = mode;
+				JustMirrorsConfig config = JustMirrorsConfig.get();
+				config.enabled = mode != Mode.DISABLED;
+				if (mode == Mode.ENABLED) {
+					config.setDefaults();
+				}
+			}
+			case SPAWN_LANTERNS -> {
+				this.spawnLanterns = mode;
+				JustSpawnLanternsConfig config = JustSpawnLanternsConfig.get();
+				config.enabled = mode != Mode.DISABLED;
+				if (mode == Mode.ENABLED) {
+					config.setDefaults();
+				}
+			}
+			case WITHER_ZOMBIE -> {
+				this.witherZombie = mode;
+				JustWitherZombiesConfig config = JustWitherZombiesConfig.get();
+				config.enabled = mode != Mode.DISABLED;
+				if (mode == Mode.ENABLED) {
+					boolean scryingBooks = config.scryingBooks;
+					config.setDefaults();
+					config.scryingBooks = scryingBooks;
+				}
+			}
+			case SCRYING -> {
+				this.scrying = mode;
+				JustScryingConfig config = JustScryingConfig.get();
+				config.enabled = mode != Mode.DISABLED;
+				if (mode == Mode.ENABLED) {
+					config.setDefaults();
+					JustWitherZombiesConfig.get().scryingBooks = true;
+				}
+			}
+		}
+	}
+
+	public void saveAll() {
+		this.save();
+		JustSilverConfig.get().save();
+		JustMirrorsConfig.get().save();
+		JustSpawnLanternsConfig.get().save();
+		JustWitherZombiesConfig.get().save();
+		JustScryingConfig.get().save();
+	}
+
 	private static Path path() {
 		return FabricLoader.getInstance().getConfigDir().resolve("argent.json");
 	}
@@ -89,6 +159,24 @@ public class ArgentConfig {
 			Files.writeString(path, CODEC.encodeStart(JsonOps.INSTANCE, this).getOrThrow().toString());
 		} catch (IOException e) {
 			LOGGER.warn("Failed to save {}", path, e);
+		}
+	}
+
+	public enum Section {
+		SILVER("silver"),
+		MIRRORS("mirrors"),
+		SPAWN_LANTERNS("spawn_lanterns"),
+		WITHER_ZOMBIE("wither_zombie"),
+		SCRYING("scrying");
+
+		private final String name;
+
+		Section(final String name) {
+			this.name = name;
+		}
+
+		public Component getDisplayName() {
+			return Component.translatable("options.argent." + this.name);
 		}
 	}
 

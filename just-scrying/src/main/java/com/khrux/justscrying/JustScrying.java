@@ -1,5 +1,6 @@
 package com.khrux.justscrying;
 
+import com.khrux.justscrying.config.JustScryingCondition;
 import com.khrux.justscrying.config.JustScryingConfig;
 import com.khrux.justscrying.world.entity.animal.ParrotArmor;
 import com.khrux.justscrying.world.entity.animal.Scrying;
@@ -8,6 +9,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -19,6 +21,7 @@ public class JustScrying implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		JustScryingConfig.load();
+		ResourceConditions.register(JustScryingCondition.TYPE);
 		JustScryingItems.bootstrap();
 		BuiltInRegistries.ITEM.addAlias(Identifier.fromNamespaceAndPath("argent", "silver_parrot_armor"), BuiltInRegistries.ITEM.getKey(JustScryingItems.PARROT_ARMOR));
 		UseEntityCallback.EVENT.register(ParrotArmor::interact);

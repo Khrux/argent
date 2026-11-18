@@ -22,6 +22,9 @@
 		],
 		"fabric-datagen": [
 			"com.khrux.justwitherzombies.datagen.JustWitherZombiesDataGenerator"
+		],
+		"modmenu": [
+			"com.khrux.justwitherzombies.client.JustWitherZombiesModMenu"
 		]
 	},
 	"depends": {

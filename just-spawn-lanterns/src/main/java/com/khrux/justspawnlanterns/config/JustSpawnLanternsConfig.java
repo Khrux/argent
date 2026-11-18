@@ -17,19 +17,34 @@ public class JustSpawnLanternsConfig {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final Codec<JustSpawnLanternsConfig> CODEC = RecordCodecBuilder.create(
 		i -> i.group(
+				Codec.BOOL.optionalFieldOf("enabled", true).forGetter(config -> config.enabled),
 				Markers.CODEC.optionalFieldOf("soul_lantern_mode", Markers.HAND).forGetter(config -> config.markers)
 			)
 			.apply(i, JustSpawnLanternsConfig::new)
 	);
-	private static JustSpawnLanternsConfig instance = new JustSpawnLanternsConfig(Markers.HAND);
+	private static JustSpawnLanternsConfig instance = new JustSpawnLanternsConfig(true, Markers.HAND);
+	public boolean enabled;
 	public Markers markers;
 
-	private JustSpawnLanternsConfig(final Markers markers) {
+	private JustSpawnLanternsConfig(final boolean enabled, final Markers markers) {
+		this.enabled = enabled;
 		this.markers = markers;
 	}
 
 	public static JustSpawnLanternsConfig get() {
 		return instance;
+	}
+
+	public boolean isEnabled() {
+		return this.enabled || !FabricLoader.getInstance().isModLoaded("argent");
+	}
+
+	public boolean showsMarkers() {
+		return this.isEnabled() && this.markers != Markers.OFF;
+	}
+
+	public void setDefaults() {
+		this.markers = Markers.HAND;
 	}
 
 	private static Path path(final String name) {

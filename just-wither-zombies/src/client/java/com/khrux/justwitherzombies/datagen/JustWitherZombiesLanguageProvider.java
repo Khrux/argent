@@ -27,5 +27,7 @@ public class JustWitherZombiesLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justwitherzombies.melee_damage.tooltip", "Whether a wither zombie's hit hurts as well as withering you.");
 		translationBuilder.add("options.justwitherzombies.item_stealing", "Item Stealing");
 		translationBuilder.add("options.justwitherzombies.item_stealing.tooltip", "Whether wither zombies take food, plants, leather, feathers, wool and eggs from you.");
+		translationBuilder.add("options.justwitherzombies.scrying_books", "Scrying Books");
+		translationBuilder.add("options.justwitherzombies.scrying_books.tooltip", "A shattering wither zombie drops a Scrying enchanted book.");
 	}
 }

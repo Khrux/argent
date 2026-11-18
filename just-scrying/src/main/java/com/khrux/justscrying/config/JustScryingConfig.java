@@ -15,21 +15,26 @@ public class JustScryingConfig {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final Codec<JustScryingConfig> CODEC = RecordCodecBuilder.create(
 		i -> i.group(
-				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.enabled),
+				Codec.BOOL.optionalFieldOf("enabled", true).forGetter(config -> config.enabled),
+				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.effect),
 				Codec.BOOL.optionalFieldOf("scrying_library_loot", false).forGetter(config -> config.libraryBooks),
 				Codec.BOOL.optionalFieldOf("parrot_armor_recipe", true).forGetter(config -> config.parrotArmorRecipe),
 				Codec.BOOL.optionalFieldOf("cat_armor_recipe", true).forGetter(config -> config.catArmorRecipe)
 			)
 			.apply(i, JustScryingConfig::new)
 	);
-	private static JustScryingConfig instance = new JustScryingConfig(true, false, true, true);
+	private static JustScryingConfig instance = new JustScryingConfig(true, true, false, true, true);
 	public boolean enabled;
+	public boolean effect;
 	public boolean libraryBooks;
 	public boolean parrotArmorRecipe;
 	public boolean catArmorRecipe;
 
-	private JustScryingConfig(final boolean enabled, final boolean libraryBooks, final boolean parrotArmorRecipe, final boolean catArmorRecipe) {
+	private JustScryingConfig(
+		final boolean enabled, final boolean effect, final boolean libraryBooks, final boolean parrotArmorRecipe, final boolean catArmorRecipe
+	) {
 		this.enabled = enabled;
+		this.effect = effect;
 		this.libraryBooks = libraryBooks;
 		this.parrotArmorRecipe = parrotArmorRecipe;
 		this.catArmorRecipe = catArmorRecipe;
@@ -43,7 +48,12 @@ public class JustScryingConfig {
 		return this.enabled || !FabricLoader.getInstance().isModLoaded("argent");
 	}
 
+	public boolean scryingWorks() {
+		return this.isEnabled() && this.effect;
+	}
+
 	public void setDefaults() {
+		this.effect = true;
 		this.libraryBooks = false;
 		this.parrotArmorRecipe = true;
 		this.catArmorRecipe = true;
