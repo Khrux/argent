@@ -5,9 +5,11 @@ import com.khrux.justscrying.client.model.geom.JustScryingModelLayers;
 import com.khrux.justscrying.client.renderer.entity.ArmoredParrotRenderer;
 import com.khrux.justscrying.world.item.JustScryingItems;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.fabricmc.fabric.api.client.rendering.v1.FabricRenderState;
 import net.minecraft.client.model.animal.parrot.ParrotModel;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -18,13 +20,20 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.ParrotRenderState;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 
 public class ParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel> {
 	private static final Identifier TEXTURE = JustScrying.id("textures/entity/parrot/parrot_armor.png");
+	private static final float PLUME_X = 0.0F;
+	private static final float PLUME_Y = -2.6F / 16.0F;
+	private static final float PLUME_Z = 0.25F / 16.0F;
+	private static final float PLUME_SCALE = 0.3F;
+	private static final float PLUME_TILT = -18.0F;
 	private final ParrotModel model;
 
 	public ParrotArmorLayer(final RenderLayerParent<ParrotRenderState, ParrotModel> renderer, final EntityModelSet modelSet) {
@@ -77,7 +86,26 @@ public class ParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel
 			armor.hasFoil() ? RenderTypes.armorCutoutNoCullGlint(TEXTURE) : RenderTypes.armorCutoutNoCull(TEXTURE),
 			lightCoords,
 			OverlayTexture.NO_OVERLAY,
+			DyedItemColor.getOrDefault(armor, DyedItemColor.LEATHER_COLOR),
+			null,
 			state.outlineColor
 		);
+		ItemStackRenderState plume = ((FabricRenderState)state).getDataOrDefault(ArmoredParrotRenderer.PLUME, null);
+		if (plume == null || plume.isEmpty()) {
+			return;
+		}
+
+		poseStack.pushPose();
+		ModelPart root = this.getParentModel().root();
+		root.translateAndRotate(poseStack);
+		root.getChild("head").translateAndRotate(poseStack);
+		poseStack.translate(PLUME_X, PLUME_Y, PLUME_Z);
+		poseStack.scale(PLUME_SCALE, -PLUME_SCALE, -PLUME_SCALE);
+		poseStack.rotateDegrees(Axis.XP, PLUME_TILT);
+		poseStack.rotateDegrees(Axis.YP, 90.0F);
+		poseStack.translate(-0.09F, 0.49F, 0.0F);
+		poseStack.rotateDegrees(Axis.ZP, 45.0F);
+		plume.submit(poseStack, submitNodeCollector, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
+		poseStack.popPose();
 	}
 }

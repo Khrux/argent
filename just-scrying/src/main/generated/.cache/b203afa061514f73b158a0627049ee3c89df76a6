@@ -1,3 +1,4 @@
 // 26.3	-999999999-01-01T00:00:00	Just Scrying/Tags for minecraft:item
 9bf4d849ee01101e9f460dc42898b6d653efe595 data/justscrying/tags/item/enchantable/scrying.json
 64a5131137472b111eb62466b0b98a6cf19cd19c data/justscrying/tags/item/repairs_parrot_armor.json
+f084a789c47275d56390a9891f914e83aaad2893 data/minecraft/tags/item/cauldron_can_remove_dye.json

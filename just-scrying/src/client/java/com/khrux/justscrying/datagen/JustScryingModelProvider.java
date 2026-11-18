@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.world.item.component.DyedItemColor;
 
 public class JustScryingModelProvider extends FabricModelProvider {
 	public JustScryingModelProvider(final FabricPackOutput output) {
@@ -18,6 +18,6 @@ public class JustScryingModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateItemModels(final ItemModelGenerators itemModelGenerators) {
-		itemModelGenerators.generateFlatItem(JustScryingItems.PARROT_ARMOR, ModelTemplates.FLAT_ITEM);
+		itemModelGenerators.generateDyedItem(JustScryingItems.PARROT_ARMOR, DyedItemColor.LEATHER_COLOR);
 	}
 }

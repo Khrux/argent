@@ -33,6 +33,7 @@ public class JustScryingRecipeProvider extends FabricRecipeProvider {
 					.pattern("LL ")
 					.unlockedBy("has_leather", this.has(Items.LEATHER))
 					.save(JustScryingRecipeProvider.this.withConditions(this.output, new JustScryingCondition(JustScryingCondition.Option.PARROT_ARMOR)));
+				this.dyedItem(JustScryingItems.PARROT_ARMOR, "dyed_armor");
 			}
 		};
 	}

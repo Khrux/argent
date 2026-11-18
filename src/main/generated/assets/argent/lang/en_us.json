@@ -18,7 +18,6 @@
   "options.argent.recipe.tooltip": "Applies after /reload or rejoining. Items already made stay.",
   "options.argent.scrying": "Scrying",
   "options.argent.silver": "Silver",
-  "options.argent.silver_warning": "Silver ore generation is off, so this needs silver already in the world.",
   "options.argent.skin_editor_key": "Editor Key: %s",
   "options.argent.spawn_lanterns": "Spawn Lanterns",
   "options.argent.title": "Argent Settings",

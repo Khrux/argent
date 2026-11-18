@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_parrot_armor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "justscrying:parrot_armor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "justscrying:parrot_armor_dyed"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_parrot_armor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "justscrying:parrot_armor_dyed"
+    ]
+  }
+}

@@ -28,5 +28,6 @@ public class JustSilverLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justsilver.silver_bell_recipe", "Silver Bell Recipe");
 		translationBuilder.add("options.justsilver.soul_lantern_recipe", "Soul Lantern from Silver Nuggets");
 		translationBuilder.add("options.justsilver.recipe.tooltip", "Applies after /reload or rejoining. Items already made stay.");
+		translationBuilder.add("options.justsilver.silver_warning", "Silver ore generation is off, so this needs silver already in the world.");
 	}
 }

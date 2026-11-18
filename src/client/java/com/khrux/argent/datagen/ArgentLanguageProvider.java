@@ -20,7 +20,6 @@ public class ArgentLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.argent.mode.custom", "Custom");
 		translationBuilder.add("options.argent.mode.tooltip", "Enabled: as designed, with the best settings. Disabled: switched off. Custom: choose the settings below.");
 		translationBuilder.add("options.argent.recipe.tooltip", "Applies after /reload or rejoining. Items already made stay.");
-		translationBuilder.add("options.argent.silver_warning", "Silver ore generation is off, so this needs silver already in the world.");
 		translationBuilder.add("options.argent.book_source", "Scrying Books");
 		translationBuilder.add("options.argent.book_source.tooltip", "Where Scrying enchanted books come from: a shattering wither zombie, rare stronghold library chests, both, or neither.");
 		translationBuilder.add("options.argent.book_source.wither_zombie", "Wither Zombie");

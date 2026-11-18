@@ -1,14 +1,15 @@
 package com.khrux.argent.client.gui.screens;
 
-import com.khrux.argent.client.gui.components.RecipeGrid;
 import com.khrux.argent.client.gui.components.SectionPicture;
 import com.khrux.argent.config.ArgentConfig;
 import com.khrux.justmirrors.client.gui.components.SkinEditorKeyBinding;
 import com.khrux.justmirrors.client.gui.screens.JustMirrorsOptions;
+import com.khrux.justmirrors.world.item.JustMirrorsItems;
 import com.khrux.justscrying.client.gui.screens.JustScryingOptions;
+import com.khrux.justsilver.client.gui.components.RecipeGrid;
 import com.khrux.justscrying.config.JustScryingConfig;
 import com.khrux.justsilver.client.gui.screens.JustSilverOptions;
-import com.khrux.justsilver.config.JustSilverConfig;
+import com.khrux.justsilver.world.item.JustSilverItems;
 import com.khrux.justspawnlanterns.client.gui.screens.JustSpawnLanternsOptions;
 import com.khrux.justwitherzombies.client.gui.screens.JustWitherZombiesOptions;
 import com.khrux.justwitherzombies.config.JustWitherZombiesConfig;
@@ -18,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
@@ -37,21 +37,21 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public class ArgentConfigScreen extends OptionsSubScreen {
 	private static final Component TITLE = Component.translatable("options.argent.title");
 	private static final Component MODE_TOOLTIP = Component.translatable("options.argent.mode.tooltip");
 	private static final Component RECIPE_TOOLTIP = Component.translatable("options.argent.recipe.tooltip");
-	private static final Component SILVER_WARNING = Component.translatable("options.argent.silver_warning").withStyle(ChatFormatting.GOLD);
 	private static final int TILE_WIDTH = 72;
 	private static final int PICTURE_HEIGHT = 50;
 	private static final int TILE_SPACING = 2;
 	private static final int TILE_GAP = 6;
 	private static final int HEADER_PADDING = 8;
 	private static final int TITLE_SPACING = 6;
-	private static final int TOOLTIP_WIDTH = 200;
 	private final SkinEditorKeyBinding skinEditorKey = new SkinEditorKeyBinding(Minecraft.getInstance());
-	private final Map<AbstractWidget, Supplier<RecipeGrid>> recipeGrids = new HashMap<>();
+	private final Map<AbstractWidget, Supplier<List<ClientTooltipComponent>>> recipeGrids = new HashMap<>();
 	private int columns;
 
 	public ArgentConfigScreen(final Screen lastScreen) {
@@ -133,15 +133,15 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		switch (section) {
 			case SILVER -> {
 				widgets.add(this.button(JustSilverOptions.oreGeneration()));
-				widgets.add(this.recipe(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip()), RecipeGrid::silverBell));
-				widgets.add(this.recipe(JustSilverOptions.soulLanternRecipe(OptionInstance.noTooltip()), RecipeGrid::soulLantern));
+				widgets.add(this.recipe(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip()), () -> RecipeGrid.silverBell().tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(JustSilverOptions.soulLanternRecipe(OptionInstance.noTooltip()), () -> RecipeGrid.soulLantern().tooltip(this.font, RECIPE_TOOLTIP)));
 			}
 			case MIRRORS -> {
 				widgets.add(this.skinEditorKey.openButton());
 				widgets.add(this.skinEditorKey.keyButton());
 				widgets.add(this.button(JustMirrorsOptions.reflections()));
 				widgets.add(this.button(JustMirrorsOptions.reflectionDistance()));
-				widgets.add(this.recipe(mirrorRecipe(), () -> RecipeGrid.mirror(ArgentConfig.get().mirrorRecipe)));
+				widgets.add(this.recipe(mirrorRecipe(), () -> mirrorGrid(ArgentConfig.get().mirrorRecipe).tooltip(this.font, RECIPE_TOOLTIP)));
 				widgets.add(this.button(JustMirrorsOptions.mirrorScreen()));
 			}
 			case SPAWN_LANTERNS -> widgets.add(this.button(JustSpawnLanternsOptions.markers()));
@@ -152,7 +152,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 			case SCRYING -> {
 				widgets.add(this.button(JustScryingOptions.effect()));
 				widgets.add(this.button(bookSource()));
-				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), RecipeGrid::parrotArmor));
+				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> com.khrux.justscrying.client.gui.components.RecipeGrid.parrotArmor().tooltip(this.font, RECIPE_TOOLTIP)));
 			}
 		}
 
@@ -163,7 +163,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		return option.createButton(this.options);
 	}
 
-	private AbstractWidget recipe(final OptionInstance<?> option, final Supplier<RecipeGrid> grid) {
+	private AbstractWidget recipe(final OptionInstance<?> option, final Supplier<List<ClientTooltipComponent>> grid) {
 		AbstractWidget widget = this.button(option);
 		this.recipeGrids.put(widget, grid);
 		return widget;
@@ -200,23 +200,18 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	@Override
 	public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float partialTicks) {
 		super.extractRenderState(graphics, mouseX, mouseY, partialTicks);
-		for (Map.Entry<AbstractWidget, Supplier<RecipeGrid>> entry : this.recipeGrids.entrySet()) {
+		for (Map.Entry<AbstractWidget, Supplier<List<ClientTooltipComponent>>> entry : this.recipeGrids.entrySet()) {
 			if (entry.getKey().isHovered()) {
-				graphics.tooltip(this.font, this.recipeTooltip(entry.getValue().get()), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
+				graphics.tooltip(this.font, entry.getValue().get(), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
 				return;
 			}
 		}
 	}
 
-	private List<ClientTooltipComponent> recipeTooltip(final RecipeGrid grid) {
-		List<ClientTooltipComponent> lines = new ArrayList<>();
-		this.font.split(RECIPE_TOOLTIP, TOOLTIP_WIDTH).forEach(line -> lines.add(ClientTooltipComponent.create(line)));
-		if (grid.needsSilver() && !JustSilverConfig.get().generatesOre()) {
-			this.font.split(SILVER_WARNING, TOOLTIP_WIDTH).forEach(line -> lines.add(ClientTooltipComponent.create(line)));
-		}
-
-		lines.add(grid);
-		return lines;
+	private static RecipeGrid mirrorGrid(final ArgentConfig.MirrorRecipe recipe) {
+		Item s = Items.STICK;
+		Item core = recipe == ArgentConfig.MirrorRecipe.SILVER ? JustSilverItems.SILVER_INGOT : Items.DIAMOND;
+		return RecipeGrid.of(JustMirrorsItems.MIRROR, recipe == ArgentConfig.MirrorRecipe.SILVER, s, s, s, s, core, s, s, s, s);
 	}
 
 	@Override

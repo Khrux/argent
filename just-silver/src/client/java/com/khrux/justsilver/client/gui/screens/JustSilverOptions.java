@@ -19,8 +19,4 @@ public class JustSilverOptions {
 		JustSilverConfig config = JustSilverConfig.get();
 		return OptionInstance.createBoolean("options.justsilver.soul_lantern_recipe", tooltip, config.soulLanternRecipe, value -> config.soulLanternRecipe = value);
 	}
-
-	public static OptionInstance.TooltipSupplier<Boolean> recipeTooltip() {
-		return OptionInstance.cachedConstantTooltip(Component.translatable("options.justsilver.recipe.tooltip"));
-	}
 }
