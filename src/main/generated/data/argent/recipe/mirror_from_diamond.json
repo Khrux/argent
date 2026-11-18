@@ -2,7 +2,7 @@
   "fabric:load_conditions": [
     {
       "condition": "argent:config",
-      "option": "diamond_mirror"
+      "mirror_recipe": "diamond"
     }
   ],
   "type": "minecraft:crafting_shaped",
@@ -16,6 +16,6 @@
     "###"
   ],
   "result": {
-    "id": "argent:mirror"
+    "id": "justmirrors:mirror"
   }
 }

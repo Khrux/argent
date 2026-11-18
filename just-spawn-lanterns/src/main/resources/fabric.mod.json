@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "justspawnlanterns",
+	"version": "${version}",
+	"name": "Just Spawn Lanterns",
+	"description": "Soul lanterns show where monsters can spawn.",
+	"authors": [
+		"khrux"
+	],
+	"contact": {
+		"sources": "https://github.com/Khrux/argent",
+		"issues": "https://github.com/Khrux/argent/issues"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.justspawnlanterns.JustSpawnLanterns"
+		],
+		"client": [
+			"com.khrux.justspawnlanterns.client.JustSpawnLanternsClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.justspawnlanterns.datagen.JustSpawnLanternsDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

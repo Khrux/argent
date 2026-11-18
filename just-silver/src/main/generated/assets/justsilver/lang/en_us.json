@@ -1,0 +1,16 @@
+{
+  "block.justsilver.deepslate_silver_ore": "Deepslate Silver Ore",
+  "block.justsilver.raw_silver_block": "Block of Raw Silver",
+  "block.justsilver.silver_bell": "Silver Bell",
+  "block.justsilver.silver_block": "Block of Silver",
+  "block.justsilver.silver_ore": "Silver Ore",
+  "item.justsilver.raw_silver": "Raw Silver",
+  "item.justsilver.silver_ingot": "Silver Ingot",
+  "item.justsilver.silver_nugget": "Silver Nugget",
+  "options.justsilver.ore_generation": "Ore Generation",
+  "options.justsilver.ore_generation.tooltip": "Silver ore generates in newly generated chunks, wherever gold does. Existing silver stays.",
+  "options.justsilver.recipe.tooltip": "Applies after /reload or rejoining. Items already made stay.",
+  "options.justsilver.silver_bell_recipe": "Silver Bell Recipe",
+  "options.justsilver.soul_lantern_recipe": "Soul Lantern from Silver Nuggets",
+  "options.justsilver.title": "Just Silver Settings"
+}

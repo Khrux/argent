@@ -1,0 +1,20 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "justsilver:config",
+      "option": "silver_bell"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "#minecraft:logs",
+    "X": "justsilver:silver_block"
+  },
+  "pattern": [
+    "###",
+    " X "
+  ],
+  "result": {
+    "id": "justsilver:silver_bell"
+  }
+}

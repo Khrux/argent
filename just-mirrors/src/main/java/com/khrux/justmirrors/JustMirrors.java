@@ -1,5 +1,6 @@
 package com.khrux.justmirrors;
 
+import com.khrux.justmirrors.config.JustMirrorsCondition;
 import com.khrux.justmirrors.config.JustMirrorsConfig;
 import com.khrux.justmirrors.network.SkinRelay;
 import com.khrux.justmirrors.world.item.JustMirrorsItems;
@@ -8,6 +9,7 @@ import com.khrux.justmirrors.world.level.block.entity.JustMirrorsBlockEntityType
 import java.util.List;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,6 +25,7 @@ public class JustMirrors implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		JustMirrorsConfig.load();
+		ResourceConditions.register(JustMirrorsCondition.TYPE);
 		JustMirrorsBlocks.bootstrap();
 		JustMirrorsItems.bootstrap();
 		JustMirrorsBlockEntityTypes.bootstrap();

@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "justmirrors",
+	"version": "${version}",
+	"name": "Just Mirrors",
+	"description": "Mirrors that reflect the world around them, with a built-in skin editor.",
+	"authors": [
+		"khrux"
+	],
+	"contact": {
+		"sources": "https://github.com/Khrux/argent",
+		"issues": "https://github.com/Khrux/argent/issues"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.justmirrors.JustMirrors"
+		],
+		"client": [
+			"com.khrux.justmirrors.client.JustMirrorsClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.justmirrors.datagen.JustMirrorsDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"mixins": [
+		{
+			"config": "justmirrors.client.mixins.json",
+			"environment": "client"
+		}
+	]
+}

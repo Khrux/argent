@@ -1,0 +1,14 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "justmirrors:enabled"
+    }
+  ],
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "minecraft:shield",
+  "material": "justmirrors:mirror",
+  "result": {
+    "id": "justwitherzombies:reflective_shield"
+  }
+}

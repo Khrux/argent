@@ -1,0 +1,37 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "justmirrors:enabled"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mirror": {
+      "conditions": {
+        "items": [
+          {
+            "items": "justmirrors:mirror"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "justwitherzombies:reflective_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mirror"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "justwitherzombies:reflective_shield"
+    ]
+  }
+}

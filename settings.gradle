@@ -10,3 +10,5 @@ pluginManagement {
 }
 
 rootProject.name = 'argent'
+
+include 'just-mirrors', 'just-scrying', 'just-spawn-lanterns', 'just-silver', 'just-wither-zombies'

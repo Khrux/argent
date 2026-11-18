@@ -1,0 +1,12 @@
+{
+  "enchantment.justscrying.scrying": "Scrying",
+  "item.justscrying.parrot_armor": "Parrot Armor",
+  "options.justscrying.cat_armor_recipe": "Cat Armor Recipe",
+  "options.justscrying.library_books": "Scrying in Libraries",
+  "options.justscrying.library_books.tooltip": "A Scrying book can rarely turn up in stronghold library chests. Applies to chests opened after /reload or rejoining.",
+  "options.justscrying.parrot_armor_recipe": "Parrot Armor Recipe",
+  "options.justscrying.recipe.tooltip": "Applies after /reload or rejoining. Items already made stay.",
+  "options.justscrying.scrying": "Scrying",
+  "options.justscrying.scrying.tooltip": "Whether sneaking and using an empty hand on your pet wearing Scrying armour lets you see and move through it.",
+  "options.justscrying.title": "Just Scrying Settings"
+}

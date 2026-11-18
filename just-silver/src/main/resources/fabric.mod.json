@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "justsilver",
+	"version": "${version}",
+	"name": "Just Silver",
+	"description": "Silver ore, ingots, nuggets, blocks and a silver bell.",
+	"authors": [
+		"khrux"
+	],
+	"contact": {
+		"sources": "https://github.com/Khrux/argent",
+		"issues": "https://github.com/Khrux/argent/issues"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.justsilver.JustSilver"
+		],
+		"client": [
+			"com.khrux.justsilver.client.JustSilverClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.justsilver.datagen.JustSilverDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

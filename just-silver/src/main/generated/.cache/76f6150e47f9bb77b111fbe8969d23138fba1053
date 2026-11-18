@@ -1,0 +1,9 @@
+// 26.3	-999999999-01-01T00:00:00	Just Silver/Tags for minecraft:block
+955543d58e9c44b1d3ae6a61dbd61b88701eb27a data/c/tags/block/ores/silver.json
+62c8205240a712598e0065f05bc1e21d334e5878 data/c/tags/block/storage_blocks/raw_silver.json
+b277250f79b561a9fcbf82cf307aa669b49bc34a data/c/tags/block/storage_blocks/silver.json
+b277250f79b561a9fcbf82cf307aa669b49bc34a data/minecraft/tags/block/beacon_base_blocks.json
+b7bcef8603592184159fb455a9708547695da6f8 data/minecraft/tags/block/blocks_motion_no_leaves.json
+fb8946565f722a33c6d70600f48c2fa77a6abb6f data/minecraft/tags/block/mineable/pickaxe.json
+9e321606664f7257047a0f60799256b2c1879892 data/minecraft/tags/block/needs_iron_tool.json
+955543d58e9c44b1d3ae6a61dbd61b88701eb27a data/minecraft/tags/block/ores.json

@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "justwitherzombies",
+	"version": "${version}",
+	"name": "Just Wither Zombies",
+	"description": "Wither zombies in the Nether, and the reflective shield that stops their stare.",
+	"authors": [
+		"khrux"
+	],
+	"contact": {
+		"sources": "https://github.com/Khrux/argent",
+		"issues": "https://github.com/Khrux/argent/issues"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.justwitherzombies.JustWitherZombies"
+		],
+		"client": [
+			"com.khrux.justwitherzombies.client.JustWitherZombiesClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.justwitherzombies.datagen.JustWitherZombiesDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*",
+		"justmirrors": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

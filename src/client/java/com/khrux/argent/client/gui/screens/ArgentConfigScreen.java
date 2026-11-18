@@ -1,7 +1,7 @@
 package com.khrux.argent.client.gui.screens;
 
-import com.khrux.argent.client.ArgentClient;
 import com.khrux.argent.config.ArgentConfig;
+import com.khrux.justmirrors.client.JustMirrorsClient;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.serialization.Codec;
 import java.util.List;
@@ -11,8 +11,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.input.KeyEvent;
@@ -32,16 +30,6 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 
 	private static <T> OptionInstance.TooltipSupplier<T> tooltip(final String captionId) {
 		return OptionInstance.cachedConstantTooltip(Component.translatable(captionId + ".tooltip"));
-	}
-
-	private Checkbox checkbox(final String captionId, final boolean initialValue, final Checkbox.OnValueChange onValueChange) {
-		Checkbox checkbox = Checkbox.builder(Component.translatable(captionId), this.font)
-			.maxWidth(Button.DEFAULT_WIDTH)
-			.selected(initialValue)
-			.onValueChange(onValueChange)
-			.build();
-		checkbox.setTooltip(Tooltip.create(Component.translatable(captionId + ".tooltip")));
-		return checkbox;
 	}
 
 	private static <T> OptionInstance<T> choice(
@@ -64,9 +52,9 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 			this.selectingSkinEditorKey = true;
 			button.setMessage(this.skinEditorKeyMessage());
 		}).build();
-		this.list.addSmall(Button.builder(OPEN_SKIN_EDITOR, button -> ArgentClient.openSkinEditor(this.minecraft)).build(), this.skinEditorKeyButton);
+		this.list.addSmall(Button.builder(OPEN_SKIN_EDITOR, button -> JustMirrorsClient.openSkinEditor(this.minecraft)).build(), this.skinEditorKeyButton);
 		this.list
-			.addSmall(
+			.addBig(
 				choice(
 					"options.argent.mirror_recipe",
 					ArgentConfig.MirrorRecipe.values(),
@@ -74,38 +62,12 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 					ArgentConfig.MirrorRecipe::getDisplayName,
 					config.mirrorRecipe,
 					value -> config.mirrorRecipe = value
-				),
-				choice(
-					"options.argent.soul_lantern",
-					ArgentConfig.SoulLantern.values(),
-					ArgentConfig.SoulLantern.CODEC,
-					ArgentConfig.SoulLantern::getDisplayName,
-					config.soulLantern,
-					value -> config.soulLantern = value
-				),
-				choice(
-					"options.argent.reflections",
-					ArgentConfig.Reflections.values(),
-					ArgentConfig.Reflections.CODEC,
-					ArgentConfig.Reflections::getDisplayName,
-					config.reflections,
-					value -> config.reflections = value
-				)
-			);
-		this.list
-			.addSmall(
-				List.of(
-					this.checkbox("options.argent.silver", config.silver, (checkbox, value) -> config.silver = value),
-					this.checkbox("options.argent.mirror_screen", config.mirrorScreen, (checkbox, value) -> config.mirrorScreen = value),
-					this.checkbox("options.argent.wither_zombies", config.witherZombies, (checkbox, value) -> config.witherZombies = value),
-					this.checkbox("options.argent.scrying", config.scrying, (checkbox, value) -> config.scrying = value),
-					this.checkbox("options.argent.scrying_library_loot", config.scryingLibraryLoot, (checkbox, value) -> config.scryingLibraryLoot = value)
 				)
 			);
 	}
 
 	private Component skinEditorKeyMessage() {
-		Component key = ArgentClient.openSkinEditorKey().getTranslatedKeyMessage();
+		Component key = JustMirrorsClient.openSkinEditorKey().getTranslatedKeyMessage();
 		if (this.selectingSkinEditorKey) {
 			key = Component.literal("> ").append(key.copy().withStyle(ChatFormatting.WHITE, ChatFormatting.UNDERLINE)).append(" <").withStyle(ChatFormatting.YELLOW);
 		}
@@ -114,7 +76,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	}
 
 	private void selectSkinEditorKey(final InputConstants.Key key) {
-		ArgentClient.openSkinEditorKey().setKey(key);
+		JustMirrorsClient.openSkinEditorKey().setKey(key);
 		KeyMapping.resetMapping();
 		this.selectingSkinEditorKey = false;
 		if (this.skinEditorKeyButton != null) {

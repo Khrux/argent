@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/bell_between_walls",
+  "textures": {
+    "particle": "justsilver:block/silver_bell"
+  }
+}

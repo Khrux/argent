@@ -2,7 +2,7 @@
   "fabric:load_conditions": [
     {
       "condition": "argent:config",
-      "option": "diamond_mirror"
+      "mirror_recipe": "diamond"
     }
   ],
   "parent": "minecraft:recipes/root",

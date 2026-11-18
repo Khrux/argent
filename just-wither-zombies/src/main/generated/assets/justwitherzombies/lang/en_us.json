@@ -1,0 +1,15 @@
+{
+  "entity.justwitherzombies.wither_zombie": "Wither Zombie",
+  "item.justwitherzombies.reflective_shield": "Reflective Shield",
+  "item.justwitherzombies.wither_zombie_spawn_egg": "Wither Zombie Spawn Egg",
+  "options.justwitherzombies.item_stealing": "Item Stealing",
+  "options.justwitherzombies.item_stealing.tooltip": "Whether wither zombies take food, plants, leather, feathers, wool and eggs from you.",
+  "options.justwitherzombies.melee_damage": "Melee Damage",
+  "options.justwitherzombies.melee_damage.tooltip": "Whether a wither zombie's hit hurts as well as withering you.",
+  "options.justwitherzombies.title": "Just Wither Zombies Settings",
+  "subtitles.entity.wither_zombie.ambient": "Wither Zombie groans",
+  "subtitles.entity.wither_zombie.death": "Wither Zombie dies",
+  "subtitles.entity.wither_zombie.hurt": "Wither Zombie hurts",
+  "subtitles.entity.wither_zombie.notice": "Wither Zombie watches you",
+  "subtitles.entity.wither_zombie.shatter": "Wither Zombie shatters"
+}

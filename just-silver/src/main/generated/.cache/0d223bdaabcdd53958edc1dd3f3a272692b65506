@@ -1,0 +1,6 @@
+// 26.3	-999999999-01-01T00:00:00	Just Silver/Block Loot Tables
+152128db71c94f3e0569d28ae48db665e27ec03f data/justsilver/loot_table/blocks/deepslate_silver_ore.json
+66c7e881cd91164da55726932665dcc3bdd8e7ce data/justsilver/loot_table/blocks/raw_silver_block.json
+9393be524747e28023203599cd5cc2cfb6d9dc40 data/justsilver/loot_table/blocks/silver_bell.json
+b709c78896d24e8d749316df0caa28659d6502a8 data/justsilver/loot_table/blocks/silver_block.json
+8151fa30a3ef22ea7053162394fb2398c8986c7f data/justsilver/loot_table/blocks/silver_ore.json

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": "minecraft:feather",
+    "L": "minecraft:leather"
+  },
+  "pattern": [
+    " F ",
+    " L ",
+    "LL "
+  ],
+  "result": {
+    "id": "justscrying:parrot_armor"
+  }
+}

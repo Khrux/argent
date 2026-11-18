@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "justscrying",
+	"version": "${version}",
+	"name": "Just Scrying",
+	"description": "Scrying, an enchantment for pet armour that lets you see and move as your wolf, cat or parrot. Adds parrot and cat armour.",
+	"authors": [
+		"khrux"
+	],
+	"contact": {
+		"sources": "https://github.com/Khrux/argent",
+		"issues": "https://github.com/Khrux/argent/issues"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.khrux.justscrying.JustScrying"
+		],
+		"client": [
+			"com.khrux.justscrying.client.JustScryingClient"
+		],
+		"fabric-datagen": [
+			"com.khrux.justscrying.datagen.JustScryingDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"mixins": [
+		"justscrying.mixins.json",
+		{
+			"config": "justscrying.client.mixins.json",
+			"environment": "client"
+		}
+	]
+}

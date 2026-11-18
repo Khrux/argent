@@ -3,7 +3,7 @@
 	"id": "argent",
 	"version": "${version}",
 	"name": "Argent",
-	"description": "Silver, and the things it lets you see. Mirrors with a built-in skin editor, soul lanterns that show where monsters can spawn, and Scrying, which lets you see and move as your wolf or parrot.",
+	"description": "Silver, and the things it lets you see. Mirrors with a built-in skin editor, soul lanterns that show where monsters can spawn, wither zombies, and Scrying, which lets you see and move as your pet. Bundles Just Mirrors, Just Scrying, Just Spawn Lanterns, Just Silver and Just Wither Zombies.",
 	"authors": [
 		"khrux"
 	],
@@ -19,9 +19,6 @@
 		"main": [
 			"com.khrux.argent.Argent"
 		],
-		"client": [
-			"com.khrux.argent.client.ArgentClient"
-		],
 		"fabric-datagen": [
 			"com.khrux.argent.datagen.ArgentDataGenerator"
 		],
@@ -33,16 +30,14 @@
 		"fabricloader": ">=0.19.5",
 		"minecraft": "~26.3",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"justmirrors": "*",
+		"justscrying": "*",
+		"justspawnlanterns": "*",
+		"justsilver": "*",
+		"justwitherzombies": "*"
 	},
 	"suggests": {
 		"modmenu": "*"
-	},
-	"mixins": [
-		"argent.mixins.json",
-		{
-			"config": "argent.client.mixins.json",
-			"environment": "client"
-		}
-	]
+	}
 }

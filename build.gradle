@@ -2,6 +2,12 @@ plugins {
 	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 }
 
+evaluationDependsOn(':just-mirrors')
+evaluationDependsOn(':just-scrying')
+evaluationDependsOn(':just-spawn-lanterns')
+evaluationDependsOn(':just-silver')
+evaluationDependsOn(':just-wither-zombies')
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -22,6 +28,7 @@ loom {
 fabricApi {
 	configureDataGeneration {
 		client = true
+		modId = "argent"
 	}
 }
 
@@ -39,6 +46,21 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+	implementation project(':just-mirrors')
+	clientImplementation rootProject.project(':just-mirrors').sourceSets.client.output
+	include project(':just-mirrors')
+	implementation project(':just-scrying')
+	clientImplementation rootProject.project(':just-scrying').sourceSets.client.output
+	include project(':just-scrying')
+	implementation project(':just-spawn-lanterns')
+	clientImplementation rootProject.project(':just-spawn-lanterns').sourceSets.client.output
+	include project(':just-spawn-lanterns')
+	implementation project(':just-silver')
+	clientImplementation rootProject.project(':just-silver').sourceSets.client.output
+	include project(':just-silver')
+	implementation project(':just-wither-zombies')
+	clientImplementation rootProject.project(':just-wither-zombies').sourceSets.client.output
+	include project(':just-wither-zombies')
 }
 
 processResources {

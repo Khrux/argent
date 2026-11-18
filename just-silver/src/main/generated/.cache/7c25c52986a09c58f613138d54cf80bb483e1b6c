@@ -1,0 +1,11 @@
+// 26.3	-999999999-01-01T00:00:00	Just Silver/Tags for minecraft:item
+524259c81e35338922df4f04ed3d0f43a9e8f03c data/c/tags/item/ingots/silver.json
+51b627c508071be5b2d51b6e83c002381d79f044 data/c/tags/item/nuggets/silver.json
+955543d58e9c44b1d3ae6a61dbd61b88701eb27a data/c/tags/item/ores/silver.json
+a7a091ac4b92447f6698cc7128041423ef2b94d8 data/c/tags/item/raw_materials/silver.json
+62c8205240a712598e0065f05bc1e21d334e5878 data/c/tags/item/storage_blocks/raw_silver.json
+b277250f79b561a9fcbf82cf307aa669b49bc34a data/c/tags/item/storage_blocks/silver.json
+dff4928a9dfec2cb0b8e46ec1063fe014790daf6 data/justsilver/tags/item/soul_lantern_nuggets.json
+524259c81e35338922df4f04ed3d0f43a9e8f03c data/minecraft/tags/item/beacon_payment_items.json
+51b627c508071be5b2d51b6e83c002381d79f044 data/minecraft/tags/item/metal_nuggets.json
+955543d58e9c44b1d3ae6a61dbd61b88701eb27a data/minecraft/tags/item/ores.json

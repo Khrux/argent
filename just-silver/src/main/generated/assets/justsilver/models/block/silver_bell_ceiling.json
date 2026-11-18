@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/bell_ceiling",
+  "textures": {
+    "particle": "justsilver:block/silver_bell"
+  }
+}

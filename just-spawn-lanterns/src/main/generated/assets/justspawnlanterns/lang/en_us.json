@@ -1,0 +1,8 @@
+{
+  "options.justspawnlanterns.markers": "Markers",
+  "options.justspawnlanterns.markers.hand": "In Hand",
+  "options.justspawnlanterns.markers.inventory": "In Inventory",
+  "options.justspawnlanterns.markers.off": "Off",
+  "options.justspawnlanterns.markers.tooltip": "Where a soul lantern must be for soul particles to rise where monsters can spawn.",
+  "options.justspawnlanterns.title": "Just Spawn Lanterns Settings"
+}

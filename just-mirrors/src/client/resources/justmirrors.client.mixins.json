@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "com.khrux.justmirrors.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AbstractClientPlayerMixin",
+		"GameRendererMixin",
+		"ItemFrameRendererMixin",
+		"PlayerInfoMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

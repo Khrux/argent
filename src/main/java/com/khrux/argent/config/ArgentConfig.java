@@ -1,6 +1,8 @@
 package com.khrux.argent.config;
 
 import com.google.gson.JsonParser;
+import com.khrux.justmirrors.config.JustMirrorsConfig;
+import com.khrux.justsilver.config.JustSilverConfig;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
@@ -11,80 +13,63 @@ import java.nio.file.Path;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class ArgentConfig {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final Codec<ArgentConfig> CODEC = RecordCodecBuilder.create(
 		i -> i.group(
-				Codec.BOOL.optionalFieldOf("silver", true).forGetter(config -> config.silver),
-				MirrorRecipe.CODEC.optionalFieldOf("mirror_recipe", MirrorRecipe.SILVER).forGetter(config -> config.mirrorRecipe),
-				Codec.BOOL.optionalFieldOf("mirror_screen", true).forGetter(config -> config.mirrorScreen),
-				SoulLantern.CODEC.optionalFieldOf("soul_lantern_mode", SoulLantern.HAND).forGetter(config -> config.soulLantern),
-				Reflections.CODEC.optionalFieldOf("reflection_mode", Reflections.ALL).forGetter(config -> config.reflections),
-				Codec.BOOL.optionalFieldOf("wither_zombies", true).forGetter(config -> config.witherZombies),
-				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.scrying),
-				Codec.BOOL.optionalFieldOf("scrying_library_loot", false).forGetter(config -> config.scryingLibraryLoot)
+				Mode.CODEC.lenientOptionalFieldOf("silver_mode", Mode.ENABLED).forGetter(config -> config.silver),
+				Mode.CODEC.lenientOptionalFieldOf("mirrors_mode", Mode.ENABLED).forGetter(config -> config.mirrors),
+				Mode.CODEC.lenientOptionalFieldOf("spawn_lanterns_mode", Mode.ENABLED).forGetter(config -> config.spawnLanterns),
+				Mode.CODEC.lenientOptionalFieldOf("wither_zombie_mode", Mode.ENABLED).forGetter(config -> config.witherZombie),
+				Mode.CODEC.lenientOptionalFieldOf("scrying_mode", Mode.ENABLED).forGetter(config -> config.scrying),
+				MirrorRecipe.CODEC.lenientOptionalFieldOf("mirror_recipe", MirrorRecipe.SILVER).forGetter(config -> config.mirrorRecipe)
 			)
 			.apply(i, ArgentConfig::new)
 	);
-	private static ArgentConfig instance = new ArgentConfig(true, MirrorRecipe.SILVER, true, SoulLantern.HAND, Reflections.ALL, true, true, false);
-	public boolean silver;
+	private static ArgentConfig instance = new ArgentConfig(Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, MirrorRecipe.SILVER);
+	public Mode silver;
+	public Mode mirrors;
+	public Mode spawnLanterns;
+	public Mode witherZombie;
+	public Mode scrying;
 	public MirrorRecipe mirrorRecipe;
-	public boolean mirrorScreen;
-	public SoulLantern soulLantern;
-	public Reflections reflections;
-	public boolean witherZombies;
-	public boolean scrying;
-	public boolean scryingLibraryLoot;
 
 	private ArgentConfig(
-		final boolean silver,
-		final MirrorRecipe mirrorRecipe,
-		final boolean mirrorScreen,
-		final SoulLantern soulLantern,
-		final Reflections reflections,
-		final boolean witherZombies,
-		final boolean scrying,
-		final boolean scryingLibraryLoot
+		final Mode silver, final Mode mirrors, final Mode spawnLanterns, final Mode witherZombie, final Mode scrying, final MirrorRecipe mirrorRecipe
 	) {
 		this.silver = silver;
-		this.mirrorRecipe = mirrorRecipe;
-		this.mirrorScreen = mirrorScreen;
-		this.soulLantern = soulLantern;
-		this.reflections = reflections;
-		this.witherZombies = witherZombies;
+		this.mirrors = mirrors;
+		this.spawnLanterns = spawnLanterns;
+		this.witherZombie = witherZombie;
 		this.scrying = scrying;
-		this.scryingLibraryLoot = scryingLibraryLoot;
+		this.mirrorRecipe = mirrorRecipe;
 	}
 
 	public static ArgentConfig get() {
 		return instance;
 	}
 
-	public boolean mirrors() {
-		return this.mirrorRecipe != MirrorRecipe.OFF;
+	public @Nullable MirrorRecipe activeMirrorRecipe() {
+		if (!JustMirrorsConfig.get().isEnabled()) {
+			return null;
+		}
+
+		if (this.mirrors == Mode.CUSTOM) {
+			return this.mirrorRecipe;
+		}
+
+		return JustSilverConfig.get().generatesOre() ? MirrorRecipe.SILVER : MirrorRecipe.DIAMOND;
 	}
 
 	private static Path path() {
 		return FabricLoader.getInstance().getConfigDir().resolve("argent.json");
 	}
 
-	private static Path legacyPath() {
-		return FabricLoader.getInstance().getConfigDir().resolve("mirror.json");
-	}
-
 	public static void load() {
 		Path path = path();
-		Path legacyPath = legacyPath();
-		if (!Files.exists(path) && Files.isRegularFile(legacyPath)) {
-			try {
-				Files.move(legacyPath, path);
-			} catch (IOException e) {
-				LOGGER.warn("Failed to move {} to {}", legacyPath, path, e);
-			}
-		}
-
 		if (!Files.isRegularFile(path)) {
 			instance.save();
 			return;
@@ -107,12 +92,29 @@ public class ArgentConfig {
 		}
 	}
 
-	private static Component displayName(final String option, final String value) {
-		return Component.translatable("options.argent." + option + "." + value);
+	public enum Mode implements StringRepresentable {
+		ENABLED("enabled"),
+		DISABLED("disabled"),
+		CUSTOM("custom");
+
+		public static final Codec<Mode> CODEC = StringRepresentable.fromEnum(Mode::values);
+		private final String name;
+
+		Mode(final String name) {
+			this.name = name;
+		}
+
+		public Component getDisplayName() {
+			return Component.translatable("options.argent.mode." + this.name);
+		}
+
+		@Override
+		public String getSerializedName() {
+			return this.name;
+		}
 	}
 
 	public enum MirrorRecipe implements StringRepresentable {
-		OFF("off"),
 		SILVER("silver"),
 		DIAMOND("diamond");
 
@@ -124,51 +126,7 @@ public class ArgentConfig {
 		}
 
 		public Component getDisplayName() {
-			return displayName("mirror_recipe", this.name);
-		}
-
-		@Override
-		public String getSerializedName() {
-			return this.name;
-		}
-	}
-
-	public enum SoulLantern implements StringRepresentable {
-		OFF("off"),
-		HAND("hand"),
-		INVENTORY("inventory");
-
-		public static final Codec<SoulLantern> CODEC = StringRepresentable.fromEnum(SoulLantern::values);
-		private final String name;
-
-		SoulLantern(final String name) {
-			this.name = name;
-		}
-
-		public Component getDisplayName() {
-			return displayName("soul_lantern", this.name);
-		}
-
-		@Override
-		public String getSerializedName() {
-			return this.name;
-		}
-	}
-
-	public enum Reflections implements StringRepresentable {
-		OFF("off"),
-		ENTITIES("entities"),
-		ALL("all");
-
-		public static final Codec<Reflections> CODEC = StringRepresentable.fromEnum(Reflections::values);
-		private final String name;
-
-		Reflections(final String name) {
-			this.name = name;
-		}
-
-		public Component getDisplayName() {
-			return displayName("reflections", this.name);
+			return Component.translatable("options.argent.mirror_recipe." + this.name);
 		}
 
 		@Override

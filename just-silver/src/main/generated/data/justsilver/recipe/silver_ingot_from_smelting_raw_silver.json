@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "silver_ingot",
+  "ingredient": "justsilver:raw_silver",
+  "result": {
+    "id": "justsilver:silver_ingot"
+  }
+}
