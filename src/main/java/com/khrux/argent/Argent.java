@@ -2,15 +2,12 @@ package com.khrux.argent;
 
 import com.khrux.argent.config.ArgentConfig;
 import com.khrux.argent.config.ConfigCondition;
-import com.khrux.argent.data.worldgen.placement.ArgentOrePlacements;
-import com.khrux.argent.network.SkinRelay;
-import com.khrux.argent.sounds.ArgentSoundEvents;
-import com.khrux.argent.world.entity.ArgentEntityTypes;
-import com.khrux.argent.world.entity.animal.ParrotArmor;
-import com.khrux.argent.world.entity.animal.Scrying;
 import com.khrux.argent.world.item.ArgentItems;
 import com.khrux.argent.world.level.block.ArgentBlocks;
 import com.khrux.argent.world.level.block.entity.ArgentBlockEntityTypes;
+import com.khrux.justmirrors.network.SkinRelay;
+import com.khrux.justscrying.world.entity.animal.ParrotArmor;
+import com.khrux.justscrying.world.entity.animal.Scrying;
 import java.util.List;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;

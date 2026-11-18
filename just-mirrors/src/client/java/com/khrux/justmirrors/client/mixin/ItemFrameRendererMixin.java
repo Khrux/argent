@@ -1,9 +1,9 @@
 package com.khrux.justmirrors.client.mixin;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.ArgentClient;
-import com.khrux.argent.client.renderer.MirrorReflections;
-import com.khrux.argent.world.item.ArgentItems;
+import com.khrux.justmirrors.JustMirrors;
+import com.khrux.justmirrors.client.JustMirrorsClient;
+import com.khrux.justmirrors.client.renderer.MirrorReflections;
+import com.khrux.justmirrors.world.item.JustMirrorsItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -50,7 +50,7 @@ public abstract class ItemFrameRendererMixin {
 		at = @At("TAIL")
 	)
 	private void mirror$extractMirrorTile(final ItemFrame entity, final ItemFrameRenderState state, final float partialTicks, final CallbackInfo ci) {
-		boolean tile = state.mapId == null && entity.getItem().is(ArgentItems.MIRROR);
+		boolean tile = state.mapId == null && entity.getItem().is(JustMirrorsItems.MIRROR);
 		((FabricRenderState)state).setData(MIRROR_TILE, tile);
 		if (!tile) {
 			return;
@@ -82,7 +82,7 @@ public abstract class ItemFrameRendererMixin {
 			buffer.addVertex(pose, 1.0F, 0.0F, -0.0001F).setColor(-1).setUv(1.0F, 0.0F).setLight(lightCoords);
 			buffer.addVertex(pose, 0.0F, 0.0F, -0.0001F).setColor(-1).setUv(0.0F, 0.0F).setLight(lightCoords);
 		});
-		MirrorReflections reflections = ArgentClient.reflections();
+		MirrorReflections reflections = JustMirrorsClient.reflections();
 		Matrix4f surface = new Matrix4f(poseStack.last().pose());
 		Identifier reflection = reflections.request(null, surface, 0.0F, 0.0F, 1.0F, 1.0F, REFLECTION_Z);
 		if (reflection == null) {

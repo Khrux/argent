@@ -1,9 +1,10 @@
 package com.khrux.argent.datagen;
 
-import com.khrux.argent.client.renderer.special.ReflectiveShieldSpecialRenderer;
 import com.khrux.argent.world.item.ArgentItems;
 import com.khrux.argent.world.level.block.ArgentBlocks;
-import com.khrux.argent.world.level.block.MirrorBlock;
+import com.khrux.justmirrors.datagen.MirrorRotatedModelProvider;
+import com.khrux.justmirrors.world.level.block.MirrorBlock;
+import com.khrux.justwitherzombies.client.renderer.special.ReflectiveShieldSpecialRenderer;
 import com.mojang.math.Quadrant;
 import java.util.List;
 import java.util.Optional;

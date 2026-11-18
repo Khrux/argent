@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class MirrorBlockEntity extends BlockEntity {
 	public MirrorBlockEntity(final BlockPos worldPosition, final BlockState blockState) {
-		super(ArgentBlockEntityTypes.MIRROR, worldPosition, blockState);
+		super(JustMirrorsBlockEntityTypes.MIRROR, worldPosition, blockState);
 	}
 }

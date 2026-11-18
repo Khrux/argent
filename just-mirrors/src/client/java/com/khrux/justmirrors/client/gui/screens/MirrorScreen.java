@@ -1,21 +1,21 @@
 package com.khrux.justmirrors.client.gui.screens;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.ArgentClient;
-import com.khrux.argent.client.gui.components.ColourPaletteWidget;
-import com.khrux.argent.client.gui.components.ColourPickerWidget;
-import com.khrux.argent.client.gui.components.SkinFaceWidget;
-import com.khrux.argent.client.gui.components.SkinLayerDoll;
-import com.khrux.argent.client.gui.components.SkinModelWidget;
-import com.khrux.argent.client.gui.components.SkinPresetTab;
-import com.khrux.argent.client.skin.SkinFace;
-import com.khrux.argent.client.skin.SkinImporter;
-import com.khrux.argent.client.skin.SkinPart;
-import com.khrux.argent.client.skin.SkinPreset;
-import com.khrux.argent.client.skin.SkinPresets;
-import com.khrux.argent.client.skin.SkinTool;
-import com.khrux.argent.client.skin.SkinUploader;
-import com.khrux.argent.world.level.block.ArgentBlocks;
+import com.khrux.justmirrors.JustMirrors;
+import com.khrux.justmirrors.client.JustMirrorsClient;
+import com.khrux.justmirrors.client.gui.components.ColourPaletteWidget;
+import com.khrux.justmirrors.client.gui.components.ColourPickerWidget;
+import com.khrux.justmirrors.client.gui.components.SkinFaceWidget;
+import com.khrux.justmirrors.client.gui.components.SkinLayerDoll;
+import com.khrux.justmirrors.client.gui.components.SkinModelWidget;
+import com.khrux.justmirrors.client.gui.components.SkinPresetTab;
+import com.khrux.justmirrors.client.skin.SkinFace;
+import com.khrux.justmirrors.client.skin.SkinImporter;
+import com.khrux.justmirrors.client.skin.SkinPart;
+import com.khrux.justmirrors.client.skin.SkinPreset;
+import com.khrux.justmirrors.client.skin.SkinPresets;
+import com.khrux.justmirrors.client.skin.SkinTool;
+import com.khrux.justmirrors.client.skin.SkinUploader;
+import com.khrux.justmirrors.world.level.block.JustMirrorsBlocks;
 import com.mojang.blaze3d.Blaze3D;
 import com.mojang.blaze3d.platform.InputConstants;
 import java.nio.file.Path;
@@ -120,7 +120,7 @@ public class MirrorScreen extends Screen {
 	private boolean uploading;
 
 	public MirrorScreen(final SkinPresets presets) {
-		super(ArgentBlocks.MIRROR.getName());
+		super(JustMirrorsBlocks.MIRROR.getName());
 		this.presets = presets;
 	}
 
@@ -433,7 +433,7 @@ public class MirrorScreen extends Screen {
 
 	private void save() {
 		this.presets.save();
-		ArgentClient.sharedSkins().sendSelected(this.presets);
+		JustMirrorsClient.sharedSkins().sendSelected(this.presets);
 	}
 
 	@Override

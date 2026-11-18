@@ -1,7 +1,7 @@
 package com.khrux.justmirrors.client.skin;
 
 import com.google.gson.JsonParser;
-import com.khrux.argent.Argent;
+import com.khrux.justmirrors.JustMirrors;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;

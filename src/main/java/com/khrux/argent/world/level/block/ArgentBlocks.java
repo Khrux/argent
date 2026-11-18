@@ -1,6 +1,8 @@
 package com.khrux.argent.world.level.block;
 
 import com.khrux.argent.references.ArgentBlockItemIds;
+import com.khrux.justmirrors.world.level.block.MirrorBlock;
+import com.khrux.justsilver.world.level.block.SilverBellBlock;
 import java.util.function.Function;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

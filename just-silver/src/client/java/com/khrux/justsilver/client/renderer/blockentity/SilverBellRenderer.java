@@ -1,7 +1,7 @@
 package com.khrux.justsilver.client.renderer.blockentity;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.world.level.block.entity.SilverBellBlockEntity;
+import com.khrux.justsilver.JustSilver;
+import com.khrux.justsilver.world.level.block.entity.SilverBellBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.object.bell.BellModel;

@@ -1,7 +1,7 @@
 package com.khrux.justsilver.world.level.block;
 
-import com.khrux.argent.world.level.block.entity.ArgentBlockEntityTypes;
-import com.khrux.argent.world.level.block.entity.SilverBellBlockEntity;
+import com.khrux.justsilver.world.level.block.entity.JustSilverBlockEntityTypes;
+import com.khrux.justsilver.world.level.block.entity.SilverBellBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -47,6 +47,6 @@ public class SilverBellBlock extends BellBlock {
 
 	@Override
 	public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(final Level level, final BlockState blockState, final BlockEntityType<T> type) {
-		return createTickerHelper(type, ArgentBlockEntityTypes.SILVER_BELL, SilverBellBlockEntity::tick);
+		return createTickerHelper(type, JustSilverBlockEntityTypes.SILVER_BELL, SilverBellBlockEntity::tick);
 	}
 }

@@ -14,7 +14,7 @@ public class SilverBellBlockEntity extends BlockEntity {
 	public Direction clickDirection;
 
 	public SilverBellBlockEntity(final BlockPos worldPosition, final BlockState blockState) {
-		super(ArgentBlockEntityTypes.SILVER_BELL, worldPosition, blockState);
+		super(JustSilverBlockEntityTypes.SILVER_BELL, worldPosition, blockState);
 	}
 
 	@Override

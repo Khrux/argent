@@ -3,7 +3,6 @@ package com.khrux.argent.world.item;
 import com.khrux.argent.references.ArgentBlockItemIds;
 import com.khrux.argent.references.ArgentItemIds;
 import com.khrux.argent.tags.ArgentItemTags;
-import com.khrux.argent.world.entity.ArgentEntityTypes;
 import com.khrux.argent.world.level.block.ArgentBlocks;
 import java.util.List;
 import java.util.Optional;

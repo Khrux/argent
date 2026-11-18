@@ -1,6 +1,6 @@
 package com.khrux.justmirrors.client.mixin;
 
-import com.khrux.argent.client.ArgentClient;
+import com.khrux.justmirrors.client.JustMirrorsClient;
 import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -20,7 +20,7 @@ public abstract class AbstractClientPlayerMixin {
 	@Inject(method = "getSkin", at = @At("HEAD"), cancellable = true)
 	private void mirror$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
 		UUID player = ((AbstractClientPlayer)(Object)this).getUUID();
-		if (ArgentClient.presets() == null || !player.equals(Minecraft.getInstance().getUser().getProfileId()) && ArgentClient.sharedSkins().get(player) == null) {
+		if (JustMirrorsClient.presets() == null || !player.equals(Minecraft.getInstance().getUser().getProfileId()) && JustMirrorsClient.sharedSkins().get(player) == null) {
 			return;
 		}
 

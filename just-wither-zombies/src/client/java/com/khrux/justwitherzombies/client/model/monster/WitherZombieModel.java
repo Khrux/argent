@@ -1,6 +1,6 @@
 package com.khrux.justwitherzombies.client.model.monster;
 
-import com.khrux.argent.client.renderer.entity.state.WitherZombieRenderState;
+import com.khrux.justwitherzombies.client.renderer.entity.state.WitherZombieRenderState;
 import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;

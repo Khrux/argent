@@ -1,10 +1,10 @@
 package com.khrux.justmirrors.client.renderer.blockentity;
 
-import com.khrux.argent.client.ArgentClient;
-import com.khrux.argent.client.renderer.MirrorReflections;
-import com.khrux.argent.client.renderer.blockentity.state.MirrorRenderState;
-import com.khrux.argent.world.level.block.MirrorBlock;
-import com.khrux.argent.world.level.block.entity.MirrorBlockEntity;
+import com.khrux.justmirrors.client.JustMirrorsClient;
+import com.khrux.justmirrors.client.renderer.MirrorReflections;
+import com.khrux.justmirrors.client.renderer.blockentity.state.MirrorRenderState;
+import com.khrux.justmirrors.world.level.block.MirrorBlock;
+import com.khrux.justmirrors.world.level.block.entity.MirrorBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -69,7 +69,7 @@ public class MirrorRenderer implements BlockEntityRenderer<MirrorBlockEntity, Mi
 
 	@Override
 	public void submit(final MirrorRenderState state, final PoseStack poseStack, final SubmitNodeCollector submitNodeCollector, final CameraRenderState camera) {
-		MirrorReflections reflections = ArgentClient.reflections();
+		MirrorReflections reflections = JustMirrorsClient.reflections();
 		poseStack.pushPose();
 		poseStack.mulPose(glassPose(state.rotation));
 		Matrix4f surface = new Matrix4f(poseStack.last().pose());

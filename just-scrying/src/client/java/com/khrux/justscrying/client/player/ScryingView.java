@@ -1,8 +1,8 @@
 package com.khrux.justscrying.client.player;
 
-import com.khrux.argent.network.protocol.ScryingBitePayload;
-import com.khrux.argent.network.protocol.ScryingEndPayload;
-import com.khrux.argent.network.protocol.ScryingMovePayload;
+import com.khrux.justscrying.network.protocol.ScryingBitePayload;
+import com.khrux.justscrying.network.protocol.ScryingEndPayload;
+import com.khrux.justscrying.network.protocol.ScryingMovePayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext;
 import net.minecraft.client.CameraType;

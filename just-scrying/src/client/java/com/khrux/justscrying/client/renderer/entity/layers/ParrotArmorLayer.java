@@ -1,9 +1,9 @@
 package com.khrux.justscrying.client.renderer.entity.layers;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.model.geom.ArgentModelLayers;
-import com.khrux.argent.client.renderer.entity.ArmoredParrotRenderer;
-import com.khrux.argent.world.item.ArgentItems;
+import com.khrux.justscrying.JustScrying;
+import com.khrux.justscrying.client.model.geom.JustScryingModelLayers;
+import com.khrux.justscrying.client.renderer.entity.ArmoredParrotRenderer;
+import com.khrux.justscrying.world.item.JustScryingItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.client.rendering.v1.FabricRenderState;
 import net.minecraft.client.model.animal.parrot.ParrotModel;
@@ -23,13 +23,13 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
-public class SilverParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel> {
+public class ParrotArmorLayer extends RenderLayer<ParrotRenderState, ParrotModel> {
 	private static final Identifier TEXTURE = JustScrying.id("textures/entity/parrot/parrot_armor.png");
 	private final ParrotModel model;
 
-	public SilverParrotArmorLayer(final RenderLayerParent<ParrotRenderState, ParrotModel> renderer, final EntityModelSet modelSet) {
+	public ParrotArmorLayer(final RenderLayerParent<ParrotRenderState, ParrotModel> renderer, final EntityModelSet modelSet) {
 		super(renderer);
-		this.model = new ParrotModel(modelSet.bakeLayer(ArgentModelLayers.SILVER_PARROT_ARMOR));
+		this.model = new ParrotModel(modelSet.bakeLayer(JustScryingModelLayers.PARROT_ARMOR));
 	}
 
 	public static LayerDefinition createArmorLayer() {
@@ -66,7 +66,7 @@ public class SilverParrotArmorLayer extends RenderLayer<ParrotRenderState, Parro
 		final float xRot
 	) {
 		ItemStack armor = ((FabricRenderState)state).getDataOrDefault(ArmoredParrotRenderer.BODY_ARMOR, ItemStack.EMPTY);
-		if (!armor.is(ArgentItems.SILVER_PARROT_ARMOR)) {
+		if (!armor.is(JustScryingItems.PARROT_ARMOR)) {
 			return;
 		}
 

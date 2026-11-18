@@ -1,8 +1,8 @@
 package com.khrux.justmirrors.client.gui.components;
 
-import com.khrux.argent.client.skin.SkinFace;
-import com.khrux.argent.client.skin.SkinPart;
-import com.khrux.argent.client.skin.SkinPreset;
+import com.khrux.justmirrors.client.skin.SkinFace;
+import com.khrux.justmirrors.client.skin.SkinPart;
+import com.khrux.justmirrors.client.skin.SkinPreset;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import java.util.Set;

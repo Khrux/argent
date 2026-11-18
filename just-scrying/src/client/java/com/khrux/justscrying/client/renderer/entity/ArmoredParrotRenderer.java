@@ -1,6 +1,6 @@
 package com.khrux.justscrying.client.renderer.entity;
 
-import com.khrux.argent.client.renderer.entity.layers.SilverParrotArmorLayer;
+import com.khrux.justscrying.client.renderer.entity.layers.ParrotArmorLayer;
 import net.fabricmc.fabric.api.client.rendering.v1.FabricRenderState;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,7 +14,7 @@ public class ArmoredParrotRenderer extends ParrotRenderer {
 
 	public ArmoredParrotRenderer(final EntityRendererProvider.Context context) {
 		super(context);
-		this.addLayer(new SilverParrotArmorLayer(this, context.getModelSet()));
+		this.addLayer(new ParrotArmorLayer(this, context.getModelSet()));
 	}
 
 	@Override

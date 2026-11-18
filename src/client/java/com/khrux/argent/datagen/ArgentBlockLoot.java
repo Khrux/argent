@@ -2,7 +2,7 @@ package com.khrux.argent.datagen;
 
 import com.khrux.argent.world.item.ArgentItems;
 import com.khrux.argent.world.level.block.ArgentBlocks;
-import com.khrux.argent.world.level.block.MirrorBlock;
+import com.khrux.justmirrors.world.level.block.MirrorBlock;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;

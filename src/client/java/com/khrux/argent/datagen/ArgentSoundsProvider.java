@@ -1,6 +1,5 @@
 package com.khrux.argent.datagen;
 
-import com.khrux.argent.sounds.ArgentSoundEvents;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.client.datagen.v1.builder.SoundTypeBuilder;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricSoundsProvider;

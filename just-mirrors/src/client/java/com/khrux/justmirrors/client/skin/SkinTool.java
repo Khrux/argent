@@ -1,6 +1,6 @@
 package com.khrux.justmirrors.client.skin;
 
-import com.khrux.argent.Argent;
+import com.khrux.justmirrors.JustMirrors;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 

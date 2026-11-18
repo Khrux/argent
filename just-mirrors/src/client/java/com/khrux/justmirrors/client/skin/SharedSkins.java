@@ -1,8 +1,8 @@
 package com.khrux.justmirrors.client.skin;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.network.protocol.PlayerSkinUpdatePayload;
-import com.khrux.argent.network.protocol.SkinUpdatePayload;
+import com.khrux.justmirrors.JustMirrors;
+import com.khrux.justmirrors.network.protocol.PlayerSkinUpdatePayload;
+import com.khrux.justmirrors.network.protocol.SkinUpdatePayload;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.logging.LogUtils;
 import java.io.IOException;

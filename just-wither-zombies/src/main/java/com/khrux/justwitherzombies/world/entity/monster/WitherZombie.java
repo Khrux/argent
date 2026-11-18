@@ -1,11 +1,13 @@
 package com.khrux.justwitherzombies.world.entity.monster;
 
-import com.khrux.argent.sounds.ArgentSoundEvents;
-import com.khrux.argent.tags.ArgentItemTags;
-import com.khrux.argent.world.item.ArgentItems;
-import com.khrux.argent.world.item.enchantment.ArgentEnchantments;
-import com.khrux.argent.world.level.block.MirrorBlock;
-import com.khrux.argent.world.level.block.entity.MirrorBlockEntity;
+import com.khrux.justmirrors.world.item.JustMirrorsItems;
+import com.khrux.justmirrors.world.level.block.MirrorBlock;
+import com.khrux.justmirrors.world.level.block.entity.MirrorBlockEntity;
+import com.khrux.justwitherzombies.JustWitherZombies;
+import com.khrux.justwitherzombies.config.JustWitherZombiesConfig;
+import com.khrux.justwitherzombies.sounds.JustWitherZombiesSoundEvents;
+import com.khrux.justwitherzombies.tags.JustWitherZombiesItemTags;
+import com.khrux.justwitherzombies.world.item.JustWitherZombiesItems;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -244,7 +246,7 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 		this.shatterTicks = 0;
 		this.entityData.set(DATA_SHATTERING, true);
 		this.entityData.set(DATA_TRACKED_PLAYER, 0);
-		this.playSound(ArgentSoundEvents.WITHER_ZOMBIE_SHATTER);
+		this.playSound(JustWitherZombiesSoundEvents.WITHER_ZOMBIE_SHATTER);
 	}
 
 	@Override
@@ -278,8 +280,8 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 		}
 
 		List<Entity> holders = new ArrayList<>();
-		holders.addAll(level.getEntitiesOfClass(ItemFrame.class, range, frame -> frame.getItem().is(ArgentItems.MIRROR)));
-		holders.addAll(level.getEntitiesOfClass(Player.class, range, player -> player.isHolding(ArgentItems.REFLECTIVE_SHIELD)));
+		holders.addAll(level.getEntitiesOfClass(ItemFrame.class, range, frame -> frame.getItem().is(JustMirrorsItems.MIRROR)));
+		holders.addAll(level.getEntitiesOfClass(Player.class, range, player -> player.isHolding(JustWitherZombiesItems.REFLECTIVE_SHIELD)));
 		for (Entity holder : holders) {
 			double distance = holder.distanceToSqr(eye);
 			if (distance < closest && this.sees(entitySurface(holder))) {
@@ -333,10 +335,10 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 		}
 
 		if (holder instanceof ItemFrame frame) {
-			return frame.getItem().is(ArgentItems.MIRROR) ? new Surface(frame.position(), Vec3.atLowerCornerOf(frame.getDirection().getUnitVec3i())) : null;
+			return frame.getItem().is(JustMirrorsItems.MIRROR) ? new Surface(frame.position(), Vec3.atLowerCornerOf(frame.getDirection().getUnitVec3i())) : null;
 		}
 
-		if (holder instanceof Player player && player.isHolding(ArgentItems.REFLECTIVE_SHIELD)) {
+		if (holder instanceof Player player && player.isHolding(JustWitherZombiesItems.REFLECTIVE_SHIELD)) {
 			Vec3 normal = player.getLookAngle().horizontal().normalize();
 			return new Surface(player.position().add(0.0, player.getBbHeight() * 0.55, 0.0).add(normal.scale(0.4)), normal);
 		}
@@ -378,10 +380,14 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 	}
 
 	private void steal(final ServerLevel level, final Player player) {
+		if (!JustWitherZombiesConfig.get().itemStealing) {
+			return;
+		}
+
 		Inventory playerInventory = player.getInventory();
 		List<Integer> slots = new ArrayList<>();
 		for (int slot = 0; slot < playerInventory.getContainerSize(); slot++) {
-			if (playerInventory.getItem(slot).is(ArgentItemTags.WITHER_ZOMBIE_TAKES)) {
+			if (playerInventory.getItem(slot).is(JustWitherZombiesItemTags.WITHER_ZOMBIE_TAKES)) {
 				slots.add(slot);
 			}
 		}
@@ -425,30 +431,32 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 	protected void dropCustomDeathLoot(final ServerLevel level, final DamageSource source, final boolean killedByPlayer) {
 		super.dropCustomDeathLoot(level, source, killedByPlayer);
 		this.inventory.removeAllItems().forEach(itemStack -> this.spawnAtLocation(level, itemStack));
-		if (this.isShattering()) {
-			Holder<Enchantment> scrying = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ArgentEnchantments.SCRYING);
-			this.spawnAtLocation(level, EnchantmentHelper.createBook(new EnchantmentInstance(scrying, 1)));
+		if (this.isShattering() && JustWitherZombiesConfig.get().scryingBooks) {
+			level.registryAccess()
+				.lookupOrThrow(Registries.ENCHANTMENT)
+				.get(JustWitherZombies.SCRYING)
+				.ifPresent(scrying -> this.spawnAtLocation(level, EnchantmentHelper.createBook(new EnchantmentInstance(scrying, 1))));
 		}
 	}
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return ArgentSoundEvents.WITHER_ZOMBIE_AMBIENT;
+		return JustWitherZombiesSoundEvents.WITHER_ZOMBIE_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(final DamageSource source) {
-		return ArgentSoundEvents.WITHER_ZOMBIE_HURT;
+		return JustWitherZombiesSoundEvents.WITHER_ZOMBIE_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return ArgentSoundEvents.WITHER_ZOMBIE_DEATH;
+		return JustWitherZombiesSoundEvents.WITHER_ZOMBIE_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(final BlockPos pos, final BlockState blockState) {
-		this.playSound(ArgentSoundEvents.WITHER_ZOMBIE_STEP, 0.15F, 1.0F);
+		this.playSound(JustWitherZombiesSoundEvents.WITHER_ZOMBIE_STEP, 0.15F, 1.0F);
 	}
 
 	private record Surface(Vec3 point, Vec3 normal) {

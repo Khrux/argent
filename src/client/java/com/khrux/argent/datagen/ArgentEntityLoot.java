@@ -1,6 +1,5 @@
 package com.khrux.argent.datagen;
 
-import com.khrux.argent.world.entity.ArgentEntityTypes;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricEntityLootSubProvider;

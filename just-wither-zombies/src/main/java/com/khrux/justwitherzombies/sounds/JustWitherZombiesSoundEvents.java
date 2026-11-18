@@ -1,12 +1,12 @@
 package com.khrux.justwitherzombies.sounds;
 
-import com.khrux.argent.Argent;
+import com.khrux.justwitherzombies.JustWitherZombies;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
-public class ArgentSoundEvents {
+public class JustWitherZombiesSoundEvents {
 	public static final SoundEvent WITHER_ZOMBIE_AMBIENT = register("entity.wither_zombie.ambient");
 	public static final SoundEvent WITHER_ZOMBIE_HURT = register("entity.wither_zombie.hurt");
 	public static final SoundEvent WITHER_ZOMBIE_DEATH = register("entity.wither_zombie.death");

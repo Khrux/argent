@@ -1,11 +1,11 @@
 package com.khrux.justscrying.world.entity.animal;
 
-import com.khrux.argent.config.ArgentConfig;
-import com.khrux.argent.network.protocol.ScryingBitePayload;
-import com.khrux.argent.network.protocol.ScryingEndPayload;
-import com.khrux.argent.network.protocol.ScryingLinkPayload;
-import com.khrux.argent.network.protocol.ScryingMovePayload;
-import com.khrux.argent.world.item.enchantment.ArgentEnchantments;
+import com.khrux.justscrying.config.JustScryingConfig;
+import com.khrux.justscrying.network.protocol.ScryingBitePayload;
+import com.khrux.justscrying.network.protocol.ScryingEndPayload;
+import com.khrux.justscrying.network.protocol.ScryingLinkPayload;
+import com.khrux.justscrying.network.protocol.ScryingMovePayload;
+import com.khrux.justscrying.world.item.enchantment.JustScryingEnchantments;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +85,7 @@ public class Scrying {
 	}
 
 	public static boolean canLink(final Player player, final InteractionHand hand, final Entity entity) {
-		return ArgentConfig.get().scrying
+		return JustScryingConfig.get().isEnabled()
 			&& player.isSecondaryUseActive()
 			&& hand == InteractionHand.MAIN_HAND
 			&& player.getMainHandItem().isEmpty()
@@ -100,7 +100,7 @@ public class Scrying {
 	}
 
 	private static boolean hasScrying(final LivingEntity pet) {
-		Holder<Enchantment> scrying = pet.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ArgentEnchantments.SCRYING);
+		Holder<Enchantment> scrying = pet.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(JustScryingEnchantments.SCRYING);
 		return EnchantmentHelper.getItemEnchantmentLevel(scrying, pet.getItemBySlot(EquipmentSlot.BODY)) > 0;
 	}
 
@@ -126,11 +126,11 @@ public class Scrying {
 	private static void modifyLootTable(
 		final ResourceKey<LootTable> key, final LootTable.Builder tableBuilder, final LootTableSource source, final HolderLookup.Provider registries
 	) {
-		if (!source.isBuiltin() || key != BuiltInLootTables.STRONGHOLD_LIBRARY || !ArgentConfig.get().scryingLibraryLoot) {
+		if (!source.isBuiltin() || key != BuiltInLootTables.STRONGHOLD_LIBRARY || !JustScryingConfig.get().libraryBooks) {
 			return;
 		}
 
-		Holder<Enchantment> scrying = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ArgentEnchantments.SCRYING);
+		Holder<Enchantment> scrying = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(JustScryingEnchantments.SCRYING);
 		tableBuilder.withPool(
 			LootPool.lootPool()
 				.setRolls(ContextIntProviders.exactly(1))

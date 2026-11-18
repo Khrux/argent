@@ -1,7 +1,7 @@
 package com.khrux.justsilver.data.worldgen.placement;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.data.worldgen.features.ArgentOreFeatures;
+import com.khrux.justsilver.JustSilver;
+import com.khrux.justsilver.data.worldgen.features.JustSilverOreFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -13,14 +13,14 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-public class ArgentOrePlacements {
+public class JustSilverOrePlacements {
 	public static final ResourceKey<PlacedFeature> ORE_SILVER = ResourceKey.create(Registries.PLACED_FEATURE, JustSilver.id("ore_silver"));
 
 	public static void bootstrap(final BootstrapContext<PlacedFeature> context) {
 		PlacementUtils.register(
 			context,
 			ORE_SILVER,
-			context.lookup(Registries.FEATURE).getOrThrow(ArgentOreFeatures.ORE_SILVER),
+			context.lookup(Registries.FEATURE).getOrThrow(JustSilverOreFeatures.ORE_SILVER),
 			CountPlacement.of(3),
 			InSquarePlacement.spread(),
 			HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)),

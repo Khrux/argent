@@ -1,8 +1,8 @@
 package com.khrux.justmirrors.client.mixin;
 
-import com.khrux.argent.client.ArgentClient;
-import com.khrux.argent.client.skin.SkinPreset;
-import com.khrux.argent.client.skin.SkinPresets;
+import com.khrux.justmirrors.client.JustMirrorsClient;
+import com.khrux.justmirrors.client.skin.SkinPreset;
+import com.khrux.justmirrors.client.skin.SkinPresets;
 import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerInfoMixin {
 	@Inject(method = "getSkin", at = @At("RETURN"), cancellable = true)
 	private void mirror$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
-		SkinPresets presets = ArgentClient.presets();
+		SkinPresets presets = JustMirrorsClient.presets();
 		if (presets == null) {
 			return;
 		}
@@ -27,7 +27,7 @@ public abstract class PlayerInfoMixin {
 			return;
 		}
 
-		SkinPreset shared = ArgentClient.sharedSkins().get(player);
+		SkinPreset shared = JustMirrorsClient.sharedSkins().get(player);
 		if (shared != null) {
 			cir.setReturnValue(shared.skin(cir.getReturnValue()));
 		}

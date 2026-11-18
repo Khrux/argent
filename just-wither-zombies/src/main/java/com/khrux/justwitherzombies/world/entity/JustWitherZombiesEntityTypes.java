@@ -1,7 +1,7 @@
 package com.khrux.justwitherzombies.world.entity;
 
-import com.khrux.argent.references.ArgentEntityTypeIds;
-import com.khrux.argent.world.entity.monster.WitherZombie;
+import com.khrux.justwitherzombies.references.JustWitherZombiesEntityTypeIds;
+import com.khrux.justwitherzombies.world.entity.monster.WitherZombie;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,9 +15,9 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 
-public class ArgentEntityTypes {
+public class JustWitherZombiesEntityTypes {
 	public static final EntityType<WitherZombie> WITHER_ZOMBIE = register(
-		ArgentEntityTypeIds.WITHER_ZOMBIE,
+		JustWitherZombiesEntityTypeIds.WITHER_ZOMBIE,
 		EntityType.Builder.of(WitherZombie::new, MobCategory.MONSTER)
 			.fireImmune()
 			.immuneTo(BlockTags.WITHER_SKELETON_IMMUNE_TO)

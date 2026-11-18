@@ -1,7 +1,7 @@
 package com.khrux.justscrying.world.item.enchantment;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.tags.ArgentItemTags;
+import com.khrux.justscrying.JustScrying;
+import com.khrux.justscrying.tags.JustScryingItemTags;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class ArgentEnchantments {
+public class JustScryingEnchantments {
 	public static final ResourceKey<Enchantment> SCRYING = ResourceKey.create(Registries.ENCHANTMENT, JustScrying.id("scrying"));
 
 	public static void bootstrap(final BootstrapContext<Enchantment> context) {
@@ -20,7 +20,7 @@ public class ArgentEnchantments {
 			SCRYING,
 			Enchantment.enchantment(
 				Enchantment.definition(
-					items.getOrThrow(ArgentItemTags.SCRYING_ENCHANTABLE), 1, 1, Enchantment.dynamicCost(25, 25), Enchantment.dynamicCost(75, 25), 8, EquipmentSlotGroup.BODY
+					items.getOrThrow(JustScryingItemTags.SCRYING_ENCHANTABLE), 1, 1, Enchantment.dynamicCost(25, 25), Enchantment.dynamicCost(75, 25), 8, EquipmentSlotGroup.BODY
 				)
 			)
 		);

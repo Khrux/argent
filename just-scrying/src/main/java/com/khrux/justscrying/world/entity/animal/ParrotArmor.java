@@ -1,6 +1,6 @@
 package com.khrux.justscrying.world.entity.animal;
 
-import com.khrux.argent.world.item.ArgentItems;
+import com.khrux.justscrying.world.item.JustScryingItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +35,7 @@ public class ParrotArmor {
 
 		ItemStack itemStack = player.getItemInHand(hand);
 		ItemStack armor = parrot.getBodyArmorItem();
-		if (itemStack.is(Items.SHEARS) && armor.is(ArgentItems.SILVER_PARROT_ARMOR) && !parrot.isOwnedBy(player)) {
+		if (itemStack.is(Items.SHEARS) && armor.is(JustScryingItems.PARROT_ARMOR) && !parrot.isOwnedBy(player)) {
 			return InteractionResult.FAIL;
 		}
 
@@ -43,7 +43,7 @@ public class ParrotArmor {
 			return InteractionResult.PASS;
 		}
 
-		if (itemStack.is(ArgentItems.SILVER_PARROT_ARMOR) && !parrot.isWearingBodyArmor()) {
+		if (itemStack.is(JustScryingItems.PARROT_ARMOR) && !parrot.isWearingBodyArmor()) {
 			if (!level.isClientSide()) {
 				parrot.setItemSlot(EquipmentSlot.BODY, itemStack.copyWithCount(1));
 				parrot.setGuaranteedDrop(EquipmentSlot.BODY);
@@ -53,7 +53,7 @@ public class ParrotArmor {
 			return InteractionResult.SUCCESS;
 		}
 
-		if (parrot.isInSittingPose() && armor.is(ArgentItems.SILVER_PARROT_ARMOR) && armor.isDamaged() && armor.isValidRepairItem(itemStack)) {
+		if (parrot.isInSittingPose() && armor.is(JustScryingItems.PARROT_ARMOR) && armor.isDamaged() && armor.isValidRepairItem(itemStack)) {
 			if (!level.isClientSide()) {
 				itemStack.consume(1, player);
 				parrot.playSound(SoundEvents.WOLF_ARMOR_REPAIR);
@@ -72,7 +72,7 @@ public class ParrotArmor {
 		}
 
 		ItemStack armor = parrot.getBodyArmorItem();
-		if (!armor.is(ArgentItems.SILVER_PARROT_ARMOR) || source.is(DamageTypeTags.BYPASSES_WOLF_ARMOR) || damage <= 0.0F) {
+		if (!armor.is(JustScryingItems.PARROT_ARMOR) || source.is(DamageTypeTags.BYPASSES_WOLF_ARMOR) || damage <= 0.0F) {
 			return true;
 		}
 
@@ -89,7 +89,7 @@ public class ParrotArmor {
 		if (Crackiness.WOLF_ARMOR.byDamage(damageBefore, maxDamage) != Crackiness.WOLF_ARMOR.byDamage(parrot.getBodyArmorItem())) {
 			parrot.playSound(SoundEvents.WOLF_ARMOR_CRACK);
 			level.sendParticles(
-				new ItemParticleOption(ParticleTypes.ITEM, ArgentItems.SILVER_NUGGET), parrot.getX(), parrot.getY() + 0.5, parrot.getZ(), 20, 0.2, 0.1, 0.2, 0.1
+				new ItemParticleOption(ParticleTypes.ITEM, Items.LEATHER), parrot.getX(), parrot.getY() + 0.5, parrot.getZ(), 20, 0.2, 0.1, 0.2, 0.1
 			);
 		}
 

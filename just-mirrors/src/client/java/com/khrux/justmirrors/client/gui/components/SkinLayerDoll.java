@@ -1,7 +1,7 @@
 package com.khrux.justmirrors.client.gui.components;
 
-import com.khrux.argent.client.skin.SkinPart;
-import com.khrux.argent.client.skin.SkinPreset;
+import com.khrux.justmirrors.client.skin.SkinPart;
+import com.khrux.justmirrors.client.skin.SkinPreset;
 import java.util.Set;
 import java.util.function.Supplier;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

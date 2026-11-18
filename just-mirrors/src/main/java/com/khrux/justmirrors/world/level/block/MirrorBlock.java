@@ -1,7 +1,7 @@
 package com.khrux.justmirrors.world.level.block;
 
-import com.khrux.argent.config.ArgentConfig;
-import com.khrux.argent.world.level.block.entity.MirrorBlockEntity;
+import com.khrux.justmirrors.config.JustMirrorsConfig;
+import com.khrux.justmirrors.world.level.block.entity.MirrorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -93,7 +93,7 @@ public class MirrorBlock extends Block implements EntityBlock {
 
 	@Override
 	protected InteractionResult useWithoutItem(final BlockState state, final Level level, final BlockPos pos, final Player player, final BlockHitResult hitResult) {
-		return ArgentConfig.get().mirrorScreen ? InteractionResult.SUCCESS : InteractionResult.PASS;
+		return JustMirrorsConfig.get().mirrorScreen ? InteractionResult.SUCCESS : InteractionResult.PASS;
 	}
 
 	@Override

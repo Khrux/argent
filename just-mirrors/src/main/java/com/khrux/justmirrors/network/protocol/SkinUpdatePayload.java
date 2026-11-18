@@ -1,6 +1,6 @@
 package com.khrux.justmirrors.network.protocol;
 
-import com.khrux.argent.Argent;
+import com.khrux.justmirrors.JustMirrors;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

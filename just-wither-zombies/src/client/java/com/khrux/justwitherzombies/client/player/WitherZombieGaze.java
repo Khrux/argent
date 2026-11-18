@@ -1,8 +1,8 @@
 package com.khrux.justwitherzombies.client.player;
 
-import com.khrux.argent.sounds.ArgentSoundEvents;
-import com.khrux.argent.world.entity.monster.WitherZombie;
-import com.khrux.argent.world.item.ArgentItems;
+import com.khrux.justwitherzombies.sounds.JustWitherZombiesSoundEvents;
+import com.khrux.justwitherzombies.world.entity.monster.WitherZombie;
+import com.khrux.justwitherzombies.world.item.JustWitherZombiesItems;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext;
@@ -33,10 +33,10 @@ public class WitherZombieGaze {
 			.getEntitiesOfClass(WitherZombie.class, player.getBoundingBox().inflate(RANGE), zombie -> zombie.getTrackedPlayerId() == player.getId())) {
 			current.add(zombie.getId());
 			if (!this.trackers.contains(zombie.getId())) {
-				context.level().playLocalSound(zombie, ArgentSoundEvents.WITHER_ZOMBIE_NOTICE, SoundSource.HOSTILE, 1.0F, 1.0F);
+				context.level().playLocalSound(zombie, JustWitherZombiesSoundEvents.WITHER_ZOMBIE_NOTICE, SoundSource.HOSTILE, 1.0F, 1.0F);
 			}
 
-			if (!player.isHolding(ArgentItems.REFLECTIVE_SHIELD) && player.hasLineOfSight(zombie)) {
+			if (!player.isHolding(JustWitherZombiesItems.REFLECTIVE_SHIELD) && player.hasLineOfSight(zombie)) {
 				this.lookAway(minecraft, player, zombie, ticks);
 			}
 		}

@@ -1,6 +1,6 @@
 package com.khrux.justmirrors.network.protocol;
 
-import com.khrux.argent.Argent;
+import com.khrux.justmirrors.JustMirrors;
 import java.util.UUID;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.FriendlyByteBuf;

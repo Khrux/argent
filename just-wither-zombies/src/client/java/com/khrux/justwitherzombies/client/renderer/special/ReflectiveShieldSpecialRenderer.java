@@ -1,8 +1,9 @@
 package com.khrux.justwitherzombies.client.renderer.special;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.ArgentClient;
-import com.khrux.argent.client.renderer.MirrorReflections;
+import com.khrux.justmirrors.JustMirrors;
+import com.khrux.justmirrors.client.JustMirrorsClient;
+import com.khrux.justmirrors.client.renderer.MirrorReflections;
+import com.khrux.justwitherzombies.JustWitherZombies;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.serialization.Codec;
@@ -97,7 +98,7 @@ public class ReflectiveShieldSpecialRenderer implements SpecialModelRenderer<Ite
 			return;
 		}
 
-		MirrorReflections reflections = ArgentClient.reflections();
+		MirrorReflections reflections = JustMirrorsClient.reflections();
 		Matrix4f surface = new Matrix4f(poseStack.last().pose());
 		Identifier reflection = reflections.request(
 			stack,

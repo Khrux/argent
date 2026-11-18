@@ -1,9 +1,7 @@
 package com.khrux.argent.datagen;
 
-import com.khrux.argent.client.renderer.special.ReflectiveShieldSpecialRenderer;
-import com.khrux.argent.data.worldgen.features.ArgentOreFeatures;
-import com.khrux.argent.data.worldgen.placement.ArgentOrePlacements;
-import com.khrux.argent.world.item.enchantment.ArgentEnchantments;
+import com.khrux.justmirrors.datagen.MirrorRotatedModelProvider;
+import com.khrux.justwitherzombies.client.renderer.special.ReflectiveShieldSpecialRenderer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;

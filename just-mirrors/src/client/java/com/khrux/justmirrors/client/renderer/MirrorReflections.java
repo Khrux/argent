@@ -1,9 +1,9 @@
 package com.khrux.justmirrors.client.renderer;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.renderer.block.ReflectedBlockMesh;
-import com.khrux.argent.client.renderer.texture.ReflectionTexture;
-import com.khrux.argent.config.ArgentConfig;
+import com.khrux.justmirrors.JustMirrors;
+import com.khrux.justmirrors.client.renderer.block.ReflectedBlockMesh;
+import com.khrux.justmirrors.client.renderer.texture.ReflectionTexture;
+import com.khrux.justmirrors.config.JustMirrorsConfig;
 import com.mojang.blaze3d.ProjectionType;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
@@ -149,7 +149,7 @@ public class MirrorReflections {
 	}
 
 	public void extract(final LevelExtractionContext context) {
-		if (ArgentConfig.get().reflections == ArgentConfig.Reflections.OFF) {
+		if (JustMirrorsConfig.get().reflections == JustMirrorsConfig.Reflections.OFF) {
 			this.clear();
 			return;
 		}
@@ -217,7 +217,7 @@ public class MirrorReflections {
 		reflectedCamera.depthFar = camera.depthFar;
 		this.renderingReflection = true;
 		this.submitEntities(context, reflectedCamera, reflection, normalVector);
-		if (ArgentConfig.get().reflections == ArgentConfig.Reflections.ALL) {
+		if (JustMirrorsConfig.get().reflections == JustMirrorsConfig.Reflections.ALL) {
 			this.scanBlocks(context.level(), reflection);
 			reflection.mesh.startFrame();
 			this.submitBlocks(context.level(), reflectedCamera, reflection, normalVector);
@@ -423,7 +423,7 @@ public class MirrorReflections {
 		modelViewStack.set(reflection.view);
 		RenderSystem.setProjectionMatrix(this.projectionMatrixBuffer.getBuffer(this.projection), ProjectionType.PERSPECTIVE);
 		gameRenderer.lighting().setupFor(Lighting.Entry.LEVEL);
-		boolean sky = ArgentConfig.get().reflections == ArgentConfig.Reflections.ALL && this.drawSky(levelState, fog, reflection.texture, reflection.clearColor);
+		boolean sky = JustMirrorsConfig.get().reflections == JustMirrorsConfig.Reflections.ALL && this.drawSky(levelState, fog, reflection.texture, reflection.clearColor);
 		try (
 			FeatureRenderDispatcher.PreparedFrame frame = this.featureRenderDispatcher(gameRenderer).prepareFrame(reflection.submitNodeStorage);
 			RenderPass renderPass = RenderSystem.getDevice()
@@ -485,7 +485,7 @@ public class MirrorReflections {
 	}
 
 	private static Vector4fc clearColor(final CameraRenderState camera) {
-		if (ArgentConfig.get().reflections != ArgentConfig.Reflections.ALL) {
+		if (JustMirrorsConfig.get().reflections != JustMirrorsConfig.Reflections.ALL) {
 			return CLEAR_COLOR;
 		}
 

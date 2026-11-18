@@ -1,7 +1,7 @@
 package com.khrux.justmirrors.network;
 
-import com.khrux.argent.network.protocol.PlayerSkinUpdatePayload;
-import com.khrux.argent.network.protocol.SkinUpdatePayload;
+import com.khrux.justmirrors.network.protocol.PlayerSkinUpdatePayload;
+import com.khrux.justmirrors.network.protocol.SkinUpdatePayload;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;

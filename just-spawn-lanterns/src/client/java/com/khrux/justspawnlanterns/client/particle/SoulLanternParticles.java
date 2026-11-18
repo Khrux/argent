@@ -1,6 +1,6 @@
 package com.khrux.justspawnlanterns.client.particle;
 
-import com.khrux.argent.config.ArgentConfig;
+import com.khrux.justspawnlanterns.config.JustSpawnLanternsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -22,7 +22,7 @@ public class SoulLanternParticles {
 
 	public static void tick(final ClientLevel level) {
 		LocalPlayer player = Minecraft.getInstance().player;
-		if (player == null || ArgentConfig.get().soulLantern == ArgentConfig.SoulLantern.OFF || !isCarryingLantern(player)) {
+		if (player == null || JustSpawnLanternsConfig.get().markers == JustSpawnLanternsConfig.Markers.OFF || !isCarryingLantern(player)) {
 			return;
 		}
 
@@ -42,7 +42,7 @@ public class SoulLanternParticles {
 	}
 
 	private static boolean isCarryingLantern(final LocalPlayer player) {
-		if (ArgentConfig.get().soulLantern == ArgentConfig.SoulLantern.INVENTORY) {
+		if (JustSpawnLanternsConfig.get().markers == JustSpawnLanternsConfig.Markers.INVENTORY) {
 			return player.getInventory().contains(stack -> stack.is(Items.SOUL_LANTERN));
 		}
 

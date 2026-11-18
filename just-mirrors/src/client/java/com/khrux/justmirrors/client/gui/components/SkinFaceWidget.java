@@ -1,8 +1,8 @@
 package com.khrux.justmirrors.client.gui.components;
 
-import com.khrux.argent.client.skin.SkinFace;
-import com.khrux.argent.client.skin.SkinPreset;
-import com.khrux.argent.client.skin.SkinTool;
+import com.khrux.justmirrors.client.skin.SkinFace;
+import com.khrux.justmirrors.client.skin.SkinPreset;
+import com.khrux.justmirrors.client.skin.SkinTool;
 import com.mojang.blaze3d.platform.NativeImage;
 import java.util.ArrayDeque;
 import java.util.Deque;

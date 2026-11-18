@@ -1,10 +1,10 @@
 package com.khrux.justwitherzombies.client.renderer.entity;
 
-import com.khrux.argent.Argent;
-import com.khrux.argent.client.model.geom.ArgentModelLayers;
-import com.khrux.argent.client.model.monster.WitherZombieModel;
-import com.khrux.argent.client.renderer.entity.state.WitherZombieRenderState;
-import com.khrux.argent.world.entity.monster.WitherZombie;
+import com.khrux.justwitherzombies.JustWitherZombies;
+import com.khrux.justwitherzombies.client.model.geom.JustWitherZombiesModelLayers;
+import com.khrux.justwitherzombies.client.model.monster.WitherZombieModel;
+import com.khrux.justwitherzombies.client.renderer.entity.state.WitherZombieRenderState;
+import com.khrux.justwitherzombies.world.entity.monster.WitherZombie;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
@@ -15,7 +15,7 @@ public class WitherZombieRenderer extends HumanoidMobRenderer<WitherZombie, With
 	private static final Identifier WITHER_ZOMBIE_LOCATION = JustWitherZombies.id("textures/entity/wither_zombie/wither_zombie.png");
 
 	public WitherZombieRenderer(final EntityRendererProvider.Context context) {
-		super(context, new WitherZombieModel(context.bakeLayer(ArgentModelLayers.WITHER_ZOMBIE)), 0.5F);
+		super(context, new WitherZombieModel(context.bakeLayer(JustWitherZombiesModelLayers.WITHER_ZOMBIE)), 0.5F);
 	}
 
 	@Override

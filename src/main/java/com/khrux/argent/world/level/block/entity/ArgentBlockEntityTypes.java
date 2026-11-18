@@ -2,6 +2,8 @@ package com.khrux.argent.world.level.block.entity;
 
 import com.khrux.argent.Argent;
 import com.khrux.argent.world.level.block.ArgentBlocks;
+import com.khrux.justmirrors.world.level.block.entity.MirrorBlockEntity;
+import com.khrux.justsilver.world.level.block.entity.SilverBellBlockEntity;
 import java.util.Set;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
