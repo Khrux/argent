@@ -589,7 +589,12 @@ public class WitherZombie extends Monster implements InventoryCarrier {
 			if (--this.stealDelay <= 0 && behind && this.zombie.distanceToSqr(player) <= REACH * REACH) {
 				this.stealDelay = STEAL_INTERVAL;
 				this.zombie.swingForAttack(InteractionHand.MAIN_HAND);
-				this.zombie.steal(getServerLevel(this.zombie), player);
+				ServerLevel level = getServerLevel(this.zombie);
+				if (JustWitherZombiesConfig.get().meleeDamage) {
+					this.zombie.doHurtTarget(level, player);
+				}
+
+				this.zombie.steal(level, player);
 			}
 		}
 	}

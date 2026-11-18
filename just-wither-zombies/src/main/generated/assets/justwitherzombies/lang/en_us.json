@@ -5,7 +5,7 @@
   "options.justwitherzombies.item_stealing": "Item Stealing",
   "options.justwitherzombies.item_stealing.tooltip": "Whether wither zombies take food, plants, leather, feathers, wool and eggs from you.",
   "options.justwitherzombies.melee_damage": "Melee Damage",
-  "options.justwitherzombies.melee_damage.tooltip": "Whether a wither zombie's hit hurts as well as withering you.",
+  "options.justwitherzombies.melee_damage.tooltip": "Whether a wither zombie's swipe from behind hurts you as well as taking things.",
   "options.justwitherzombies.scrying_books": "Scrying Books",
   "options.justwitherzombies.scrying_books.tooltip": "A shattering wither zombie drops a Scrying enchanted book.",
   "options.justwitherzombies.title": "Just Wither Zombies Settings",

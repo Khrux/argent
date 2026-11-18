@@ -50,7 +50,11 @@ public class JustWitherZombies implements ModInitializer {
 		);
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(combat -> combat.insertAfter(Items.SHIELD, JustWitherZombiesItems.REFLECTIVE_SHIELD));
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS)
-			.register(spawnEggs -> spawnEggs.insertAfter(Items.WITHER_SKELETON_SPAWN_EGG, JustWitherZombiesItems.WITHER_ZOMBIE_SPAWN_EGG));
+			.register(spawnEggs -> {
+				if (JustWitherZombiesConfig.get().isEnabled()) {
+					spawnEggs.insertAfter(Items.WITHER_SKELETON_SPAWN_EGG, JustWitherZombiesItems.WITHER_ZOMBIE_SPAWN_EGG);
+				}
+			});
 	}
 
 	private static void addLegacyAliases(final List<Registry<?>> registries) {
