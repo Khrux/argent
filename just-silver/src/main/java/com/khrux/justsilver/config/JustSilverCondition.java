@@ -22,13 +22,15 @@ public record JustSilverCondition(Option option) implements ResourceCondition {
 		JustSilverConfig config = JustSilverConfig.get();
 		return switch (this.option) {
 			case SILVER_BELL -> config.isEnabled() && config.silverBellRecipe;
-			case SOUL_LANTERN -> config.isEnabled() && config.soulLanternRecipe;
+			case SOUL_LANTERN_SILVER -> config.isEnabled() && config.soulLanternRecipe == JustSilverConfig.SoulLanternRecipe.SILVER;
+			case SOUL_LANTERN_MIXED -> config.isEnabled() && config.soulLanternRecipe == JustSilverConfig.SoulLanternRecipe.MIXED;
 		};
 	}
 
 	public enum Option implements StringRepresentable {
 		SILVER_BELL("silver_bell"),
-		SOUL_LANTERN("soul_lantern");
+		SOUL_LANTERN_SILVER("soul_lantern_silver"),
+		SOUL_LANTERN_MIXED("soul_lantern_mixed");
 
 		public static final Codec<Option> CODEC = StringRepresentable.fromEnum(Option::values);
 		private final String name;

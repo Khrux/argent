@@ -22,7 +22,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.CycleButton;
@@ -40,6 +39,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import org.jspecify.annotations.Nullable;
 
 public class ArgentConfigScreen extends OptionsSubScreen {
 	private static final Component TITLE = Component.translatable("options.argent.title");
@@ -99,7 +99,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 				.withTooltip(value -> Tooltip.create(MODE_TOOLTIP))
 				.create(0, 0, TILE_WIDTH, 20, section.getDisplayName(), (button, value) -> {
 					config.setMode(section, value);
-					this.rebuildWidgets();
+					this.minecraft.gui.setScreen(new ArgentConfigScreen(this.lastScreen));
 				})
 		);
 		return tile;
@@ -108,7 +108,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	@Override
 	protected void repositionElements() {
 		if (columns(this.width) != this.columns) {
-			this.rebuildWidgets();
+			this.minecraft.gui.setScreen(new ArgentConfigScreen(this.lastScreen));
 			return;
 		}
 
@@ -134,15 +134,15 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		switch (section) {
 			case SILVER -> {
 				widgets.add(this.button(JustSilverOptions.oreGeneration()));
-				widgets.add(this.recipe(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip()), () -> RecipeGrid.silverBell().tooltip(this.font, RECIPE_TOOLTIP)));
-				widgets.add(this.recipe(JustSilverOptions.soulLanternRecipe(OptionInstance.noTooltip()), () -> RecipeGrid.soulLantern().tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip()), () -> this.grid(RecipeGrid.silverBell())));
+				widgets.add(this.recipe(JustSilverOptions.soulLanternRecipe(), () -> this.grid(RecipeGrid.soulLantern())));
 			}
 			case MIRRORS -> {
 				widgets.add(this.skinEditorKey.openButton());
 				widgets.add(this.skinEditorKey.keyButton());
 				widgets.add(this.button(JustMirrorsOptions.reflections()));
 				widgets.add(this.button(JustMirrorsOptions.reflectionDistance()));
-				widgets.add(this.recipe(mirrorRecipe(), () -> mirrorGrid(ArgentConfig.get().mirrorRecipe).tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(mirrorRecipe(), () -> this.grid(mirrorGrid(ArgentConfig.get().mirrorRecipe))));
 				widgets.add(this.button(JustMirrorsOptions.mirrorScreen()));
 			}
 			case SPAWN_LANTERNS -> widgets.add(this.button(JustSpawnLanternsOptions.markers()));
@@ -154,8 +154,8 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 				widgets.add(this.button(JustScryingOptions.effect()));
 				widgets.add(this.button(bookSource()));
 				widgets.add(this.button(JustScryingOptions.elderGuardianBook()));
-				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.parrotArmor().tooltip(this.font, RECIPE_TOOLTIP)));
-				widgets.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.catArmor().tooltip(this.font, RECIPE_TOOLTIP)));
+				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> this.grid(PetArmorRecipeGrid.parrotArmor())));
+				widgets.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), () -> this.grid(PetArmorRecipeGrid.catArmor())));
 			}
 		}
 
@@ -172,12 +172,20 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		return widget;
 	}
 
+	private @Nullable List<ClientTooltipComponent> grid(final @Nullable RecipeGrid grid) {
+		return grid == null ? null : grid.tooltip(this.font, RECIPE_TOOLTIP);
+	}
+
+	private @Nullable List<ClientTooltipComponent> grid(final @Nullable PetArmorRecipeGrid grid) {
+		return grid == null ? null : grid.tooltip(this.font, RECIPE_TOOLTIP);
+	}
+
 	private static OptionInstance<ArgentConfig.MirrorRecipe> mirrorRecipe() {
 		ArgentConfig config = ArgentConfig.get();
 		return new OptionInstance<>(
 			"options.argent.mirror_recipe",
 			OptionInstance.noTooltip(),
-			(caption, value) -> Options.genericValueLabel(caption, value.getDisplayName()),
+			(caption, value) -> value.getDisplayName(),
 			new OptionInstance.Enum<>(List.of(ArgentConfig.MirrorRecipe.values()), ArgentConfig.MirrorRecipe.CODEC),
 			config.mirrorRecipe,
 			value -> config.mirrorRecipe = value
@@ -190,7 +198,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		return new OptionInstance<>(
 			"options.argent.book_source",
 			OptionInstance.cachedConstantTooltip(Component.translatable("options.argent.book_source.tooltip")),
-			(caption, value) -> Options.genericValueLabel(caption, value.getDisplayName()),
+			(caption, value) -> value.getDisplayName(),
 			new OptionInstance.Enum<>(List.of(BookSource.values()), BookSource.CODEC),
 			BookSource.of(witherZombies.scryingBooks, scrying.libraryBooks),
 			value -> {
@@ -205,7 +213,11 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		super.extractRenderState(graphics, mouseX, mouseY, partialTicks);
 		for (Map.Entry<AbstractWidget, Supplier<List<ClientTooltipComponent>>> entry : this.recipeGrids.entrySet()) {
 			if (entry.getKey().isHovered()) {
-				graphics.tooltip(this.font, entry.getValue().get(), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
+				List<ClientTooltipComponent> grid = entry.getValue().get();
+				if (grid != null) {
+					graphics.tooltip(this.font, grid, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
+				}
+
 				return;
 			}
 		}

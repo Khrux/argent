@@ -1,5 +1,6 @@
 package com.khrux.justscrying.client.gui.components;
 
+import com.khrux.justscrying.config.JustScryingConfig;
 import com.khrux.justscrying.world.item.JustScryingItems;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jspecify.annotations.Nullable;
 
 public record PetArmorRecipeGrid(List<ItemStack> ingredients, ItemStack result) implements ClientTooltipComponent {
 	private static final int SLOT_SIZE = 18;
@@ -25,14 +27,22 @@ public record PetArmorRecipeGrid(List<ItemStack> ingredients, ItemStack result) 
 		);
 	}
 
-	public static PetArmorRecipeGrid parrotArmor() {
+	public static @Nullable PetArmorRecipeGrid parrotArmor() {
+		if (!JustScryingConfig.get().parrotArmorRecipe) {
+			return null;
+		}
+
 		Item f = Items.FEATHER;
 		Item l = Items.LEATHER;
 		Item air = Items.AIR;
 		return of(JustScryingItems.PARROT_ARMOR, air, f, air, air, l, air, l, l, air);
 	}
 
-	public static PetArmorRecipeGrid catArmor() {
+	public static @Nullable PetArmorRecipeGrid catArmor() {
+		if (!JustScryingConfig.get().catArmorRecipe) {
+			return null;
+		}
+
 		Item s = Items.ARMADILLO_SCUTE;
 		Item air = Items.AIR;
 		return of(JustScryingItems.CAT_ARMOR, air, air, air, s, s, s, s, air, s);

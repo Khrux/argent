@@ -21,9 +21,9 @@ public class JustScryingLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justscrying.title", "Just Scrying Settings");
 		translationBuilder.add("options.justscrying.scrying", "Scrying");
 		translationBuilder.add("options.justscrying.scrying.tooltip", "Whether sneaking and using an empty hand on your pet wearing Scrying armour lets you see and move through it.");
-		translationBuilder.add("options.justscrying.library_books", "Scrying in Libraries");
+		translationBuilder.add("options.justscrying.library_books", "Library Books");
 		translationBuilder.add("options.justscrying.library_books.tooltip", "A Scrying book can rarely turn up in stronghold library chests. Applies to chests opened after /reload or rejoining.");
-		translationBuilder.add("options.justscrying.fishing_books", "Scrying from Fishing");
+		translationBuilder.add("options.justscrying.fishing_books", "Fishing Books");
 		translationBuilder.add("options.justscrying.fishing_books.tooltip", "A Scrying book can turn up as fishing treasure, as often as any other treasure. Applies after /reload or rejoining.");
 		translationBuilder.add("options.justscrying.elder_guardian_book", "Elder Guardian Book");
 		translationBuilder.add("options.justscrying.elder_guardian_book.tooltip", "Every elder guardian drops a Scrying book when it dies. Applies after /reload or rejoining.");

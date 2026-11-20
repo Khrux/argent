@@ -22,7 +22,7 @@ public class ArgentLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.argent.recipe.tooltip", "Applies after /reload or rejoining. Items already made stay.");
 		translationBuilder.add("options.argent.book_source", "Scrying Books");
 		translationBuilder.add("options.argent.book_source.tooltip", "Where Scrying enchanted books come from: a shattering wither zombie, rare stronghold library chests, both, or neither.");
-		translationBuilder.add("options.argent.book_source.wither_zombie", "Wither Zombie");
+		translationBuilder.add("options.argent.book_source.wither_zombie", "Zombies");
 		translationBuilder.add("options.argent.book_source.library", "Library");
 		translationBuilder.add("options.argent.book_source.both", "Both");
 		translationBuilder.add("options.argent.book_source.neither", "Neither");

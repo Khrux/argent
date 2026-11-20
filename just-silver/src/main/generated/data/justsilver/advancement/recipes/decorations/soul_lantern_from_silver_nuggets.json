@@ -1,0 +1,38 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "justsilver:config",
+      "option": "soul_lantern_silver"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_soul_torch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:soul_torch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "justsilver:soul_lantern_from_silver_nuggets"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_soul_torch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "justsilver:soul_lantern_from_silver_nuggets"
+    ]
+  }
+}

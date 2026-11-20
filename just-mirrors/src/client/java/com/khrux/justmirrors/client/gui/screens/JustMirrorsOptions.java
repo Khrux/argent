@@ -14,7 +14,7 @@ public class JustMirrorsOptions {
 		return new OptionInstance<>(
 			"options.justmirrors.reflections",
 			OptionInstance.cachedConstantTooltip(Component.translatable("options.justmirrors.reflections.tooltip")),
-			(caption, value) -> Options.genericValueLabel(caption, value.getDisplayName()),
+			(caption, value) -> value.getDisplayName(),
 			new OptionInstance.Enum<>(List.of(JustMirrorsConfig.Reflections.values()), JustMirrorsConfig.Reflections.CODEC),
 			config.reflections,
 			value -> config.reflections = value
@@ -26,9 +26,7 @@ public class JustMirrorsOptions {
 		return new OptionInstance<>(
 			"options.justmirrors.reflection_distance",
 			OptionInstance.cachedConstantTooltip(Component.translatable("options.justmirrors.reflection_distance.tooltip")),
-			(caption, value) -> Options.genericValueLabel(
-				caption, Component.translatable("options.justmirrors.reflection_distance.blocks", value * JustMirrorsConfig.REFLECTION_DISTANCE_STEP)
-			),
+			(caption, value) -> Options.genericValueLabel(caption, value * JustMirrorsConfig.REFLECTION_DISTANCE_STEP),
 			new OptionInstance.IntRange(
 				JustMirrorsConfig.MIN_REFLECTION_DISTANCE / JustMirrorsConfig.REFLECTION_DISTANCE_STEP,
 				JustMirrorsConfig.MAX_REFLECTION_DISTANCE / JustMirrorsConfig.REFLECTION_DISTANCE_STEP

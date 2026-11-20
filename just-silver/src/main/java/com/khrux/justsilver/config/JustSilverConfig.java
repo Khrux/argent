@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringRepresentable;
 import org.slf4j.Logger;
 
 public class JustSilverConfig {
@@ -18,17 +20,17 @@ public class JustSilverConfig {
 				Codec.BOOL.optionalFieldOf("silver", true).forGetter(config -> config.enabled),
 				Codec.BOOL.optionalFieldOf("ore_generation", true).forGetter(config -> config.oreGeneration),
 				Codec.BOOL.optionalFieldOf("silver_bell_recipe", true).forGetter(config -> config.silverBellRecipe),
-				Codec.BOOL.optionalFieldOf("soul_lantern_recipe", true).forGetter(config -> config.soulLanternRecipe)
+				SoulLanternRecipe.CODEC.lenientOptionalFieldOf("soul_lantern_recipe", SoulLanternRecipe.MIXED).forGetter(config -> config.soulLanternRecipe)
 			)
 			.apply(i, JustSilverConfig::new)
 	);
-	private static JustSilverConfig instance = new JustSilverConfig(true, true, true, true);
+	private static JustSilverConfig instance = new JustSilverConfig(true, true, true, SoulLanternRecipe.MIXED);
 	public boolean enabled;
 	public boolean oreGeneration;
 	public boolean silverBellRecipe;
-	public boolean soulLanternRecipe;
+	public SoulLanternRecipe soulLanternRecipe;
 
-	private JustSilverConfig(final boolean enabled, final boolean oreGeneration, final boolean silverBellRecipe, final boolean soulLanternRecipe) {
+	private JustSilverConfig(final boolean enabled, final boolean oreGeneration, final boolean silverBellRecipe, final SoulLanternRecipe soulLanternRecipe) {
 		this.enabled = enabled;
 		this.oreGeneration = oreGeneration;
 		this.silverBellRecipe = silverBellRecipe;
@@ -50,7 +52,7 @@ public class JustSilverConfig {
 	public void setDefaults() {
 		this.oreGeneration = true;
 		this.silverBellRecipe = true;
-		this.soulLanternRecipe = true;
+		this.soulLanternRecipe = SoulLanternRecipe.MIXED;
 	}
 
 	private static Path path(final String name) {
@@ -81,6 +83,28 @@ public class JustSilverConfig {
 			Files.writeString(path, CODEC.encodeStart(JsonOps.INSTANCE, this).getOrThrow().toString());
 		} catch (IOException e) {
 			LOGGER.warn("Failed to save {}", path, e);
+		}
+	}
+
+	public enum SoulLanternRecipe implements StringRepresentable {
+		IRON("iron"),
+		SILVER("silver"),
+		MIXED("mixed");
+
+		public static final Codec<SoulLanternRecipe> CODEC = StringRepresentable.fromEnum(SoulLanternRecipe::values);
+		private final String name;
+
+		SoulLanternRecipe(final String name) {
+			this.name = name;
+		}
+
+		public Component getDisplayName() {
+			return Component.translatable("options.justsilver.soul_lantern_recipe." + this.name);
+		}
+
+		@Override
+		public String getSerializedName() {
+			return this.name;
 		}
 	}
 }

@@ -57,7 +57,11 @@ public class JustScryingConfigScreen extends OptionsSubScreen {
 		for (Map.Entry<OptionInstance<?>, Supplier<PetArmorRecipeGrid>> entry : this.recipeGrids.entrySet()) {
 			AbstractWidget widget = this.list.findOption(entry.getKey());
 			if (widget != null && widget.isHovered()) {
-				graphics.tooltip(this.font, entry.getValue().get().tooltip(this.font, RECIPE_TOOLTIP), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
+				PetArmorRecipeGrid grid = entry.getValue().get();
+				if (grid != null) {
+					graphics.tooltip(this.font, grid.tooltip(this.font, RECIPE_TOOLTIP), mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null, false);
+				}
+
 				return;
 			}
 		}

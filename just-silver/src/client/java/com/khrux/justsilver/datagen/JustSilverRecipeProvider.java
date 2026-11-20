@@ -49,12 +49,26 @@ public class JustSilverRecipeProvider extends FabricRecipeProvider {
 				);
 				this.shaped(RecipeCategory.DECORATIONS, Blocks.SOUL_LANTERN)
 					.define('#', Items.SOUL_TORCH)
+					.define('X', JustSilverItems.SILVER_NUGGET)
+					.pattern("XXX")
+					.pattern("X#X")
+					.pattern("XXX")
+					.unlockedBy("has_soul_torch", this.has(Items.SOUL_TORCH))
+					.save(
+						JustSilverRecipeProvider.this.withConditions(this.output, new JustSilverCondition(JustSilverCondition.Option.SOUL_LANTERN_SILVER)),
+						"soul_lantern_from_silver_nuggets"
+					);
+				this.shaped(RecipeCategory.DECORATIONS, Blocks.SOUL_LANTERN)
+					.define('#', Items.SOUL_TORCH)
 					.define('X', JustSilverItemTagsProvider.SOUL_LANTERN_NUGGETS)
 					.pattern("XXX")
 					.pattern("X#X")
 					.pattern("XXX")
 					.unlockedBy("has_soul_torch", this.has(Items.SOUL_TORCH))
-					.save(JustSilverRecipeProvider.this.withConditions(this.output, new JustSilverCondition(JustSilverCondition.Option.SOUL_LANTERN)), "soul_lantern_from_mixed_nuggets");
+					.save(
+						JustSilverRecipeProvider.this.withConditions(this.output, new JustSilverCondition(JustSilverCondition.Option.SOUL_LANTERN_MIXED)),
+						"soul_lantern_from_mixed_nuggets"
+					);
 				this.shaped(RecipeCategory.DECORATIONS, JustSilverItems.SILVER_BELL)
 					.define('#', ItemTags.LOGS)
 					.define('X', JustSilverItems.SILVER_BLOCK)

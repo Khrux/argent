@@ -2,7 +2,7 @@
   "fabric:load_conditions": [
     {
       "condition": "justsilver:config",
-      "option": "soul_lantern"
+      "option": "soul_lantern_mixed"
     }
   ],
   "type": "minecraft:crafting_shaped",

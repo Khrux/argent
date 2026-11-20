@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.jspecify.annotations.Nullable;
 
 public record RecipeGrid(List<ItemStack> ingredients, ItemStack result, boolean needsSilver) implements ClientTooltipComponent {
 	private static final int SLOT_SIZE = 18;
@@ -28,15 +29,25 @@ public record RecipeGrid(List<ItemStack> ingredients, ItemStack result, boolean 
 		);
 	}
 
-	public static RecipeGrid silverBell() {
+	public static @Nullable RecipeGrid silverBell() {
+		if (!JustSilverConfig.get().silverBellRecipe) {
+			return null;
+		}
+
 		Item log = Items.OAK_LOG;
 		Item air = Items.AIR;
 		return of(JustSilverItems.SILVER_BELL, true, log, log, log, air, JustSilverItems.SILVER_BLOCK, air, air, air, air);
 	}
 
 	public static RecipeGrid soulLantern() {
-		Item n = JustSilverItems.SILVER_NUGGET;
-		return of(Items.SOUL_LANTERN, false, n, n, n, n, Items.SOUL_TORCH, n, n, n, n);
+		Item iron = Items.IRON_NUGGET;
+		Item silver = JustSilverItems.SILVER_NUGGET;
+		Item torch = Items.SOUL_TORCH;
+		return switch (JustSilverConfig.get().soulLanternRecipe) {
+			case IRON -> of(Items.SOUL_LANTERN, false, iron, iron, iron, iron, torch, iron, iron, iron, iron);
+			case SILVER -> of(Items.SOUL_LANTERN, true, silver, silver, silver, silver, torch, silver, silver, silver, silver);
+			case MIXED -> of(Items.SOUL_LANTERN, false, silver, iron, silver, iron, torch, iron, silver, iron, silver);
+		};
 	}
 
 	public List<ClientTooltipComponent> tooltip(final Font font, final Component text) {
