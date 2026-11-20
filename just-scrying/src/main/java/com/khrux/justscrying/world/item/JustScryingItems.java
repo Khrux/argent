@@ -13,7 +13,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -46,20 +45,8 @@ public class JustScryingItems {
 			.stacksTo(1);
 	}
 
-	private static Item registerItem(final ResourceKey<Item> id) {
-		return registerItem(id, Item::new, new Item.Properties());
-	}
-
 	private static Item registerItem(final ResourceKey<Item> id, final Function<Item.Properties, Item> itemFactory, final Item.Properties properties) {
-		return register(id, itemFactory.apply(properties.setId(id)));
-	}
-
-	private static Item register(final ResourceKey<Item> id, final Item item) {
-		if (item instanceof BlockItem blockItem) {
-			blockItem.registerBlocks(Item.BY_BLOCK, item);
-		}
-
-		return Registry.register(BuiltInRegistries.ITEM, id, item);
+		return Registry.register(BuiltInRegistries.ITEM, id, itemFactory.apply(properties.setId(id)));
 	}
 
 	public static void bootstrap() {
