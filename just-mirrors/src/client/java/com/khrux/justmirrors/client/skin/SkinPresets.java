@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 
 public class SkinPresets {
 	private static final Logger LOGGER = LogUtils.getLogger();
-	private static final List<String> LEGACY_MOD_IDS = List.of("argent", "mirror");
 	public static final int COUNT = 9;
 	private static final int COLOUR_COUNT = 16;
 	private static final int SKIN_SIZE = 64;
@@ -57,18 +56,6 @@ public class SkinPresets {
 
 	public static SkinPresets load(final Minecraft minecraft) {
 		Path directory = minecraft.gameDirectory.toPath().resolve(JustMirrors.MOD_ID);
-		for (String legacyModId : LEGACY_MOD_IDS) {
-			Path legacyDirectory = minecraft.gameDirectory.toPath().resolve(legacyModId);
-			if (Files.exists(directory) || !Files.isDirectory(legacyDirectory)) {
-				continue;
-			}
-
-			try {
-				Files.move(legacyDirectory, directory);
-			} catch (IOException e) {
-				LOGGER.warn("Failed to move {} to {}", legacyDirectory, directory, e);
-			}
-		}
 
 		SkinPresets presets = new SkinPresets(directory.resolve("presets"));
 		Settings settings = presets.readSettings();

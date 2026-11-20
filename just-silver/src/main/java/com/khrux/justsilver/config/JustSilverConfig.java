@@ -59,14 +59,9 @@ public class JustSilverConfig {
 
 	public static void load() {
 		Path path = path("justsilver.json");
-		Path legacyPath = path("argent.json");
 		if (Files.isRegularFile(path)) {
 			read(path);
-		} else if (Files.isRegularFile(legacyPath)) {
-			read(legacyPath);
-		}
-
-		if (!Files.isRegularFile(path)) {
+		} else {
 			instance.save();
 		}
 	}

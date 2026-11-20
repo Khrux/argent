@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -23,7 +22,6 @@ public class JustScrying implements ModInitializer {
 		JustScryingConfig.load();
 		ResourceConditions.register(JustScryingCondition.TYPE);
 		JustScryingItems.bootstrap();
-		BuiltInRegistries.ITEM.addAlias(Identifier.fromNamespaceAndPath("argent", "silver_parrot_armor"), BuiltInRegistries.ITEM.getKey(JustScryingItems.PARROT_ARMOR));
 		UseEntityCallback.EVENT.register(PetArmor::interact);
 		Scrying.bootstrap();
 		ServerLivingEntityEvents.ALLOW_DAMAGE.register(PetArmor::allowDamage);

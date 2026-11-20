@@ -87,14 +87,9 @@ public class JustScryingConfig {
 
 	public static void load() {
 		Path path = path("justscrying.json");
-		Path legacyPath = path("argent.json");
 		if (Files.isRegularFile(path)) {
 			read(path);
-		} else if (Files.isRegularFile(legacyPath)) {
-			read(legacyPath);
-		}
-
-		if (!Files.isRegularFile(path)) {
+		} else {
 			instance.save();
 		}
 	}

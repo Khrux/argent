@@ -55,14 +55,9 @@ public class JustWitherZombiesConfig {
 
 	public static void load() {
 		Path path = path("justwitherzombies.json");
-		Path legacyPath = path("argent.json");
 		if (Files.isRegularFile(path)) {
 			read(path);
-		} else if (Files.isRegularFile(legacyPath)) {
-			read(legacyPath);
-		}
-
-		if (!Files.isRegularFile(path)) {
+		} else {
 			instance.save();
 		}
 	}

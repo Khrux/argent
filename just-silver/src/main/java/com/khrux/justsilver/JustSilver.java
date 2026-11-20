@@ -6,13 +6,10 @@ import com.khrux.justsilver.data.worldgen.placement.JustSilverOrePlacements;
 import com.khrux.justsilver.world.item.JustSilverItems;
 import com.khrux.justsilver.world.level.block.JustSilverBlocks;
 import com.khrux.justsilver.world.level.block.entity.JustSilverBlockEntityTypes;
-import java.util.List;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -21,7 +18,6 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 
 public class JustSilver implements ModInitializer {
 	public static final String MOD_ID = "justsilver";
-	private static final List<String> LEGACY_MOD_IDS = List.of("argent", "mirror");
 
 	@Override
 	public void onInitialize() {
@@ -30,7 +26,6 @@ public class JustSilver implements ModInitializer {
 		JustSilverBlocks.bootstrap();
 		JustSilverItems.bootstrap();
 		JustSilverBlockEntityTypes.bootstrap();
-		addLegacyAliases(List.of(BuiltInRegistries.BLOCK, BuiltInRegistries.ITEM, BuiltInRegistries.BLOCK_ENTITY_TYPE));
 		BiomeModifications.addFeature(
 			context -> JustSilverConfig.get().generatesOre() && context.hasPlacedFeature(OrePlacements.ORE_GOLD),
 			GenerationStep.Decoration.UNDERGROUND_ORES,
@@ -74,19 +69,6 @@ public class JustSilver implements ModInitializer {
 			});
 	}
 
-	private static void addLegacyAliases(final List<Registry<?>> registries) {
-		for (Registry<?> registry : registries) {
-			for (Identifier id : List.copyOf(registry.keySet())) {
-				if (!id.getNamespace().equals(MOD_ID)) {
-					continue;
-				}
-
-				for (String legacyModId : LEGACY_MOD_IDS) {
-					registry.addAlias(Identifier.fromNamespaceAndPath(legacyModId, id.getPath()), id);
-				}
-			}
-		}
-	}
 
 	public static Identifier id(final String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);

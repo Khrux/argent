@@ -63,14 +63,9 @@ public class JustMirrorsConfig {
 
 	public static void load() {
 		Path path = path("justmirrors.json");
-		Path legacyPath = path("argent.json");
 		if (Files.isRegularFile(path)) {
 			read(path);
-		} else if (Files.isRegularFile(legacyPath)) {
-			read(legacyPath);
-		}
-
-		if (!Files.isRegularFile(path)) {
+		} else {
 			instance.save();
 		}
 	}

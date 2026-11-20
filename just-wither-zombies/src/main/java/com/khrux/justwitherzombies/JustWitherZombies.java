@@ -4,13 +4,10 @@ import com.khrux.justwitherzombies.config.JustWitherZombiesConfig;
 import com.khrux.justwitherzombies.sounds.JustWitherZombiesSoundEvents;
 import com.khrux.justwitherzombies.world.entity.JustWitherZombiesEntityTypes;
 import com.khrux.justwitherzombies.world.item.JustWitherZombiesItems;
-import java.util.List;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -30,7 +27,6 @@ public class JustWitherZombies implements ModInitializer {
 		JustWitherZombiesSoundEvents.bootstrap();
 		JustWitherZombiesEntityTypes.bootstrap();
 		JustWitherZombiesItems.bootstrap();
-		addLegacyAliases(List.of(BuiltInRegistries.ITEM, BuiltInRegistries.ENTITY_TYPE, BuiltInRegistries.SOUND_EVENT));
 		BiomeModifications.addSpawn(
 			BiomeSelectors.includeByKey(Biomes.NETHER_WASTES, Biomes.CRIMSON_FOREST, Biomes.WARPED_FOREST, Biomes.BASALT_DELTAS)
 				.and(context -> JustWitherZombiesConfig.get().isEnabled()),
@@ -57,15 +53,6 @@ public class JustWitherZombies implements ModInitializer {
 			});
 	}
 
-	private static void addLegacyAliases(final List<Registry<?>> registries) {
-		for (Registry<?> registry : registries) {
-			for (Identifier id : List.copyOf(registry.keySet())) {
-				if (id.getNamespace().equals(MOD_ID)) {
-					registry.addAlias(Identifier.fromNamespaceAndPath("argent", id.getPath()), id);
-				}
-			}
-		}
-	}
 
 	public static Identifier id(final String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
