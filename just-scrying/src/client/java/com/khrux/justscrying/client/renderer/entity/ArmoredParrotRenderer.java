@@ -17,7 +17,6 @@ import net.minecraft.world.item.Items;
 public class ArmoredParrotRenderer extends ParrotRenderer {
 	public static final RenderStateDataKey<ItemStack> BODY_ARMOR = RenderStateDataKey.create(() -> "justscrying:body_armor");
 	public static final RenderStateDataKey<ItemStackRenderState> PLUME = RenderStateDataKey.create(() -> "justscrying:plume");
-	private static final ItemStack FEATHER = new ItemStack(Items.FEATHER);
 	private final ItemModelResolver itemModelResolver;
 
 	public ArmoredParrotRenderer(final EntityRendererProvider.Context context) {
@@ -38,7 +37,7 @@ public class ArmoredParrotRenderer extends ParrotRenderer {
 		}
 
 		if (armor.is(JustScryingItems.PARROT_ARMOR)) {
-			this.itemModelResolver.updateForLiving(plume, FEATHER, ItemDisplayContext.NONE, entity);
+			this.itemModelResolver.updateForLiving(plume, Items.FEATHER.getDefaultInstance(), ItemDisplayContext.NONE, entity);
 		} else {
 			plume.clear();
 		}
