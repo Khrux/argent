@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"))
-	private void mirror$drawReflections(final CallbackInfo ci) {
+	private void justmirrors$drawReflections(final CallbackInfo ci) {
 		MirrorReflections reflections = JustMirrorsClient.reflections();
 		if (reflections != null) {
 			reflections.draw((GameRenderer)(Object)this);

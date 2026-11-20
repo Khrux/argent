@@ -2,11 +2,13 @@ package com.khrux.justmirrors.client.gui.screens;
 
 import com.khrux.justmirrors.config.JustMirrorsConfig;
 import java.util.List;
-import net.minecraft.client.Options;
 import net.minecraft.client.OptionInstance;
+import net.minecraft.client.Options;
 import net.minecraft.network.chat.Component;
 
 public class JustMirrorsOptions {
+	private static final Component MIRROR_SCREEN_TOOLTIP = Component.translatable("options.justmirrors.mirror_screen.tooltip");
+
 	public static OptionInstance<JustMirrorsConfig.Reflections> reflections() {
 		JustMirrorsConfig config = JustMirrorsConfig.get();
 		return new OptionInstance<>(
@@ -38,6 +40,11 @@ public class JustMirrorsOptions {
 
 	public static OptionInstance<Boolean> mirrorScreen() {
 		JustMirrorsConfig config = JustMirrorsConfig.get();
-		return OptionInstance.createBoolean("options.justmirrors.mirror_screen", OptionInstance.cachedConstantTooltip(Component.translatable("options.justmirrors.mirror_screen.tooltip")), config.mirrorScreen, value -> config.mirrorScreen = value);
+		return OptionInstance.createBoolean(
+			"options.justmirrors.mirror_screen",
+			OptionInstance.cachedConstantTooltip(MIRROR_SCREEN_TOOLTIP),
+			config.mirrorScreen,
+			value -> config.mirrorScreen = value
+		);
 	}
 }

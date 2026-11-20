@@ -1,15 +1,15 @@
 package com.khrux.justscrying.client.renderer.entity;
 
 import com.khrux.justscrying.client.renderer.entity.layers.ParrotArmorLayer;
+import com.khrux.justscrying.world.item.JustScryingItems;
 import net.fabricmc.fabric.api.client.rendering.v1.FabricRenderState;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
-import com.khrux.justscrying.world.item.JustScryingItems;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ParrotRenderer;
 import net.minecraft.client.renderer.entity.state.ParrotRenderState;
-import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.world.entity.animal.parrot.Parrot;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

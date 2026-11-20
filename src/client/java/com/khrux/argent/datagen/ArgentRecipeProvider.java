@@ -12,8 +12,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 
 public class ArgentRecipeProvider extends FabricRecipeProvider {
 	public ArgentRecipeProvider(final FabricPackOutput output, final CompletableFuture<HolderLookup.Provider> registries) {

@@ -119,8 +119,8 @@ public class ColourPickerWidget extends AbstractWidget {
 	}
 
 	private void update(final double mouseX, final double mouseY) {
-		int column = Mth.clamp((int)Math.floor(mouseX) - this.getX() - SQUARE_X, 0, SQUARE_SIZE - 1);
-		int row = Mth.clamp((int)Math.floor(mouseY) - this.getY() - SQUARE_Y, 0, SQUARE_SIZE - 1);
+		int column = Mth.clamp(Mth.floor(mouseX) - this.getX() - SQUARE_X, 0, SQUARE_SIZE - 1);
+		int row = Mth.clamp(Mth.floor(mouseY) - this.getY() - SQUARE_Y, 0, SQUARE_SIZE - 1);
 		if (this.draggingHue) {
 			this.hue = this.hueAt(row);
 		} else {

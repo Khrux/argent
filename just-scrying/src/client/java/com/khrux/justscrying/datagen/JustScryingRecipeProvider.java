@@ -10,8 +10,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 
 public class JustScryingRecipeProvider extends FabricRecipeProvider {
 	public JustScryingRecipeProvider(final FabricPackOutput output, final CompletableFuture<HolderLookup.Provider> registries) {

@@ -18,7 +18,7 @@ public abstract class AbstractClientPlayerMixin {
 	protected abstract PlayerInfo getPlayerInfo();
 
 	@Inject(method = "getSkin", at = @At("HEAD"), cancellable = true)
-	private void mirror$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
+	private void justmirrors$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
 		UUID player = ((AbstractClientPlayer)(Object)this).getUUID();
 		if (JustMirrorsClient.presets() == null || !player.equals(Minecraft.getInstance().getUser().getProfileId()) && JustMirrorsClient.sharedSkins().get(player) == null) {
 			return;

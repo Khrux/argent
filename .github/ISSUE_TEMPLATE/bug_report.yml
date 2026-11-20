@@ -1,5 +1,5 @@
 name: Bug report
-description: Something in Argent is broken or behaves strangely.
+description: Something in Argent or one of the Just mods is broken or behaves strangely.
 labels: ["bug"]
 body:
   - type: textarea
@@ -23,8 +23,8 @@ body:
   - type: input
     id: argent-version
     attributes:
-      label: Argent version
-      placeholder: 1.0.0
+      label: Mod and version
+      placeholder: Argent 1.1.0, or Just Mirrors 1.0.0
     validations:
       required: true
   - type: input
@@ -40,15 +40,15 @@ body:
       label: Where does it happen?
       options:
         - Singleplayer
-        - On a server with Argent installed
-        - On a server without Argent
+        - On a server with the mod installed
+        - On a server without the mod
     validations:
       required: true
   - type: dropdown
     id: alone
     attributes:
-      label: Does it still happen with only Argent and Fabric API installed?
-      description: Removing other mods for a moment is the quickest way to tell whether it's Argent or a clash with another mod.
+      label: Does it still happen with only this mod and Fabric API installed?
+      description: Removing other mods for a moment is the quickest way to tell whether it's this mod or a clash with another mod.
       options:
         - "Yes"
         - "No, only alongside other mods (please list them below)"

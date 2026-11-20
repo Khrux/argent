@@ -5,9 +5,16 @@ import net.minecraft.client.OptionInstance;
 import net.minecraft.network.chat.Component;
 
 public class JustSilverOptions {
+	private static final Component ORE_GENERATION_TOOLTIP = Component.translatable("options.justsilver.ore_generation.tooltip");
+
 	public static OptionInstance<Boolean> oreGeneration() {
 		JustSilverConfig config = JustSilverConfig.get();
-		return OptionInstance.createBoolean("options.justsilver.ore_generation", OptionInstance.cachedConstantTooltip(Component.translatable("options.justsilver.ore_generation.tooltip")), config.oreGeneration, value -> config.oreGeneration = value);
+		return OptionInstance.createBoolean(
+			"options.justsilver.ore_generation",
+			OptionInstance.cachedConstantTooltip(ORE_GENERATION_TOOLTIP),
+			config.oreGeneration,
+			value -> config.oreGeneration = value
+		);
 	}
 
 	public static OptionInstance<Boolean> silverBellRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {

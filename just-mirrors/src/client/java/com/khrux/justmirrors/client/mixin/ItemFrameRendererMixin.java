@@ -49,7 +49,7 @@ public abstract class ItemFrameRendererMixin {
 		method = "extractRenderState(Lnet/minecraft/world/entity/decoration/ItemFrame;Lnet/minecraft/client/renderer/entity/state/ItemFrameRenderState;F)V",
 		at = @At("TAIL")
 	)
-	private void mirror$extractMirrorTile(final ItemFrame entity, final ItemFrameRenderState state, final float partialTicks, final CallbackInfo ci) {
+	private void justmirrors$extractMirrorTile(final ItemFrame entity, final ItemFrameRenderState state, final float partialTicks, final CallbackInfo ci) {
 		boolean tile = state.mapId == null && entity.getItem().is(JustMirrorsItems.MIRROR);
 		((FabricRenderState)state).setData(MIRROR_TILE, tile);
 		if (!tile) {
@@ -66,7 +66,7 @@ public abstract class ItemFrameRendererMixin {
 		method = "submit(Lnet/minecraft/client/renderer/entity/state/ItemFrameRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
 		at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V", ordinal = 1)
 	)
-	private void mirror$submitMirrorTile(
+	private void justmirrors$submitMirrorTile(
 		final ItemFrameRenderState state, final PoseStack poseStack, final SubmitNodeCollector submitNodeCollector, final CameraRenderState camera, final CallbackInfo ci
 	) {
 		if (!((FabricRenderState)state).getDataOrDefault(MIRROR_TILE, false)) {
@@ -95,17 +95,17 @@ public abstract class ItemFrameRendererMixin {
 				for (int row = 0; row < REFLECTION_CELLS; row++) {
 					float x0 = column * cell;
 					float y0 = row * cell;
-					mirror$addReflectionVertex(buffer, pose, reflections, surface, x0, y0 + cell);
-					mirror$addReflectionVertex(buffer, pose, reflections, surface, x0 + cell, y0 + cell);
-					mirror$addReflectionVertex(buffer, pose, reflections, surface, x0 + cell, y0);
-					mirror$addReflectionVertex(buffer, pose, reflections, surface, x0, y0);
+					justmirrors$addReflectionVertex(buffer, pose, reflections, surface, x0, y0 + cell);
+					justmirrors$addReflectionVertex(buffer, pose, reflections, surface, x0 + cell, y0 + cell);
+					justmirrors$addReflectionVertex(buffer, pose, reflections, surface, x0 + cell, y0);
+					justmirrors$addReflectionVertex(buffer, pose, reflections, surface, x0, y0);
 				}
 			}
 		});
 	}
 
 	@Unique
-	private static void mirror$addReflectionVertex(
+	private static void justmirrors$addReflectionVertex(
 		final VertexConsumer buffer, final PoseStack.Pose pose, final MirrorReflections reflections, final Matrix4f surface, final float x, final float y
 	) {
 		Vector2f uv = reflections.textureCoordinates(surface, x, y, REFLECTION_Z);

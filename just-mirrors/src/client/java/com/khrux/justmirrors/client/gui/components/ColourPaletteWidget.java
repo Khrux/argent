@@ -9,6 +9,7 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.CommonColors;
+import net.minecraft.util.Mth;
 
 public class ColourPaletteWidget extends AbstractWidget {
 	private static final int COLUMNS = 8;
@@ -40,8 +41,8 @@ public class ColourPaletteWidget extends AbstractWidget {
 	}
 
 	private int swatchAt(final double mouseX, final double mouseY) {
-		int x = (int)Math.floor(mouseX) - this.getX();
-		int y = (int)Math.floor(mouseY) - this.getY();
+		int x = Mth.floor(mouseX) - this.getX();
+		int y = Mth.floor(mouseY) - this.getY();
 		if (x < 0 || y < 0 || x % STEP_X >= SWATCH_WIDTH || y % STEP_Y >= SWATCH_HEIGHT) {
 			return -1;
 		}

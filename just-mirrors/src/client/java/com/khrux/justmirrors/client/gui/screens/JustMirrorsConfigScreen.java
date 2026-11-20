@@ -1,12 +1,12 @@
 package com.khrux.justmirrors.client.gui.screens;
 
-import com.khrux.justmirrors.config.JustMirrorsConfig;
 import com.khrux.justmirrors.client.gui.components.SkinEditorKeyBinding;
-import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.input.MouseButtonEvent;
+import com.khrux.justmirrors.config.JustMirrorsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public class JustMirrorsConfigScreen extends OptionsSubScreen {

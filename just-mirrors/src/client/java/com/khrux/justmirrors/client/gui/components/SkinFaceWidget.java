@@ -111,8 +111,8 @@ public class SkinFaceWidget extends AbstractWidget {
 
 	private int @Nullable [] cellAt(final SkinFace face, final PlayerModelType model, final double mouseX, final double mouseY) {
 		int scale = this.pixelScale(face, model);
-		int column = (int)Math.floor((mouseX - this.gridLeft(face, model, scale)) / scale);
-		int row = (int)Math.floor((mouseY - this.gridTop(face, scale)) / scale);
+		int column = Mth.floor((mouseX - this.gridLeft(face, model, scale)) / scale);
+		int row = Mth.floor((mouseY - this.gridTop(face, scale)) / scale);
 		if (column < 0 || column >= face.width(model) || row < 0 || row >= face.height()) {
 			return null;
 		}

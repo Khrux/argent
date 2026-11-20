@@ -35,7 +35,13 @@ public class JustScryingConfig {
 	public boolean catArmorRecipe;
 
 	private JustScryingConfig(
-		final boolean enabled, final boolean effect, final boolean libraryBooks, final boolean fishingBooks, final boolean elderGuardianBook, final boolean parrotArmorRecipe, final boolean catArmorRecipe
+		final boolean enabled,
+		final boolean effect,
+		final boolean libraryBooks,
+		final boolean fishingBooks,
+		final boolean elderGuardianBook,
+		final boolean parrotArmorRecipe,
+		final boolean catArmorRecipe
 	) {
 		this.enabled = enabled;
 		this.effect = effect;

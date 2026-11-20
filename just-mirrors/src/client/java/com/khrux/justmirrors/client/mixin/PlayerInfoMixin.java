@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerInfo.class)
 public abstract class PlayerInfoMixin {
 	@Inject(method = "getSkin", at = @At("RETURN"), cancellable = true)
-	private void mirror$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
+	private void justmirrors$getSkin(final CallbackInfoReturnable<PlayerSkin> cir) {
 		SkinPresets presets = JustMirrorsClient.presets();
 		if (presets == null) {
 			return;

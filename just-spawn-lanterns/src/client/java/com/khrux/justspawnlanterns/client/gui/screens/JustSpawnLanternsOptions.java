@@ -2,8 +2,8 @@ package com.khrux.justspawnlanterns.client.gui.screens;
 
 import com.khrux.justspawnlanterns.config.JustSpawnLanternsConfig;
 import java.util.List;
-import net.minecraft.client.Options;
 import net.minecraft.client.OptionInstance;
+import net.minecraft.client.Options;
 import net.minecraft.network.chat.Component;
 
 public class JustSpawnLanternsOptions {
