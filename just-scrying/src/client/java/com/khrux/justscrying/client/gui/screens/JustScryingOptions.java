@@ -15,6 +15,11 @@ public class JustScryingOptions {
 		return OptionInstance.createBoolean("options.justscrying.library_books", OptionInstance.cachedConstantTooltip(Component.translatable("options.justscrying.library_books.tooltip")), config.libraryBooks, value -> config.libraryBooks = value);
 	}
 
+	public static OptionInstance<Boolean> fishingBooks() {
+		JustScryingConfig config = JustScryingConfig.get();
+		return OptionInstance.createBoolean("options.justscrying.fishing_books", OptionInstance.cachedConstantTooltip(Component.translatable("options.justscrying.fishing_books.tooltip")), config.fishingBooks, value -> config.fishingBooks = value);
+	}
+
 	public static OptionInstance<Boolean> parrotArmorRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {
 		JustScryingConfig config = JustScryingConfig.get();
 		return OptionInstance.createBoolean("options.justscrying.parrot_armor_recipe", tooltip, config.parrotArmorRecipe, value -> config.parrotArmorRecipe = value);

@@ -45,6 +45,7 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.UniformContainerBase;
 import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
@@ -128,17 +129,25 @@ public class Scrying {
 	private static void modifyLootTable(
 		final ResourceKey<LootTable> key, final LootTable.Builder tableBuilder, final LootTableSource source, final HolderLookup.Provider registries
 	) {
-		if (!source.isBuiltin() || key != BuiltInLootTables.STRONGHOLD_LIBRARY || !JustScryingConfig.get().libraryBooks) {
+		if (!source.isBuiltin()) {
 			return;
 		}
 
+		if (key == BuiltInLootTables.STRONGHOLD_LIBRARY && JustScryingConfig.get().libraryBooks) {
+			tableBuilder.withPool(
+				LootPool.lootPool()
+					.setRolls(ContextIntProviders.exactly(1))
+					.when(LootItemRandomChanceCondition.randomChance(LIBRARY_BOOK_CHANCE))
+					.add(scryingBook(registries))
+			);
+		} else if (key == BuiltInLootTables.FISHING_TREASURE && JustScryingConfig.get().fishingBooksDrop()) {
+			tableBuilder.modifyPools(pool -> pool.add(scryingBook(registries)));
+		}
+	}
+
+	private static UniformContainerBase.Builder<?> scryingBook(final HolderLookup.Provider registries) {
 		Holder<Enchantment> scrying = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(JustScryingEnchantments.SCRYING);
-		tableBuilder.withPool(
-			LootPool.lootPool()
-				.setRolls(ContextIntProviders.exactly(1))
-				.when(LootItemRandomChanceCondition.randomChance(LIBRARY_BOOK_CHANCE))
-				.add(LootItem.lootTableItem(Items.BOOK).apply(new SetEnchantmentsFunction.Builder().withEnchantment(scrying, ContextIntProviders.exactly(1))))
-		);
+		return LootItem.lootTableItem(Items.BOOK).apply(new SetEnchantmentsFunction.Builder().withEnchantment(scrying, ContextIntProviders.exactly(1)));
 	}
 
 	private static void tick(final MinecraftServer server) {

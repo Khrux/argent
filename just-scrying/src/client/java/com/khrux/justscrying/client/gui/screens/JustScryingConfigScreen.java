@@ -2,9 +2,12 @@ package com.khrux.justscrying.client.gui.screens;
 
 import com.khrux.justscrying.client.gui.components.PetArmorRecipeGrid;
 import com.khrux.justscrying.config.JustScryingConfig;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -26,13 +29,16 @@ public class JustScryingConfigScreen extends OptionsSubScreen {
 	@Override
 	protected void addOptions() {
 		this.recipeGrids.clear();
-		this.list
-			.addSmall(
-				JustScryingOptions.effect(),
-				JustScryingOptions.libraryBooks(),
-				this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::parrotArmor),
-				this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::catArmor)
-			);
+		List<OptionInstance<?>> options = new ArrayList<>();
+		options.add(JustScryingOptions.effect());
+		if (!FabricLoader.getInstance().isModLoaded("argent")) {
+			options.add(JustScryingOptions.fishingBooks());
+		}
+
+		options.add(JustScryingOptions.libraryBooks());
+		options.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::parrotArmor));
+		options.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::catArmor));
+		this.list.addSmall(options.toArray(OptionInstance[]::new));
 	}
 
 	private OptionInstance<?> recipe(final OptionInstance<?> option, final Supplier<PetArmorRecipeGrid> grid) {

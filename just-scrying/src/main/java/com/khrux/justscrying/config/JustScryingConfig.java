@@ -18,24 +18,27 @@ public class JustScryingConfig {
 				Codec.BOOL.optionalFieldOf("enabled", true).forGetter(config -> config.enabled),
 				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.effect),
 				Codec.BOOL.optionalFieldOf("scrying_library_loot", false).forGetter(config -> config.libraryBooks),
+				Codec.BOOL.optionalFieldOf("scrying_fishing_loot", true).forGetter(config -> config.fishingBooks),
 				Codec.BOOL.optionalFieldOf("parrot_armor_recipe", true).forGetter(config -> config.parrotArmorRecipe),
 				Codec.BOOL.optionalFieldOf("cat_armor_recipe", true).forGetter(config -> config.catArmorRecipe)
 			)
 			.apply(i, JustScryingConfig::new)
 	);
-	private static JustScryingConfig instance = new JustScryingConfig(true, true, false, true, true);
+	private static JustScryingConfig instance = new JustScryingConfig(true, true, false, true, true, true);
 	public boolean enabled;
 	public boolean effect;
 	public boolean libraryBooks;
+	public boolean fishingBooks;
 	public boolean parrotArmorRecipe;
 	public boolean catArmorRecipe;
 
 	private JustScryingConfig(
-		final boolean enabled, final boolean effect, final boolean libraryBooks, final boolean parrotArmorRecipe, final boolean catArmorRecipe
+		final boolean enabled, final boolean effect, final boolean libraryBooks, final boolean fishingBooks, final boolean parrotArmorRecipe, final boolean catArmorRecipe
 	) {
 		this.enabled = enabled;
 		this.effect = effect;
 		this.libraryBooks = libraryBooks;
+		this.fishingBooks = fishingBooks;
 		this.parrotArmorRecipe = parrotArmorRecipe;
 		this.catArmorRecipe = catArmorRecipe;
 	}
@@ -52,9 +55,14 @@ public class JustScryingConfig {
 		return this.isEnabled() && this.effect;
 	}
 
+	public boolean fishingBooksDrop() {
+		return this.fishingBooks && !FabricLoader.getInstance().isModLoaded("argent");
+	}
+
 	public void setDefaults() {
 		this.effect = true;
 		this.libraryBooks = false;
+		this.fishingBooks = true;
 		this.parrotArmorRecipe = true;
 		this.catArmorRecipe = true;
 	}

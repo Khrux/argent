@@ -24,7 +24,7 @@ public class JustWitherZombiesLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("subtitles.entity.wither_zombie.shatter", "Wither Zombie shatters");
 		translationBuilder.add("options.justwitherzombies.title", "Just Wither Zombies Settings");
 		translationBuilder.add("options.justwitherzombies.melee_damage", "Melee Damage");
-		translationBuilder.add("options.justwitherzombies.melee_damage.tooltip", "Whether a wither zombie's swipe from behind hurts you as well as taking things.");
+		translationBuilder.add("options.justwitherzombies.melee_damage.tooltip", "Whether a wither zombie's swipe from behind hurts you as well as taking things. Off is recommended: it always stays behind you, where you can't look at it, so you can't fight back.");
 		translationBuilder.add("options.justwitherzombies.item_stealing", "Item Stealing");
 		translationBuilder.add("options.justwitherzombies.item_stealing.tooltip", "Whether wither zombies take food, plants, leather, feathers, wool and eggs from you.");
 		translationBuilder.add("options.justwitherzombies.scrying_books", "Scrying Books");

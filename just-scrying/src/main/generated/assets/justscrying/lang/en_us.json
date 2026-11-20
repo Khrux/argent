@@ -3,6 +3,8 @@
   "item.justscrying.cat_armor": "Cat Armor",
   "item.justscrying.parrot_armor": "Parrot Armor",
   "options.justscrying.cat_armor_recipe": "Cat Armor Recipe",
+  "options.justscrying.fishing_books": "Scrying from Fishing",
+  "options.justscrying.fishing_books.tooltip": "A Scrying book can turn up as fishing treasure, as often as any other treasure. Applies after /reload or rejoining.",
   "options.justscrying.library_books": "Scrying in Libraries",
   "options.justscrying.library_books.tooltip": "A Scrying book can rarely turn up in stronghold library chests. Applies to chests opened after /reload or rejoining.",
   "options.justscrying.parrot_armor_recipe": "Parrot Armor Recipe",
