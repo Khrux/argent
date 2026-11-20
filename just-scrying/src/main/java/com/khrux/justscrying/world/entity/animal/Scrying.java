@@ -29,6 +29,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Leashable;
 import net.minecraft.world.entity.LivingEntity;
@@ -142,6 +143,8 @@ public class Scrying {
 			);
 		} else if (key == BuiltInLootTables.FISHING_TREASURE && JustScryingConfig.get().fishingBooksDrop()) {
 			tableBuilder.modifyPools(pool -> pool.add(scryingBook(registries)));
+		} else if (EntityTypes.ELDER_GUARDIAN.getDefaultLootTable().filter(key::equals).isPresent() && JustScryingConfig.get().elderGuardianBookDrops()) {
+			tableBuilder.withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1)).add(scryingBook(registries)));
 		}
 	}
 

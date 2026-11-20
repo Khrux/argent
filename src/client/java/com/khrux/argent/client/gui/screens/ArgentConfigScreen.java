@@ -153,6 +153,7 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 			case SCRYING -> {
 				widgets.add(this.button(JustScryingOptions.effect()));
 				widgets.add(this.button(bookSource()));
+				widgets.add(this.button(JustScryingOptions.elderGuardianBook()));
 				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.parrotArmor().tooltip(this.font, RECIPE_TOOLTIP)));
 				widgets.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), () -> PetArmorRecipeGrid.catArmor().tooltip(this.font, RECIPE_TOOLTIP)));
 			}

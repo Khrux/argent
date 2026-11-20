@@ -20,6 +20,11 @@ public class JustScryingOptions {
 		return OptionInstance.createBoolean("options.justscrying.fishing_books", OptionInstance.cachedConstantTooltip(Component.translatable("options.justscrying.fishing_books.tooltip")), config.fishingBooks, value -> config.fishingBooks = value);
 	}
 
+	public static OptionInstance<Boolean> elderGuardianBook() {
+		JustScryingConfig config = JustScryingConfig.get();
+		return OptionInstance.createBoolean("options.justscrying.elder_guardian_book", OptionInstance.cachedConstantTooltip(Component.translatable("options.justscrying.elder_guardian_book.tooltip")), config.elderGuardianBook, value -> config.elderGuardianBook = value);
+	}
+
 	public static OptionInstance<Boolean> parrotArmorRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {
 		JustScryingConfig config = JustScryingConfig.get();
 		return OptionInstance.createBoolean("options.justscrying.parrot_armor_recipe", tooltip, config.parrotArmorRecipe, value -> config.parrotArmorRecipe = value);

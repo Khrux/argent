@@ -36,6 +36,7 @@ public class JustScryingConfigScreen extends OptionsSubScreen {
 		}
 
 		options.add(JustScryingOptions.libraryBooks());
+		options.add(JustScryingOptions.elderGuardianBook());
 		options.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::parrotArmor));
 		options.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), PetArmorRecipeGrid::catArmor));
 		this.list.addSmall(options.toArray(OptionInstance[]::new));
