@@ -30,7 +30,6 @@ public class MirrorRenderer implements BlockEntityRenderer<MirrorBlockEntity, Mi
 	private static final float GLASS_LEFT = 12.0F;
 	private static final float GLASS_RIGHT = 4.0F;
 	private static final float GLASS_BOTTOM = 3.0F;
-	private static final float GLASS_MIDDLE = 16.0F;
 	private static final float GLASS_TOP = 29.0F;
 	private static final float REFLECTION_Z = 7.75F;
 	private static final int COLUMNS = 4;
