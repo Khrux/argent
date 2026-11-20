@@ -26,6 +26,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.client.gui.components.StringWidget;
@@ -37,6 +38,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPosition
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
@@ -59,6 +61,9 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	private static final int TILE_GAP = 6;
 	private static final int HEADER_PADDING = 8;
 	private static final int TITLE_SPACING = 6;
+	private static final int FOOTER_SPACING = 8;
+	private static final int SKIN_EDITOR_BUTTON_WIDTH = 120;
+	private static final int DONE_BUTTON_WIDTH = 100;
 	private final SkinEditorKeyBinding skinEditorKey = new SkinEditorKeyBinding(Minecraft.getInstance());
 	private final Map<AbstractWidget, Supplier<List<ClientTooltipComponent>>> recipeGrids = new HashMap<>();
 	private int columns;
@@ -135,6 +140,14 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		}
 	}
 
+	@Override
+	protected void addFooter() {
+		LinearLayout footer = this.layout.addToFooter(LinearLayout.horizontal().spacing(FOOTER_SPACING));
+		footer.addChild(this.skinEditorKey.openButton()).setWidth(SKIN_EDITOR_BUTTON_WIDTH);
+		footer.addChild(this.skinEditorKey.keyButton()).setWidth(SKIN_EDITOR_BUTTON_WIDTH);
+		footer.addChild(Button.builder(CommonComponents.GUI_DONE, button -> this.onClose()).width(DONE_BUTTON_WIDTH).build());
+	}
+
 	private void addCustomOptions(final ArgentConfig.Section section) {
 		ArgentConfig config = ArgentConfig.get();
 		JustSilverConfig silver = JustSilverConfig.get();
@@ -151,8 +164,6 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 				this.list
 					.addSmall(
 						List.of(
-							this.skinEditorKey.openButton(),
-							this.skinEditorKey.keyButton(),
 							this.button(JustMirrorsOptions.reflections()),
 							this.button(JustMirrorsOptions.reflectionDistance()),
 							this.button(JustMirrorsOptions.mirrorScreen())
