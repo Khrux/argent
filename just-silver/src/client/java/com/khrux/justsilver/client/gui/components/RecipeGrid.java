@@ -39,15 +39,18 @@ public record RecipeGrid(List<ItemStack> ingredients, ItemStack result, boolean 
 		return of(JustSilverItems.SILVER_BELL, true, log, log, log, air, JustSilverItems.SILVER_BLOCK, air, air, air, air);
 	}
 
-	public static RecipeGrid soulLantern() {
+	public static @Nullable RecipeGrid soulLantern() {
+		JustSilverConfig config = JustSilverConfig.get();
 		Item iron = Items.IRON_NUGGET;
 		Item silver = JustSilverItems.SILVER_NUGGET;
 		Item torch = Items.SOUL_TORCH;
-		return switch (JustSilverConfig.get().soulLanternRecipe) {
-			case IRON -> of(Items.SOUL_LANTERN, false, iron, iron, iron, iron, torch, iron, iron, iron, iron);
-			case SILVER -> of(Items.SOUL_LANTERN, true, silver, silver, silver, silver, torch, silver, silver, silver, silver);
-			case MIXED -> of(Items.SOUL_LANTERN, false, silver, iron, silver, iron, torch, iron, silver, iron, silver);
-		};
+		if (config.soulLanternIron && config.soulLanternFromSilver()) {
+			return of(Items.SOUL_LANTERN, false, silver, iron, silver, iron, torch, iron, silver, iron, silver);
+		} else if (config.soulLanternIron) {
+			return of(Items.SOUL_LANTERN, false, iron, iron, iron, iron, torch, iron, iron, iron, iron);
+		} else {
+			return config.soulLanternFromSilver() ? of(Items.SOUL_LANTERN, true, silver, silver, silver, silver, torch, silver, silver, silver, silver) : null;
+		}
 	}
 
 	public List<ClientTooltipComponent> tooltip(final Font font, final Component text) {

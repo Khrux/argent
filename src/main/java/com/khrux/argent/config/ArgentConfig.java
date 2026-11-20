@@ -16,7 +16,6 @@ import java.nio.file.Path;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
-import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class ArgentConfig {
@@ -28,43 +27,52 @@ public class ArgentConfig {
 				Mode.CODEC.lenientOptionalFieldOf("spawn_lanterns_mode", Mode.ENABLED).forGetter(config -> config.spawnLanterns),
 				Mode.CODEC.lenientOptionalFieldOf("wither_zombie_mode", Mode.ENABLED).forGetter(config -> config.witherZombie),
 				Mode.CODEC.lenientOptionalFieldOf("scrying_mode", Mode.ENABLED).forGetter(config -> config.scrying),
-				MirrorRecipe.CODEC.lenientOptionalFieldOf("mirror_recipe", MirrorRecipe.SILVER).forGetter(config -> config.mirrorRecipe)
+				Codec.BOOL.optionalFieldOf("silver_mirror_recipe", true).forGetter(config -> config.silverMirrorRecipe),
+				Codec.BOOL.optionalFieldOf("diamond_mirror_recipe", false).forGetter(config -> config.diamondMirrorRecipe)
 			)
 			.apply(i, ArgentConfig::new)
 	);
-	private static ArgentConfig instance = new ArgentConfig(Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, MirrorRecipe.SILVER);
+	private static ArgentConfig instance = new ArgentConfig(Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, Mode.ENABLED, true, false);
 	public Mode silver;
 	public Mode mirrors;
 	public Mode spawnLanterns;
 	public Mode witherZombie;
 	public Mode scrying;
-	public MirrorRecipe mirrorRecipe;
+	public boolean silverMirrorRecipe;
+	public boolean diamondMirrorRecipe;
 
 	private ArgentConfig(
-		final Mode silver, final Mode mirrors, final Mode spawnLanterns, final Mode witherZombie, final Mode scrying, final MirrorRecipe mirrorRecipe
+		final Mode silver,
+		final Mode mirrors,
+		final Mode spawnLanterns,
+		final Mode witherZombie,
+		final Mode scrying,
+		final boolean silverMirrorRecipe,
+		final boolean diamondMirrorRecipe
 	) {
 		this.silver = silver;
 		this.mirrors = mirrors;
 		this.spawnLanterns = spawnLanterns;
 		this.witherZombie = witherZombie;
 		this.scrying = scrying;
-		this.mirrorRecipe = mirrorRecipe;
+		this.silverMirrorRecipe = silverMirrorRecipe;
+		this.diamondMirrorRecipe = diamondMirrorRecipe;
 	}
 
 	public static ArgentConfig get() {
 		return instance;
 	}
 
-	public @Nullable MirrorRecipe activeMirrorRecipe() {
+	public boolean usesMirrorRecipe(final MirrorRecipe recipe) {
 		if (!JustMirrorsConfig.get().isEnabled()) {
-			return null;
+			return false;
 		}
 
 		if (this.mirrors == Mode.CUSTOM) {
-			return this.mirrorRecipe;
+			return recipe == MirrorRecipe.SILVER ? this.silverMirrorRecipe && JustSilverConfig.get().isEnabled() : this.diamondMirrorRecipe;
 		}
 
-		return JustSilverConfig.get().generatesOre() ? MirrorRecipe.SILVER : MirrorRecipe.DIAMOND;
+		return recipe == MirrorRecipe.SILVER == JustSilverConfig.get().generatesOre();
 	}
 
 	public Mode mode(final Section section) {
@@ -101,6 +109,7 @@ public class ArgentConfig {
 				config.enabled = mode != Mode.DISABLED;
 				if (mode == Mode.ENABLED) {
 					config.setDefaults();
+					JustSilverConfig.get().setSoulLanternDefaults();
 				}
 			}
 			case WITHER_ZOMBIE -> {

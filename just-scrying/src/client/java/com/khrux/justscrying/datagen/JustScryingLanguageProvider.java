@@ -21,14 +21,16 @@ public class JustScryingLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justscrying.title", "Just Scrying Settings");
 		translationBuilder.add("options.justscrying.scrying", "Scrying");
 		translationBuilder.add("options.justscrying.scrying.tooltip", "Whether sneaking and using an empty hand on your pet wearing Scrying armour lets you see and move through it.");
-		translationBuilder.add("options.justscrying.library_books", "Library Books");
-		translationBuilder.add("options.justscrying.library_books.tooltip", "A Scrying book can rarely turn up in stronghold library chests. Applies to chests opened after /reload or rejoining.");
-		translationBuilder.add("options.justscrying.fishing_books", "Fishing Books");
-		translationBuilder.add("options.justscrying.fishing_books.tooltip", "A Scrying book can turn up as fishing treasure, as often as any other treasure. Applies after /reload or rejoining.");
-		translationBuilder.add("options.justscrying.elder_guardian_book", "Elder Guardian Book");
-		translationBuilder.add("options.justscrying.elder_guardian_book.tooltip", "Every elder guardian drops a Scrying book when it dies. Applies after /reload or rejoining.");
-		translationBuilder.add("options.justscrying.parrot_armor_recipe", "Parrot Armor Recipe");
-		translationBuilder.add("options.justscrying.cat_armor_recipe", "Cat Armor Recipe");
+		translationBuilder.add("options.justscrying.books_looted_from", "Books Looted From");
+		translationBuilder.add("options.justscrying.books_looted_from.elder_guardian", "Elder Guardian");
+		translationBuilder.add("options.justscrying.books_looted_from.elder_guardian.tooltip", "Every elder guardian drops a Scrying book when it dies. Applies after /reload or rejoining.");
+		translationBuilder.add("options.justscrying.books_looted_from.fishing", "Fishing Loot");
+		translationBuilder.add("options.justscrying.books_looted_from.fishing.tooltip", "A Scrying book can turn up as fishing treasure, as often as any other treasure. Applies after /reload or rejoining.");
+		translationBuilder.add("options.justscrying.books_looted_from.library", "Stronghold Library");
+		translationBuilder.add("options.justscrying.books_looted_from.library.tooltip", "A Scrying book can rarely turn up in stronghold library chests. Applies to chests opened after /reload or rejoining.");
+		translationBuilder.add("options.justscrying.armor_recipes", "Armor Recipes");
+		translationBuilder.add("options.justscrying.armor_recipes.parrot", "Parrot");
+		translationBuilder.add("options.justscrying.armor_recipes.cat", "Cat");
 		translationBuilder.add("options.justscrying.recipe.tooltip", "Applies after /reload or rejoining. Items already made stay.");
 	}
 }

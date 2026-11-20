@@ -26,10 +26,9 @@ public class JustSilverLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justsilver.ore_generation", "Ore Generation");
 		translationBuilder.add("options.justsilver.ore_generation.tooltip", "Silver ore generates in newly generated chunks, wherever gold does. Existing silver stays.");
 		translationBuilder.add("options.justsilver.silver_bell_recipe", "Silver Bell Recipe");
-		translationBuilder.add("options.justsilver.soul_lantern_recipe", "Soul Lanterns");
+		translationBuilder.add("options.justsilver.soul_lantern_recipe", "Soul Lantern Recipe");
 		translationBuilder.add("options.justsilver.soul_lantern_recipe.iron", "Iron");
 		translationBuilder.add("options.justsilver.soul_lantern_recipe.silver", "Silver");
-		translationBuilder.add("options.justsilver.soul_lantern_recipe.mixed", "Mixed");
 		translationBuilder.add("options.justsilver.recipe.tooltip", "Applies after /reload or rejoining. Items already made stay.");
 		translationBuilder.add("options.justsilver.silver_warning", "Silver ore generation is off, so this needs silver already in the world.");
 	}

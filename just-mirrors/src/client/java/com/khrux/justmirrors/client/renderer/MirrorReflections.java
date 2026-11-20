@@ -64,12 +64,10 @@ import org.jspecify.annotations.Nullable;
 public class MirrorReflections {
 	private static final int MAX_REFLECTIONS = 4;
 	private static final int UNUSED_FRAMES_KEPT = 600;
-	private static final double ENTITY_RANGE = 32.0;
 	private static final int RESOLUTION_DIVISOR = 2;
 	private static final float SAME_PLANE_NORMAL = 0.9995F;
 	private static final double SAME_PLANE_DISTANCE = 0.05;
 	private static final Vector4fc CLEAR_COLOR = new Vector4f(0.72F, 0.75F, 0.78F, 0.0F);
-	private static final double BLOCK_RANGE = 32.0;
 	private static final int MAX_BLOCKS = 4096;
 	private static final int SCAN_BUDGET = 16384;
 	private static final float BLOCK_RADIUS = 0.87F;
@@ -235,9 +233,10 @@ public class MirrorReflections {
 		float partialTicks = context.deltaTracker().getGameTimeDeltaPartialTick(false);
 		PoseStack poseStack = new PoseStack();
 		Vec3 origin = reflectedCamera.pos;
+		double range = JustMirrorsConfig.get().reflectionDistance;
 		for (Entity entity : context.level().entitiesForRendering()) {
 			Vec3 position = entity.position();
-			if (position.distanceToSqr(reflection.point) > ENTITY_RANGE * ENTITY_RANGE || position.subtract(reflection.point).dot(normal) <= 0.0) {
+			if (position.distanceToSqr(reflection.point) > range * range || position.subtract(reflection.point).dot(normal) <= 0.0) {
 				continue;
 			}
 
@@ -249,7 +248,7 @@ public class MirrorReflections {
 
 	private void scanBlocks(final ClientLevel level, final Reflection reflection) {
 		if (reflection.scan == null) {
-			AABB region = reflection.bounds.inflate(BLOCK_RANGE);
+			AABB region = reflection.bounds.inflate(JustMirrorsConfig.get().reflectionDistance);
 			reflection.scan = BlockPos.betweenClosed(region).iterator();
 			reflection.scanned = new ArrayList<>();
 		}

@@ -18,14 +18,14 @@ public class JustScryingConfig {
 				Codec.BOOL.optionalFieldOf("enabled", true).forGetter(config -> config.enabled),
 				Codec.BOOL.optionalFieldOf("scrying", true).forGetter(config -> config.effect),
 				Codec.BOOL.optionalFieldOf("scrying_library_loot", false).forGetter(config -> config.libraryBooks),
-				Codec.BOOL.optionalFieldOf("scrying_fishing_loot", true).forGetter(config -> config.fishingBooks),
+				Codec.BOOL.optionalFieldOf("scrying_fishing_loot", !argentLoaded()).forGetter(config -> config.fishingBooks),
 				Codec.BOOL.optionalFieldOf("scrying_elder_guardian_loot", false).forGetter(config -> config.elderGuardianBook),
 				Codec.BOOL.optionalFieldOf("parrot_armor_recipe", true).forGetter(config -> config.parrotArmorRecipe),
 				Codec.BOOL.optionalFieldOf("cat_armor_recipe", true).forGetter(config -> config.catArmorRecipe)
 			)
 			.apply(i, JustScryingConfig::new)
 	);
-	private static JustScryingConfig instance = new JustScryingConfig(true, true, false, true, false, true, true);
+	private static JustScryingConfig instance = new JustScryingConfig(true, true, false, !argentLoaded(), false, true, true);
 	public boolean enabled;
 	public boolean effect;
 	public boolean libraryBooks;
@@ -56,8 +56,12 @@ public class JustScryingConfig {
 		return instance;
 	}
 
+	private static boolean argentLoaded() {
+		return FabricLoader.getInstance().isModLoaded("argent");
+	}
+
 	public boolean isEnabled() {
-		return this.enabled || !FabricLoader.getInstance().isModLoaded("argent");
+		return this.enabled || !argentLoaded();
 	}
 
 	public boolean scryingWorks() {
@@ -65,7 +69,7 @@ public class JustScryingConfig {
 	}
 
 	public boolean fishingBooksDrop() {
-		return this.fishingBooks && !FabricLoader.getInstance().isModLoaded("argent");
+		return this.fishingBooks && this.isEnabled();
 	}
 
 	public boolean elderGuardianBookDrops() {
@@ -75,7 +79,7 @@ public class JustScryingConfig {
 	public void setDefaults() {
 		this.effect = true;
 		this.libraryBooks = false;
-		this.fishingBooks = true;
+		this.fishingBooks = !argentLoaded();
 		this.elderGuardianBook = false;
 		this.parrotArmorRecipe = true;
 		this.catArmorRecipe = true;

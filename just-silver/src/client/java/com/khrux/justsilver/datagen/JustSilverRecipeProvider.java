@@ -11,6 +11,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
 public class JustSilverRecipeProvider extends FabricRecipeProvider {
+	private static final Identifier VANILLA_SOUL_LANTERN = Identifier.withDefaultNamespace("soul_lantern");
 	private static final List<ItemLike> SILVER_SMELTABLES = List.of(JustSilverItems.SILVER_ORE, JustSilverItems.DEEPSLATE_SILVER_ORE, JustSilverItems.RAW_SILVER);
 
 	public JustSilverRecipeProvider(final FabricPackOutput output, final CompletableFuture<HolderLookup.Provider> registries) {
@@ -47,6 +49,14 @@ public class JustSilverRecipeProvider extends FabricRecipeProvider {
 				this.oreBlasting(
 					List.of(JustSilverItems.RAW_SILVER_BLOCK), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS, JustSilverItems.SILVER_BLOCK, 9.0F, 900, "silver_block"
 				);
+				this.shaped(RecipeCategory.DECORATIONS, Blocks.SOUL_LANTERN)
+					.define('#', Items.SOUL_TORCH)
+					.define('X', Items.IRON_NUGGET)
+					.pattern("XXX")
+					.pattern("X#X")
+					.pattern("XXX")
+					.unlockedBy("has_soul_torch", this.has(Items.SOUL_TORCH))
+					.save(JustSilverRecipeProvider.this.withConditions(this.output, new JustSilverCondition(JustSilverCondition.Option.SOUL_LANTERN_IRON)));
 				this.shaped(RecipeCategory.DECORATIONS, Blocks.SOUL_LANTERN)
 					.define('#', Items.SOUL_TORCH)
 					.define('X', JustSilverItems.SILVER_NUGGET)
@@ -78,6 +88,11 @@ public class JustSilverRecipeProvider extends FabricRecipeProvider {
 					.save(JustSilverRecipeProvider.this.withConditions(this.output, new JustSilverCondition(JustSilverCondition.Option.SILVER_BELL)));
 			}
 		};
+	}
+
+	@Override
+	protected Identifier getRecipeIdentifier(final Identifier identifier) {
+		return identifier.equals(VANILLA_SOUL_LANTERN) ? identifier : super.getRecipeIdentifier(identifier);
 	}
 
 	@Override

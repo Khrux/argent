@@ -16,7 +16,7 @@ public class JustSpawnLanternsLanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add("options.justspawnlanterns.markers", "Markers");
 		translationBuilder.add("options.justspawnlanterns.markers.tooltip", "Where a soul lantern must be for soul particles to rise where monsters can spawn.");
 		translationBuilder.add("options.justspawnlanterns.markers.off", "Off");
-		translationBuilder.add("options.justspawnlanterns.markers.hand", "In Hand");
-		translationBuilder.add("options.justspawnlanterns.markers.inventory", "In Inventory");
+		translationBuilder.add("options.justspawnlanterns.markers.hand", "Works in Hand");
+		translationBuilder.add("options.justspawnlanterns.markers.inventory", "Works in Inventory");
 	}
 }

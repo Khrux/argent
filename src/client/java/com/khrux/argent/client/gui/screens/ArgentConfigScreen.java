@@ -6,24 +6,27 @@ import com.khrux.justmirrors.client.gui.components.SkinEditorKeyBinding;
 import com.khrux.justmirrors.client.gui.screens.JustMirrorsOptions;
 import com.khrux.justmirrors.world.item.JustMirrorsItems;
 import com.khrux.justscrying.client.gui.components.PetArmorRecipeGrid;
+import com.khrux.justscrying.client.gui.screens.JustScryingConfigScreen;
 import com.khrux.justscrying.client.gui.screens.JustScryingOptions;
 import com.khrux.justscrying.config.JustScryingConfig;
 import com.khrux.justsilver.client.gui.components.RecipeGrid;
 import com.khrux.justsilver.client.gui.screens.JustSilverOptions;
+import com.khrux.justsilver.config.JustSilverConfig;
 import com.khrux.justsilver.world.item.JustSilverItems;
 import com.khrux.justspawnlanterns.client.gui.screens.JustSpawnLanternsOptions;
 import com.khrux.justwitherzombies.client.gui.screens.JustWitherZombiesOptions;
 import com.khrux.justwitherzombies.config.JustWitherZombiesConfig;
-import com.mojang.serialization.Codec;
-import java.util.ArrayList;
+import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.Tooltip;
@@ -36,7 +39,6 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jspecify.annotations.Nullable;
@@ -45,6 +47,12 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	private static final Component TITLE = Component.translatable("options.argent.title");
 	private static final Component MODE_TOOLTIP = Component.translatable("options.argent.mode.tooltip");
 	private static final Component RECIPE_TOOLTIP = Component.translatable("options.argent.recipe.tooltip");
+	private static final Component MIRROR_RECIPE = Component.translatable("options.argent.mirror_recipe").withStyle(ChatFormatting.GRAY);
+	private static final Component SOUL_LANTERN_RECIPE = Component.translatable("options.justsilver.soul_lantern_recipe").withStyle(ChatFormatting.GRAY);
+	private static final Component IRON = Component.translatable("options.justsilver.soul_lantern_recipe.iron");
+	private static final Component SILVER = Component.translatable("options.justsilver.soul_lantern_recipe.silver");
+	private static final Component WITHER_ZOMBIE = Component.translatable("options.argent.books_looted_from.wither_zombie");
+	private static final Component WITHER_ZOMBIE_TOOLTIP = Component.translatable("options.justwitherzombies.scrying_books.tooltip");
 	private static final int TILE_WIDTH = 72;
 	private static final int PICTURE_HEIGHT = 50;
 	private static final int TILE_SPACING = 2;
@@ -120,54 +128,110 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 		this.recipeGrids.clear();
 		ArgentConfig config = ArgentConfig.get();
 		for (ArgentConfig.Section section : ArgentConfig.Section.values()) {
-			if (config.mode(section) != ArgentConfig.Mode.CUSTOM) {
-				continue;
+			if (config.mode(section) == ArgentConfig.Mode.CUSTOM) {
+				this.list.addHeader(section.getDisplayName());
+				this.addCustomOptions(section);
 			}
-
-			this.list.addHeader(section.getDisplayName());
-			this.list.addSmall(this.customOptions(section));
 		}
 	}
 
-	private List<AbstractWidget> customOptions(final ArgentConfig.Section section) {
-		List<AbstractWidget> widgets = new ArrayList<>();
+	private void addCustomOptions(final ArgentConfig.Section section) {
+		ArgentConfig config = ArgentConfig.get();
+		JustSilverConfig silver = JustSilverConfig.get();
+		JustScryingConfig scrying = JustScryingConfig.get();
 		switch (section) {
-			case SILVER -> {
-				widgets.add(this.button(JustSilverOptions.oreGeneration()));
-				widgets.add(this.recipe(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip()), () -> this.grid(RecipeGrid.silverBell())));
-				widgets.add(this.recipe(JustSilverOptions.soulLanternRecipe(), () -> this.grid(RecipeGrid.soulLantern())));
-			}
+			case SILVER -> this.list
+				.addSmall(
+					List.of(
+						this.button(JustSilverOptions.oreGeneration()),
+						this.recipe(this.button(JustSilverOptions.silverBellRecipe(OptionInstance.noTooltip())), () -> this.grid(RecipeGrid.silverBell()))
+					)
+				);
 			case MIRRORS -> {
-				widgets.add(this.skinEditorKey.openButton());
-				widgets.add(this.skinEditorKey.keyButton());
-				widgets.add(this.button(JustMirrorsOptions.reflections()));
-				widgets.add(this.button(JustMirrorsOptions.reflectionDistance()));
-				widgets.add(this.recipe(mirrorRecipe(), () -> this.grid(mirrorGrid(ArgentConfig.get().mirrorRecipe))));
-				widgets.add(this.button(JustMirrorsOptions.mirrorScreen()));
+				this.list
+					.addSmall(
+						List.of(
+							this.skinEditorKey.openButton(),
+							this.skinEditorKey.keyButton(),
+							this.button(JustMirrorsOptions.reflections()),
+							this.button(JustMirrorsOptions.reflectionDistance()),
+							this.button(JustMirrorsOptions.mirrorScreen())
+						)
+					);
+				this.list.addHeader(MIRROR_RECIPE);
+				this.list
+					.addSmall(
+						List.of(
+							this.recipe(
+								this.silverCheckbox(ArgentConfig.MirrorRecipe.SILVER.getDisplayName(), config.silverMirrorRecipe, value -> config.silverMirrorRecipe = value),
+								() -> config.silverMirrorRecipe ? this.grid(mirrorGrid(ArgentConfig.MirrorRecipe.SILVER)) : null
+							),
+							this.recipe(
+								this.checkbox(ArgentConfig.MirrorRecipe.DIAMOND.getDisplayName(), null, config.diamondMirrorRecipe, value -> config.diamondMirrorRecipe = value),
+								() -> config.diamondMirrorRecipe ? this.grid(mirrorGrid(ArgentConfig.MirrorRecipe.DIAMOND)) : null
+							)
+						)
+					);
 			}
-			case SPAWN_LANTERNS -> widgets.add(this.button(JustSpawnLanternsOptions.markers()));
-			case WITHER_ZOMBIE -> {
-				widgets.add(this.button(JustWitherZombiesOptions.meleeDamage()));
-				widgets.add(this.button(JustWitherZombiesOptions.itemStealing()));
+			case SPAWN_LANTERNS -> {
+				this.list.addBig(JustSpawnLanternsOptions.markers());
+				this.list.addHeader(SOUL_LANTERN_RECIPE);
+				this.list
+					.addSmall(
+						List.of(
+							this.recipe(this.checkbox(IRON, null, silver.soulLanternIron, value -> silver.soulLanternIron = value), () -> this.grid(RecipeGrid.soulLantern())),
+							this.recipe(
+								this.silverCheckbox(SILVER, silver.soulLanternSilver, value -> silver.soulLanternSilver = value), () -> this.grid(RecipeGrid.soulLantern())
+							)
+						)
+					);
 			}
+			case WITHER_ZOMBIE -> this.list.addSmall(JustWitherZombiesOptions.meleeDamage(), JustWitherZombiesOptions.itemStealing());
 			case SCRYING -> {
-				widgets.add(this.button(JustScryingOptions.effect()));
-				widgets.add(this.button(bookSource()));
-				widgets.add(this.button(JustScryingOptions.elderGuardianBook()));
-				widgets.add(this.recipe(JustScryingOptions.parrotArmorRecipe(OptionInstance.noTooltip()), () -> this.grid(PetArmorRecipeGrid.parrotArmor())));
-				widgets.add(this.recipe(JustScryingOptions.catArmorRecipe(OptionInstance.noTooltip()), () -> this.grid(PetArmorRecipeGrid.catArmor())));
+				this.list.addBig(JustScryingOptions.effect());
+				this.list.addHeader(JustScryingOptions.BOOKS_LOOTED_FROM);
+				JustWitherZombiesConfig witherZombies = JustWitherZombiesConfig.get();
+				this.list
+					.addSmall(
+						List.of(
+							this.checkbox(WITHER_ZOMBIE, WITHER_ZOMBIE_TOOLTIP, witherZombies.scryingBooks, value -> witherZombies.scryingBooks = value),
+							this.checkbox(JustScryingOptions.ELDER_GUARDIAN, JustScryingOptions.ELDER_GUARDIAN_TOOLTIP, scrying.elderGuardianBook, value -> scrying.elderGuardianBook = value),
+							this.checkbox(JustScryingOptions.FISHING_LOOT, JustScryingOptions.FISHING_LOOT_TOOLTIP, scrying.fishingBooks, value -> scrying.fishingBooks = value)
+						)
+					);
+				this.list.addHeader(JustScryingOptions.ARMOR_RECIPES);
+				this.list
+					.addSmall(
+						List.of(
+							this.recipe(
+								this.checkbox(JustScryingOptions.PARROT, null, scrying.parrotArmorRecipe, value -> scrying.parrotArmorRecipe = value), () -> this.grid(PetArmorRecipeGrid.parrotArmor())
+							),
+							this.recipe(this.checkbox(JustScryingOptions.CAT, null, scrying.catArmorRecipe, value -> scrying.catArmorRecipe = value), () -> this.grid(PetArmorRecipeGrid.catArmor()))
+						)
+					);
 			}
 		}
-
-		return widgets;
 	}
 
 	private AbstractWidget button(final OptionInstance<?> option) {
 		return option.createButton(this.options);
 	}
 
-	private AbstractWidget recipe(final OptionInstance<?> option, final Supplier<List<ClientTooltipComponent>> grid) {
-		AbstractWidget widget = this.button(option);
+	private Checkbox checkbox(final Component label, final @Nullable Component tooltip, final boolean selected, final BooleanConsumer onChange) {
+		return JustScryingConfigScreen.checkbox(this, label, tooltip, selected, onChange);
+	}
+
+	private Checkbox silverCheckbox(final Component label, final boolean selected, final BooleanConsumer onChange) {
+		if (JustSilverConfig.get().isEnabled()) {
+			return this.checkbox(label, null, selected, onChange);
+		}
+
+		Checkbox checkbox = this.checkbox(label.copy().withStyle(ChatFormatting.STRIKETHROUGH), null, selected, onChange);
+		checkbox.active = false;
+		return checkbox;
+	}
+
+	private AbstractWidget recipe(final AbstractWidget widget, final Supplier<@Nullable List<ClientTooltipComponent>> grid) {
 		this.recipeGrids.put(widget, grid);
 		return widget;
 	}
@@ -178,34 +242,6 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 
 	private @Nullable List<ClientTooltipComponent> grid(final @Nullable PetArmorRecipeGrid grid) {
 		return grid == null ? null : grid.tooltip(this.font, RECIPE_TOOLTIP);
-	}
-
-	private static OptionInstance<ArgentConfig.MirrorRecipe> mirrorRecipe() {
-		ArgentConfig config = ArgentConfig.get();
-		return new OptionInstance<>(
-			"options.argent.mirror_recipe",
-			OptionInstance.noTooltip(),
-			(caption, value) -> value.getDisplayName(),
-			new OptionInstance.Enum<>(List.of(ArgentConfig.MirrorRecipe.values()), ArgentConfig.MirrorRecipe.CODEC),
-			config.mirrorRecipe,
-			value -> config.mirrorRecipe = value
-		);
-	}
-
-	private static OptionInstance<BookSource> bookSource() {
-		JustWitherZombiesConfig witherZombies = JustWitherZombiesConfig.get();
-		JustScryingConfig scrying = JustScryingConfig.get();
-		return new OptionInstance<>(
-			"options.argent.book_source",
-			OptionInstance.cachedConstantTooltip(Component.translatable("options.argent.book_source.tooltip")),
-			(caption, value) -> value.getDisplayName(),
-			new OptionInstance.Enum<>(List.of(BookSource.values()), BookSource.CODEC),
-			BookSource.of(witherZombies.scryingBooks, scrying.libraryBooks),
-			value -> {
-				witherZombies.scryingBooks = value.witherZombie;
-				scrying.libraryBooks = value.library;
-			}
-		);
 	}
 
 	@Override
@@ -243,42 +279,5 @@ public class ArgentConfigScreen extends OptionsSubScreen {
 	public void removed() {
 		super.removed();
 		ArgentConfig.get().saveAll();
-	}
-
-	private enum BookSource implements StringRepresentable {
-		WITHER_ZOMBIE("wither_zombie", true, false),
-		LIBRARY("library", false, true),
-		BOTH("both", true, true),
-		NEITHER("neither", false, false);
-
-		public static final Codec<BookSource> CODEC = StringRepresentable.fromEnum(BookSource::values);
-		private final String name;
-		private final boolean witherZombie;
-		private final boolean library;
-
-		BookSource(final String name, final boolean witherZombie, final boolean library) {
-			this.name = name;
-			this.witherZombie = witherZombie;
-			this.library = library;
-		}
-
-		private static BookSource of(final boolean witherZombie, final boolean library) {
-			for (BookSource source : values()) {
-				if (source.witherZombie == witherZombie && source.library == library) {
-					return source;
-				}
-			}
-
-			return NEITHER;
-		}
-
-		public Component getDisplayName() {
-			return Component.translatable("options.argent.book_source." + this.name);
-		}
-
-		@Override
-		public String getSerializedName() {
-			return this.name;
-		}
 	}
 }

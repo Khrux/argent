@@ -1,7 +1,6 @@
 package com.khrux.justsilver.client.gui.screens;
 
 import com.khrux.justsilver.config.JustSilverConfig;
-import java.util.List;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.network.chat.Component;
 
@@ -23,15 +22,4 @@ public class JustSilverOptions {
 		return OptionInstance.createBoolean("options.justsilver.silver_bell_recipe", tooltip, config.silverBellRecipe, value -> config.silverBellRecipe = value);
 	}
 
-	public static OptionInstance<JustSilverConfig.SoulLanternRecipe> soulLanternRecipe() {
-		JustSilverConfig config = JustSilverConfig.get();
-		return new OptionInstance<>(
-			"options.justsilver.soul_lantern_recipe",
-			OptionInstance.noTooltip(),
-			(caption, value) -> value.getDisplayName(),
-			new OptionInstance.Enum<>(List.of(JustSilverConfig.SoulLanternRecipe.values()), JustSilverConfig.SoulLanternRecipe.CODEC),
-			config.soulLanternRecipe,
-			value -> config.soulLanternRecipe = value
-		);
-	}
 }

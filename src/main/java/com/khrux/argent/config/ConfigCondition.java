@@ -19,6 +19,6 @@ public record ConfigCondition(ArgentConfig.MirrorRecipe mirrorRecipe) implements
 
 	@Override
 	public boolean test(final RegistryOps.RegistryInfoLookup registryInfo) {
-		return ArgentConfig.get().activeMirrorRecipe() == this.mirrorRecipe;
+		return ArgentConfig.get().usesMirrorRecipe(this.mirrorRecipe);
 	}
 }

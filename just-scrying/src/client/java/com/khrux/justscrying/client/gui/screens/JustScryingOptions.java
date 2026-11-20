@@ -1,59 +1,27 @@
 package com.khrux.justscrying.client.gui.screens;
 
 import com.khrux.justscrying.config.JustScryingConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.network.chat.Component;
 
 public class JustScryingOptions {
+	public static final Component BOOKS_LOOTED_FROM = Component.translatable("options.justscrying.books_looted_from").withStyle(ChatFormatting.GRAY);
+	public static final Component ELDER_GUARDIAN = Component.translatable("options.justscrying.books_looted_from.elder_guardian");
+	public static final Component ELDER_GUARDIAN_TOOLTIP = Component.translatable("options.justscrying.books_looted_from.elder_guardian.tooltip");
+	public static final Component FISHING_LOOT = Component.translatable("options.justscrying.books_looted_from.fishing");
+	public static final Component FISHING_LOOT_TOOLTIP = Component.translatable("options.justscrying.books_looted_from.fishing.tooltip");
+	public static final Component STRONGHOLD_LIBRARY = Component.translatable("options.justscrying.books_looted_from.library");
+	public static final Component STRONGHOLD_LIBRARY_TOOLTIP = Component.translatable("options.justscrying.books_looted_from.library.tooltip");
+	public static final Component ARMOR_RECIPES = Component.translatable("options.justscrying.armor_recipes").withStyle(ChatFormatting.GRAY);
+	public static final Component PARROT = Component.translatable("options.justscrying.armor_recipes.parrot");
+	public static final Component CAT = Component.translatable("options.justscrying.armor_recipes.cat");
 	private static final Component SCRYING_TOOLTIP = Component.translatable("options.justscrying.scrying.tooltip");
-	private static final Component LIBRARY_BOOKS_TOOLTIP = Component.translatable("options.justscrying.library_books.tooltip");
-	private static final Component FISHING_BOOKS_TOOLTIP = Component.translatable("options.justscrying.fishing_books.tooltip");
-	private static final Component ELDER_GUARDIAN_BOOK_TOOLTIP = Component.translatable("options.justscrying.elder_guardian_book.tooltip");
 
 	public static OptionInstance<Boolean> effect() {
 		JustScryingConfig config = JustScryingConfig.get();
 		return OptionInstance.createBoolean(
 			"options.justscrying.scrying", OptionInstance.cachedConstantTooltip(SCRYING_TOOLTIP), config.effect, value -> config.effect = value
 		);
-	}
-
-	public static OptionInstance<Boolean> libraryBooks() {
-		JustScryingConfig config = JustScryingConfig.get();
-		return OptionInstance.createBoolean(
-			"options.justscrying.library_books",
-			OptionInstance.cachedConstantTooltip(LIBRARY_BOOKS_TOOLTIP),
-			config.libraryBooks,
-			value -> config.libraryBooks = value
-		);
-	}
-
-	public static OptionInstance<Boolean> fishingBooks() {
-		JustScryingConfig config = JustScryingConfig.get();
-		return OptionInstance.createBoolean(
-			"options.justscrying.fishing_books",
-			OptionInstance.cachedConstantTooltip(FISHING_BOOKS_TOOLTIP),
-			config.fishingBooks,
-			value -> config.fishingBooks = value
-		);
-	}
-
-	public static OptionInstance<Boolean> elderGuardianBook() {
-		JustScryingConfig config = JustScryingConfig.get();
-		return OptionInstance.createBoolean(
-			"options.justscrying.elder_guardian_book",
-			OptionInstance.cachedConstantTooltip(ELDER_GUARDIAN_BOOK_TOOLTIP),
-			config.elderGuardianBook,
-			value -> config.elderGuardianBook = value
-		);
-	}
-
-	public static OptionInstance<Boolean> parrotArmorRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {
-		JustScryingConfig config = JustScryingConfig.get();
-		return OptionInstance.createBoolean("options.justscrying.parrot_armor_recipe", tooltip, config.parrotArmorRecipe, value -> config.parrotArmorRecipe = value);
-	}
-
-	public static OptionInstance<Boolean> catArmorRecipe(final OptionInstance.TooltipSupplier<Boolean> tooltip) {
-		JustScryingConfig config = JustScryingConfig.get();
-		return OptionInstance.createBoolean("options.justscrying.cat_armor_recipe", tooltip, config.catArmorRecipe, value -> config.catArmorRecipe = value);
 	}
 }
